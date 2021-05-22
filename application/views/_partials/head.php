@@ -19,4 +19,10 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/bootstrap/') ?>css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- untuk select2 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="<?= base_url('assets/select2/') ?>css/select2.min.css" rel="stylesheet" />
+    <script src="<?= base_url('assets/select2/') ?>js/select2.min.js"></script>
+    
+
 </head>
