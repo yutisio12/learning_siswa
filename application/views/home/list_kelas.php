@@ -34,22 +34,17 @@
                                 <label for="nama_kelas">Nama Kelas</label>
                                 <input type="text" class="form-control" name="nama_kelas" id="nama_kelas" placeholder="Masukan Nama Kelas">
                             </div>
+
                             <div class="modal-body">
-                                <label for="wali_kelas">Wali Kelas</label>
+                                <label for="wali_kelas">Pengajar</label>
                                 <br>
-                                <select class="select2s" id="wali_kelas" name="wali_kelas" style="width: 100%;">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
+                                <select class="form-control" id="wali_kelas" name="wali_kelas">
+                                    <option value="0" selected>Pilih Wali Kelas</option>
+                                    <option value="1">Agung</option>
+                                    <option value="2">Ardi</option>
                                 </select>
-                                <script>
-                                    $(document).ready(function() {
-                                        $('.select2s').select2({
-                                            dropdownParent: $('#exampleModal')
-                                        });
-                                    });
-                                    </script>
-                                
                             </div>
+
                             <div class="modal-body">
                                 <label for="lokasi_kelas">Lokasi</label>
                                 <input type="text" class="form-control" id="lokasi_kelas" name="lokasi_kelas" placeholder="Masukan Lokasi Kelas">
