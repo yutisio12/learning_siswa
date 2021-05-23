@@ -39,7 +39,12 @@ class Auth extends CI_Controller {
             setcookie('user', null, -1, '/'); 
             setcookie('user', $permissions, time() + (60 * 60 * 24 * 5), '/');
             $cookie = get_cookie('user');
-            redirect('home');
+            if($datadb['role']==0){
+                redirect('home');
+            } elseif($datadb['role']==1){
+                redirect('guru');
+            }
+            
         } else {
             delete_cookie('user');
             redirect('auth/index');
