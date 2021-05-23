@@ -1,8 +1,25 @@
 <!-- Footer -->
+    <script>
+    <?php if(strlen($this->session->flashdata('success'))>1){ ?>
+        Swal.fire({
+            icon: 'success',
+            title: "<?= $this->session->flashdata('success') ?>",
+            showConfirmButton: false,
+            timer: 1500
+        })
+    <?php } elseif(strlen($this->session->flashdata('warning'))>1) { ?>
+        Swal.fire({
+            icon: 'warning',
+            title: "<?= $this->session->flashdata('warning') ?>",
+            showConfirmButton: false,
+            timer: 1500
+        })
+    <?php } ?>
+    </script>
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Learning 2021</span>
                     </div>
                 </div>
             </footer>
@@ -51,10 +68,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     <!-- Page level plugins -->
     
-    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.select2').select2();
+            $('.data-table').DataTable();
         });
     </script>
 
