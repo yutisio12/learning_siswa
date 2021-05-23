@@ -29,10 +29,10 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="">
+                        <form action="<?php echo base_url('home/tambah')?>" method="post">
                             <div class="modal-body">
                                 <label for="nama_kelas">Nama Kelas</label>
-                                <input type="text" class="form-control" id="nama_kelas" placeholder="Masukan Nama Kelas">
+                                <input type="text" class="form-control" name="nama_kelas" id="nama_kelas" placeholder="Masukan Nama Kelas">
                             </div>
                             <div class="modal-body">
                                 <label for="wali_kelas">Wali Kelas</label>
@@ -52,11 +52,11 @@
                             </div>
                             <div class="modal-body">
                                 <label for="lokasi_kelas">Lokasi</label>
-                                <input type="text" class="form-control" id="lokasi_kelas" placeholder="Masukan Lokasi Kelas">
+                                <input type="text" class="form-control" id="lokasi_kelas" name="lokasi_kelas" placeholder="Masukan Lokasi Kelas">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
                         </div>
