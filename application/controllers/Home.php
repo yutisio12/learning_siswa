@@ -16,8 +16,6 @@ class Home extends CI_Controller {
 	}
 
 	function tambah(){
-		print_r($_POST);
-		exit;
 		$data = array(
 			'nama_kelas'  => $this->input->post('nama_kelas'),
 			'wali_kelas' => $this->input->post('wali_kelas'),
