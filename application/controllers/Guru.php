@@ -10,7 +10,7 @@ class Guru extends CI_Controller {
 		if(get_cookie('user')==NULL){
 			redirect('auth/logout');
 		}
-        $this->permission_cookie = explode(";", str_replace('"', '', get_cookie('user'))) ;
+        $this->permission_cookie = explode(";", str_replace('"', '', get_cookie('user')));
 	} 
 
     public function test_var($var){
