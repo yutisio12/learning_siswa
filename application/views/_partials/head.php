@@ -23,6 +23,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="<?= base_url('assets/select2/') ?>css/select2.min.css" rel="stylesheet" />
     <script src="<?= base_url('assets/select2/') ?>js/select2.min.js"></script>
-    
+    <script src="<?= base_url('assets/swal2/') ?>swal.js"></script>
 
 </head>
