@@ -43,6 +43,8 @@
                         <a class="collapse-item" href="<?= base_url('home/list_kelas') ?>"><i class="fas fa-list"></i> Data Kelas</a>
                         <a class="collapse-item" href="<?= base_url('home/list_kelas') ?>"><i class="fas fa-list"></i> Data Guru</a>
                         <a class="collapse-item" href="<?= base_url('home/list_kelas') ?>"><i class="fas fa-list"></i> Data Siswa</a>
+                        <a class="collapse-item" href="<?= base_url('home/mapel') ?>"><i class="fas fa-list"></i> Mata Pelajaran</a>
+
                     </div>
                 </div>
             </li>

@@ -8,6 +8,8 @@ class Home extends CI_Controller {
 
 
 		$this->load->model('list_kelas');
+		$this->load->model('mapel');
+
 
 	} 
 
@@ -20,7 +22,7 @@ class Home extends CI_Controller {
 
 	// LIST KELAS
 	public function list_kelas(){
-		$data['row'] = $this->list_kelas->getKelas()->result();
+		$data['list_kelas'] = $this->list_kelas->getKelas()->result();
 
 		$data['sidebar'] = 'home/sidebar';
 		$data['subview'] = 'home/list_kelas';
@@ -41,11 +43,23 @@ class Home extends CI_Controller {
 
 	//TAMBAH MAPEL
 	public function mapel(){
-		$data['row'] = $this->list_kelas->getKelas()->result();
+		$data['mata_pelajaran'] = $this->mapel->getMapel()->result();
 
 		$data['sidebar'] = 'home/sidebar';
 		$data['subview'] = 'home/mapel';
 		$this->load->view('index', $data);
+	}
+
+	function tambah_mapel(){
+		$data = array(
+			'nama_mapel'  => $this->input->post('nama_mapel'),
+			'kelas_mapel' => $this->input->post('kelas_mapel'),
+			'pengajar_mapel' => $this->input->post('pengajar_mapel'),
+			'status' => $this->input->post('status')
+		);
+		$this->mapel->tambah_mapel($data);
+		$this->session->set_flashdata('notif','<div class="alert alert-success" role="alert"> Data Berhasil ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+		redirect('home/mapel');
 	}
 
 }
