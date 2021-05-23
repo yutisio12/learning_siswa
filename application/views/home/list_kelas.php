@@ -29,7 +29,7 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?php echo base_url('home/tambah')?>" method="post">
+                        <form action="<?= base_url('home/tambah')?>" method="POST">
                             <div class="modal-body">
                                 <label for="nama_kelas">Nama Kelas</label>
                                 <input type="text" class="form-control" name="nama_kelas" id="nama_kelas" placeholder="Masukan Nama Kelas">
