@@ -29,38 +29,30 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?php echo base_url('home/tambah_mapel')?>" method="post">
+                        <form action="<?php echo base_url('home/tambah_user')?>" method="post">
                             <div class="modal-body">
-                                <label for="nama_mapel">Nama Mapel</label>
-                                <input type="text" class="form-control" name="nama_mapel" id="nama_mapel" placeholder="Masukan Nama Mapel">
+                                <label for="name">Nama</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Masukan Nama">
                             </div>
 
                             <div class="modal-body">
-                                <label for="kelas_mapel">Kelas</label>
-                                <input type="text" class="form-control" name="kelas_mapel" id="kelas_mapel" placeholder="Masukan Nama Mapel">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Masukan Username">
                             </div>
 
+
                             <div class="modal-body">
-                                <label for="pengajar_mapel">Pengajar</label>
+                                <label for="role">Role</label>
                                 <br>
-                                <select class="form-control" id="pengajar_mapel" name="pengajar_mapel">
-                                    <option value="0" selected>Pilih Pengajar Mata Pelajaran</option>
-                                    <option value="1">Agung</option>
-                                    <option value="2">Ardi</option>
+                                <select class="form-control" id="role" name="role">
+                                    <option value="" selected>Pilih Role</option>
+                                    <option value="0">Admin</option>
+                                    <option value="1">Guru</option>
+                                    <option value="2">Siswa</option>
                                 </select>
-                            </div>
-                            
-                            <div class="modal-body">
-                                <label for="status">Status</label>
-                                <br>
-                                <select class="form-control" id="status" name="status">
-                                <option value="0" selected>Pilih Status Mata Pelajaran</option>
-                                <option value="1">Aktif</option>
-                                <option value="-1">Tidak Aktif</option>
-                            </select>
                                 
                             </div>
-
+                        
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
@@ -77,23 +69,37 @@
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nama Mata Pelajara</th>
-                            <th scope="col">Kelas</th>
-                            <th scope="col">Pengajar</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">role</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
                     $no = 1;
-                    foreach ($mata_pelajaran as $mapel):
+                    foreach ($user as $u):
                     ?>
                         <tr>
                             <td><?php echo $no++ ?></td>
-                            <td><?php echo $mapel->nama_mapel ?></td>
-                            <td><?php echo $mapel->kelas_mapel ?></td>
-                            <td><?php echo $mapel->pengajar_mapel ?></td>
-                            <td><?php echo $mapel->status ?></td>
+                            <td><?php echo $u->name ?></td>
+                            <td><?php echo $u->username ?></td>
+                            <td><?php if ($u->role == '0') {
+                                echo "admin";
+                            }
+                            if ($u->role == '1') {
+                                echo "Guru";
+                            }
+                            if ($u->role == '2') {
+                                echo "Siswa";
+                            }
+                            ?></td>
+                            <td><?php if ($u->status == '0') {
+                                echo "Tidak Aktif";
+                            }
+                            if ($u->status == '1') {
+                                echo "Aktif";
+                            } ?></td>
                         </tr>
                        <?php endforeach ?>
                     </tbody>

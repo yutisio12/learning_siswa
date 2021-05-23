@@ -5,9 +5,11 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->library('encryption');
 		$this->load->helper('cookie');
 		$this->load->model('list_kelas');
 		$this->load->model('mapel');
+		$this->load->model('user');
 		if(get_cookie('user')==NULL){
 			redirect('auth/logout');
 		}
@@ -43,7 +45,7 @@ class Home extends CI_Controller {
 		redirect('home/list_kelas');
 	}
 
-	//TAMBAH MAPEL
+	// MATA PELAJARAN
 	public function mapel(){
 		$data['mata_pelajaran'] = $this->mapel->getMapel()->result();
 
@@ -63,5 +65,27 @@ class Home extends CI_Controller {
 		$this->session->set_flashdata('notif','<div class="alert alert-success" role="alert"> Data Berhasil ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 		redirect('home/mapel');
 	}
+
+		// USER
+		public function user(){
+			$data['user'] = $this->user->getUser()->result();
+	
+			$data['sidebar'] = 'home/sidebar';
+			$data['subview'] = 'home/user';
+			$this->load->view('index', $data);
+		}
+	
+		function tambah_user(){
+			$data = array(
+				'name'  => $this->input->post('name'),
+				'username' => $this->input->post('username'),
+				'password' => $this->encryption->encrypt('12345'),
+				'role' => $this->input->post('role'),
+				'status' => '1'
+			);
+			$this->user->tambah_user($data);
+			$this->session->set_flashdata('notif','<div class="alert alert-success" role="alert"> Data Berhasil ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+			redirect('home/user');
+		}
 
 }
