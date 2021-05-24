@@ -17,7 +17,7 @@
                 <div class="text-left">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                         <i class="fas fa-plus"></i>
-                         Tambah Mata Pelajaran
+                         Tambah Pengguna
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

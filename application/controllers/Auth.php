@@ -43,6 +43,8 @@ class Auth extends CI_Controller {
                 redirect('home');
             } elseif($datadb['role']==1){
                 redirect('guru');
+            } elseif($datadb['role']==2){
+                redirect('siswa');
             }
             
         } else {
