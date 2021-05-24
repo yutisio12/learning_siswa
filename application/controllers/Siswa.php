@@ -7,6 +7,7 @@ class Siswa extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('cookie');
         $this->load->model('guru_model');
+        $this->load->model('siswa_model');
 		if(get_cookie('user')==NULL){
 			redirect('auth/logout');
 		}
@@ -25,42 +26,33 @@ class Siswa extends CI_Controller {
         $datatugas = $this->guru_model->total_tugas()[0];
         $data['total_tugas'] = $datatugas;
 
-		$data['sidebar'] = 'guru/sidebar';
-		$data['subview'] = 'guru/dashboard';
+		$data['sidebar'] = 'siswa/sidebar';
+		$data['subview'] = 'siswa/dashboard';
 		$this->load->view('index', $data);
 	}
 
-    public function list_tugas(){
-        $where['created_by'] = $this->permission_cookie[0];
-        $datatugas = $this->guru_model->list_tugas($where);
-        $data['tugas'] = $datatugas;
+    public function tugas_tersedia(){
+        $where['id'] = $this->permission_cookie[0];
+        $data_user = $this->siswa_model->list_user($where)[0];
+            unset($where);
+        $where['nip_siswa'] = $data_user['nip'];
+        $data_siswa = $this->siswa_model->list_siswa($where)[0];
+            unset($where);
+        $where['id_kelas']  = $data_siswa['kelas_siswa'];
+        $where['status']    = 0;
+        $data_tugas = $this->guru_model->list_tugas($where);
+        $data['list_tugas'] = $data_tugas;
 
-        $data['list_kelas'] = $this->guru_model->list_kelas();
-        foreach($data['list_kelas'] as $key => $value){
-            $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
-        }
-
+        // ============ ARRAY KEY
         $data['list_mapel'] = $this->guru_model->list_mapel();
         foreach($data['list_mapel'] as $key => $value){
             $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
         }
+        // $this->test_var($data['list_tugas']);
 
-        $data['sidebar'] = 'guru/sidebar';
-		$data['subview'] = 'guru/list_tugas';
-		$this->load->view('index', $data);
-    }
-
-    public function add_tugas_process(){
-        $insert['id_kelas']         = $_POST['kelas'];
-        $insert['id_mapel']         = $_POST['mapel'];
-        $insert['open_date']        = $_POST['date_open'].' '.$_POST['time_open'];
-        $insert['close_date']       = $_POST['date_close'].' '.$_POST['time_close'];
-        $insert['created_by']       = $this->permission_cookie[0];
-        $insert['created_datetime'] = DATE('Y-m-d H:i:s');
-        $this->guru_model->insert_tugas($insert);
-
-        $this->session->set_flashdata('success', 'Tugas Berhasil Di Buat');
-        redirect('guru/list_tugas');
+        $data['sidebar'] = 'siswa/sidebar';
+        $data['subview'] = 'siswa/list_tugas';
+        $this->load->view('index', $data);
     }
 
 }

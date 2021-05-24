@@ -93,6 +93,7 @@
                             <th scope="col">Open Date</th>
                             <th scope="col">Close Date</th>
                             <th scope="col">Status</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,6 +117,9 @@
                                         echo "<span class='badge badge-success'>Scored</span>";
                                     }
                                 ?>
+                            </td>
+                            <td>
+                                <a href="<?= base_url('guru/tulis_soal/').$value['id'] ?>" class="btn btn-danger"><i class="fas fa-pencil-alt"></i> Soal</a>
                             </td>
                         </tr>
                         <?php 

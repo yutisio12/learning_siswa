@@ -63,4 +63,12 @@ class Guru extends CI_Controller {
         redirect('guru/list_tugas');
     }
 
+    public function tulis_soal($id_tugas){
+        // $this->test_var($id_tugas);
+        $data['id_tugas'] = $id_tugas;
+        $data['sidebar'] = 'guru/sidebar';
+        $data['subview'] = 'guru/list_soal';
+        $this->load->view('index', $data);
+    }
+
 }
