@@ -16,5 +16,10 @@ class siswa_model extends CI_Model{
         $db = $this->db->get('siswa')->result_array();
         return $db;
     }
+
+    function insert_siswa($data){
+        $this->db->insert('siswa', $data);
+
+    }
         
 }
