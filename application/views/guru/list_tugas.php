@@ -33,7 +33,7 @@
                             <div class="modal-body">
                                 <label for="kelas">Kelas</label>
                                 <br>
-                                <select class="select2 form-control" id="kelas" name="kelas" style="width: 100%;" required>
+                                <select class="select2 form-control" id="kelas" name="kelas[]" style="width: 100%;" required>
                                     <option value="">---</option>
                                     <?php foreach($list_kelas as $v_kelas){ ?>
                                         <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
@@ -43,7 +43,7 @@
                             <div class="modal-body">
                                 <label for="mapel">mapel</label>
                                 <br>
-                                <select class="select2 form-control" id="mapel" name="mapel" style="width: 100%;" required>
+                                <select class="select2 form-control" id="mapel" name="mapel[]" style="width: 100%;" required>
                                     <option value="">---</option>
                                     <?php foreach($list_mapel as $v_mapel){ ?>
                                         <option value="<?= $v_mapel['id'] ?>"><?= $v_mapel['nama_mapel'] ?></option>

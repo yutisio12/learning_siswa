@@ -74,6 +74,10 @@
         $(document).ready(function() {
             $('.select2').select2();
             $('.data-table').DataTable();
+            $('.multiSelect2').val(null).select2({
+                multiple: true,
+            });
+
         });
     </script>
 

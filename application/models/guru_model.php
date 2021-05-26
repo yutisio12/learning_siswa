@@ -38,5 +38,17 @@ class guru_model extends CI_Model{
     function insert_tugas($data){
         $this->db->insert('tugas', $data);
     }
+
+    function list_guru(){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('guru')->result_array();
+        return $db;
+    }
+
+    function insert_guru($data){
+        $this->db->insert('guru', $data);
+    }
         
 }

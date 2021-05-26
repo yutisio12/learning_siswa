@@ -39,22 +39,12 @@
                                 <label for="wali_kelas">Wali Kelas</label>
                                 <br>
                                 <select class="select2 form-control" id="wali_kelas" name="wali_kelas" style="width: 100%;" required>
-                                    <option value="">---</option>
+                                    <option value="">Pilih Wali Kelas</option>
                                     <?php foreach($wali_kelas as $v_wali){ ?>
                                         <option value="<?= $v_wali['id'] ?>"><?= $v_wali['name'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
-<!-- 
-                            <div class="modal-body">
-                                <label for="wali_kelas">Wali Kelas</label>
-                                <br>
-                                <select class="form-control" id="wali_kelas" name="wali_kelas">
-                                    <option value="0" selected>Pilih Wali Kelas</option>
-                                    <option value="1">Agung</option>
-                                    <option value="2">Ardi</option>
-                                </select>
-                            </div> -->
 
                             <div class="modal-body">
                                 <label for="lokasi_kelas">Lokasi</label>
