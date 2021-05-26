@@ -36,14 +36,25 @@
                             </div>
 
                             <div class="modal-body">
-                                <label for="wali_kelas">Pengajar</label>
+                                <label for="wali_kelas">Wali Kelas</label>
+                                <br>
+                                <select class="select2 form-control" id="wali_kelas" name="wali_kelas" style="width: 100%;" required>
+                                    <option value="">---</option>
+                                    <?php foreach($wali_kelas as $v_wali){ ?>
+                                        <option value="<?= $v_wali['id'] ?>"><?= $v_wali['name'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+<!-- 
+                            <div class="modal-body">
+                                <label for="wali_kelas">Wali Kelas</label>
                                 <br>
                                 <select class="form-control" id="wali_kelas" name="wali_kelas">
                                     <option value="0" selected>Pilih Wali Kelas</option>
                                     <option value="1">Agung</option>
                                     <option value="2">Ardi</option>
                                 </select>
-                            </div>
+                            </div> -->
 
                             <div class="modal-body">
                                 <label for="lokasi_kelas">Lokasi</label>
@@ -73,13 +84,13 @@
                     <tbody>
                     <?php 
                     $no = 1;
-                    foreach ($list_kelas as $list):
+                    foreach ($kelas as $list):
                     ?>
                         <tr>
                             <td><?php echo $no++ ?></td>
-                            <td><?php echo $list->nama_kelas ?></td>
-                            <td><?php echo $list->wali_kelas ?></td>
-                            <td><?php echo $list->lokasi_kelas ?></td>
+                            <td><?= $list['nama_kelas'] ?></td>
+                            <td><?= $name[$list['wali_kelas']] ?></td>
+                            <td><?= $list['lokasi_kelas'] ?></td>
                         </tr>
                        <?php endforeach ?>
                     </tbody>

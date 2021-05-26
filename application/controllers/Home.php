@@ -26,7 +26,16 @@ class Home extends CI_Controller {
 
 	// LIST KELAS
 	public function list_kelas(){
-		$data['list_kelas'] = $this->list_kelas->getKelas()->result();
+
+        $datakelas = $this->list_kelas->getKelas();
+        $data['kelas'] = $datakelas;
+
+
+		$where_role['role'] = 1;
+		$data['wali_kelas'] = $this->list_kelas->wali_kelas($where_role);
+        foreach($data['wali_kelas'] as $key => $value){
+            $data['name'][$value['id']] = $value['name'];
+        }
 
 		$data['sidebar'] = 'home/sidebar';
 		$data['subview'] = 'home/list_kelas';
@@ -35,14 +44,14 @@ class Home extends CI_Controller {
 
 	// TAMBAH KELAS
 	function tambah(){
-		$data = array(
-			'nama_kelas'  => $this->input->post('nama_kelas'),
-			'wali_kelas' => $this->input->post('wali_kelas'),
-			'lokasi_kelas' => $this->input->post('lokasi_kelas')
-		);
-		$this->list_kelas->tambah($data);
-		$this->session->set_flashdata('notif','<div class="alert alert-success" role="alert"> Data Berhasil ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-		redirect('home/list_kelas');
+
+		$insert['nama_kelas']         = $_POST['nama_kelas'];
+        $insert['wali_kelas']         = $_POST['wali_kelas'];
+		$insert['lokasi_kelas']       = $_POST['lokasi_kelas'];
+        $this->list_kelas->tambah($insert);
+
+        $this->session->set_flashdata('success', 'Kelas Berhasil Di Tambah');
+        redirect('home/list_kelas');
 	}
 
 	// MATA PELAJARAN
