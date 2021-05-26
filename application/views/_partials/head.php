@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Learning Siswa</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/bootstrap/') ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
