@@ -64,7 +64,10 @@ class Guru extends CI_Controller {
     }
 
     public function tulis_soal($id_tugas){
-        // $this->test_var($id_tugas);
+        
+        $where['id_tuags'] = $id_tugas;
+        $data['soal'] = $this->guru_model->list_tugas_soal($where);
+        // $this->test_var($data);
         $data['id_tugas'] = $id_tugas;
         $data['sidebar'] = 'guru/sidebar';
         $data['subview'] = 'guru/list_soal';
@@ -73,16 +76,20 @@ class Guru extends CI_Controller {
 
     public function add_soal_process($id_tugas){
         error_reporting(0);
+        
         foreach ($_POST['soal'] as $key => $soal) {
             $insert['id_tugas']         = $id_tugas;
             $insert['soal']             = $soal;
-            $insert['soal_opsi_a']      = $soal['opsi_a'];
-            $insert['soal_opsi_b']      = $soal['opsi_b'];
-            $insert['soal_opsi_c']      = $soal['opsi_c'];
-            $insert['soal_opsi_d']      = $soal['opsi_d'];
-            $insert['jenis_soal']       = $soal['jenis'];
+            $insert['soal_opsi_a']      = $_POST['opsi_a'][$key];
+            $insert['soal_opsi_b']      = $_POST['opsi_b'][$key];
+            $insert['soal_opsi_c']      = $_POST['opsi_c'][$key];
+            $insert['soal_opsi_d']      = $_POST['opsi_d'][$key];
+            $insert['jenis_soal']       = $_POST['jenis'][$key];
+            
+            $this->guru_model->insert_soal($insert);
         }
-        $this->test_var($_POST);
+        $this->session->set_flashdata('success', 'Soal Berhasil Di Tambahkan');
+        redirect('guru');
     }
 
 }

@@ -23,12 +23,55 @@
                 <br>
                 <div class="card">
                     <div class="col">
+                        <?php 
+                            if(isset($soal)){ 
+                            $nos = 1;
+                            foreach ($soal as $key_soal => $value_soal){
+                        ?>
+                            <div class="soal_">
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-1"><p><?= $nos ?> )</p></div>
+                                    <div class="col">
+                                        <textarea class="form-control" disabled><?= $value_soal['soal'] ?></textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="radio" <?= $value_soal['jenis_soal']==0 ? 'checked' : '' ?> class="text-right">&nbsp;Essay
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="radio" <?= $value_soal['jenis_soal']==1 ? 'checked' : '' ?> >&nbsp;Objektif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col">
+                                                A <input class="form-control"  type="text" value="<?= $value_soal['soal_opsi_a'] ?>" disabled>
+                                            </div>
+                                            <div class="col">
+                                                B <input class="form-control"  type="text" value="<?= $value_soal['soal_opsi_b'] ?>" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                C <input class="form-control"  type="text" value="<?= $value_soal['soal_opsi_c'] ?>" disabled>
+                                            </div>
+                                            <div class="col">
+                                                D <input class="form-control"  type="text" value="<?= $value_soal['soal_opsi_d'] ?>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        <?php $nos++;}} ?>
                         <form action="<?= base_url('guru/add_soal_process/').$id_tugas ?>" method="POST">
                         <div id="tugas">
                         <br>
                         <div class="soal_1">
                             <div class="row">
-                                <div class="col-md-1"><p>1)</p></div>
+                                <div class="col-md-1"><p><?= $nos ?> )</p></div>
                                 <div class="col">
                                     <textarea class="form-control" required="" name="soal[]"></textarea>
                                 </div>
@@ -70,7 +113,9 @@
                     </div>
                 </div>
                 <script type="text/javascript">
-                    var no_soal = 1
+                
+                    var x = <?= $nos ?>+0
+                    var no_soal = x
                     var no_div = 0
                     function tambah_soal(){
                         no_soal+=1

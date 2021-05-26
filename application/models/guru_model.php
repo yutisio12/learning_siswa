@@ -50,5 +50,17 @@ class guru_model extends CI_Model{
     function insert_guru($data){
         $this->db->insert('guru', $data);
     }
+
+    function insert_soal($insert){
+        $this->db->insert('tugas_soal', $insert);
+    }
+
+    function list_tugas_soal(){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('tugas_soal')->result_array();
+        return $db;
+    }
         
 }
