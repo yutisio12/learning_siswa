@@ -71,4 +71,18 @@ class Guru extends CI_Controller {
         $this->load->view('index', $data);
     }
 
+    public function add_soal_process($id_tugas){
+        error_reporting(0);
+        foreach ($_POST['soal'] as $key => $soal) {
+            $insert['id_tugas']         = $id_tugas;
+            $insert['soal']             = $soal;
+            $insert['soal_opsi_a']      = $soal['opsi_a'];
+            $insert['soal_opsi_b']      = $soal['opsi_b'];
+            $insert['soal_opsi_c']      = $soal['opsi_c'];
+            $insert['soal_opsi_d']      = $soal['opsi_d'];
+            $insert['jenis_soal']       = $soal['jenis'];
+        }
+        $this->test_var($_POST);
+    }
+
 }

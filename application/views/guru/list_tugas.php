@@ -108,15 +108,11 @@
                             <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
                             <td>
-                                <?php
-                                    if($value['status']==0){
-                                        echo "<span class='badge badge-secondary'>Open</span>";
-                                    } elseif($value['status']==1){
-                                        echo "<span class='badge badge-primary'>Close</span>";
-                                    } elseif($value['status']==2){
-                                        echo "<span class='badge badge-success'>Scored</span>";
-                                    }
-                                ?>
+                                <select class="form-control">
+                                    <option value="0" <?= $value['status']==0 ? 'selected' : '' ?>>Open</option>
+                                    <option value="1" <?= $value['status']==1 ? 'selected' : '' ?>>Close</option>
+                                    <option value="2" <?= $value['status']==2 ? 'selected' : '' ?>>Scored</option>
+                                </select>
                             </td>
                             <td>
                                 <a href="<?= base_url('guru/tulis_soal/').$value['id'] ?>" class="btn btn-danger"><i class="fas fa-pencil-alt"></i> Soal</a>
