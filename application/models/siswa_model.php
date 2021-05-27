@@ -27,12 +27,23 @@ class siswa_model extends CI_Model{
 
     function insert_siswa($data){
         $this->db->insert('siswa', $data);
-
     }
 
     function editSiswa($where, $data){
         $this->db->where($where);
         $this->db->update('siswa', $data);    
+    }
+
+    function insert_pengumpulan($data){
+        $this->db->insert('pengumpulan', $data);
+    }
+
+    function list_pengumpulan($where = NULL){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('pengumpulan')->result_array();
+        return $db;
     }
         
 }

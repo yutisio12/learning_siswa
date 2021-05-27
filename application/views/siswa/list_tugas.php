@@ -36,9 +36,15 @@
                             <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
                             <td>
-                                <a href="<?= base_url('siswa/kerjakan_tugas/').$value['id'] ?>" class="btn btn-success">
-                                    <i class="fas fa-tasks"></i> Kerjakan
-                                </a>
+                                <?php if($check_kumpul[$value['id']]!=1){ ?>
+                                    <a href="<?= base_url('siswa/kerjakan_tugas/').$value['id'] ?>" class="btn btn-success">
+                                        <i class="fas fa-tasks"></i> Kerjakan
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="<?= base_url('siswa/review_pengumpulan/').$value['id'] ?>" class="btn btn-secondary">
+                                        <i class="fas fa-eye"></i> Lihat Jawaban
+                                    </a>
+                                <?php } ?>
                             </td>
                         </tr>
                         <?php 

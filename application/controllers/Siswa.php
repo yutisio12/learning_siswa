@@ -32,6 +32,12 @@ class Siswa extends CI_Controller {
 	}
 
     public function tugas_tersedia(){
+
+        $pengumpulan = $this->siswa_model->list_pengumpulan();
+        foreach ($pengumpulan as $key => $value) {
+            $data['check_kumpul'][$value['id_tugas']] = 1;
+        }
+
         $where['id'] = $this->permission_cookie[0];
         $data_user = $this->siswa_model->list_user($where)[0];
             unset($where);
@@ -49,13 +55,13 @@ class Siswa extends CI_Controller {
             $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
         }
         // $this->test_var($data['list_tugas']);
-
         $data['sidebar'] = 'siswa/sidebar';
         $data['subview'] = 'siswa/list_tugas';
         $this->load->view('index', $data);
     }
 
     public function kerjakan_tugas($id_tugas){
+        $data['id_tugas_main']  = $id_tugas;
         $where['id_tugas'] = $id_tugas;
         $data['soal'] = $this->siswa_model->list_soal($where);
         // $this->test_var($data['soal']);
@@ -63,6 +69,35 @@ class Siswa extends CI_Controller {
         $data['sidebar'] = 'siswa/sidebar';
         $data['subview'] = 'siswa/pengerjaan_soal';
         $this->load->view('index', $data);
+    }
+
+    public function review_pengumpulan($id_tugas){
+        $data['id_tugas_main']  = $id_tugas;
+        $where['id_tugas'] = $id_tugas;
+        $data['soal'] = $this->siswa_model->list_soal($where);
+
+        $data_jawaban = $this->siswa_model->list_pengumpulan($where);
+        foreach ($data_jawaban as $key => $value) {
+            $data['jawaban'][$value['id_tugas_soal']] = $value['jawaban'];
+        }
+
+        $data['sidebar'] = 'siswa/sidebar';
+        $data['subview'] = 'siswa/review_pengumpulan';
+        $this->load->view('index', $data);
+    }
+
+    public function pengumpulan_soal($id_tugas){
+        // $this->test_var($_POST);
+        foreach ($_POST['id_soal'] as $key => $soal) {
+            $insert['id_tugas']         = $id_tugas;
+            $insert['id_tugas_soal']    = $soal;
+            $insert['jawaban']          = $_POST['jawaban'][$key];
+            $insert['status_jawaban']   = 0;
+
+            $this->siswa_model->insert_pengumpulan($insert);
+        }
+        $this->session->set_flashdata('success', 'Soal berhasil dikumpulkan :)');
+        redirect('siswa/tugas_tersedia');
     }
 
 }

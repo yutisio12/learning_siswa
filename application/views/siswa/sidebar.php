@@ -28,7 +28,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Guru
+                Siswa
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -40,9 +40,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?= base_url('guru/list_tugas') ?>"><i class="fas fa-list"></i> Data Tugas</a>
-                        <a class="collapse-item" href="<?= base_url('home/list_kelas') ?>"><i class="fas fa-list"></i> Data Pengumpulan</a>
-                        <a class="collapse-item" href="<?= base_url('home/list_kelas') ?>"><i class="fas fa-list"></i> Data Penilaian</a>
+                        <a class="collapse-item" href="<?= base_url('siswa/tugas_tersedia') ?>"><i class="fas fa-list"></i> Data Tugas</a>
                     </div>
                 </div>
             </li>
