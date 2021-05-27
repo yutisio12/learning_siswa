@@ -41,5 +41,23 @@
     </footer>
     <script src="<?= base_url('assets/jquery/') ?>jquery-3.6.0.min.js"></script>
     <script src="<?= base_url('assets/bs/') ?>js/bootstrap.min.js"></script>
+    <script src="<?= base_url('assets/swal2/') ?>swal.js"></script>
+    <script>
+    <?php if(strlen($this->session->flashdata('success'))>1){ ?>
+        Swal.fire({
+            icon: 'success',
+            title: "<?= $this->session->flashdata('success') ?>",
+            showConfirmButton: false,
+            timer: 1500
+        })
+    <?php } elseif(strlen($this->session->flashdata('warning'))>1) { ?>
+        Swal.fire({
+            icon: 'warning',
+            title: "<?= $this->session->flashdata('warning') ?>",
+            showConfirmButton: false,
+            timer: 1500
+        })
+    <?php } ?>
+    </script>
   </body>
 </html>

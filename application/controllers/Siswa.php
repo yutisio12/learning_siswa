@@ -12,6 +12,11 @@ class Siswa extends CI_Controller {
 			redirect('auth/logout');
 		}
         $this->permission_cookie = explode(";", str_replace('"', '', get_cookie('user')));
+        $this->kelas_cookie = get_cookie('cookies_kelas');
+        if($this->permission_cookie[3]!=2){
+            $this->session->set_flashdata('warning', 'You dant have permission to access this page');
+            redirect('auth/logout');
+        }
 	} 
 
     public function test_var($var){
