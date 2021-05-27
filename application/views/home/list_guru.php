@@ -94,6 +94,8 @@
                             <th scope="col">Mata Pelajaran</th>
                             <th scope="col">Alamat Guru</th>
                             <th scope="col">No Telphone</th>
+                            <th scope="col">Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -121,6 +123,10 @@
                             </td>
                             <td><?= $list['alamat_guru'] ?></td>
                             <td><?= $list['telpon_guru'] ?></td>
+                            <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal<?= $list['id']; ?>">
+                            <i class="fas fa-edit"></i>
+                            Edit Kelas
+                            </button></td>
                         </tr>
                         <?php endforeach ?>
                     </tbody>
@@ -132,3 +138,76 @@
 </div>
 <!-- /.container-fluid -->
 </div>
+
+<!-- Modal Edit -->
+<?php 
+foreach ($guru as $list):
+?>
+
+<div class="modal fade" id="modal<?= $list['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data Kelas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="<?= base_url('home/edit_guru')?>" method="POST">
+      
+                            <div class="modal-body">
+                                <label for="nama_guru">Nama Guru</label>
+                                <input type="text" class="form-control" name="nama_guru" id="nama_guru" value="<?= $list['nama_guru'] ?>" placeholder="Masukan Nama Guru">
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="nip_guru">NIP Guru</label>
+                                <input type="text" class="form-control" name="nip_guru" id="nip_guru" value="<?= $list['nip_guru'] ?>"placeholder="Masukan NIP Guru">
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="kelas">Kelas</label>
+                                <br>
+                                <select class="multiSelect2 form-control" id="kelas" name="kelas[]" style="width: 100%;" required>
+                                    <!-- <option value="">---</option> -->
+                                    <?php foreach($list_kelas as $v_kelas){ ?>
+                                        <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="mapel">mapel</label>
+                                <br>
+                                <select class="multiSelect2 form-control" id="mapel" name="mapel[]" style="width: 100%;" required>
+                                    <!-- <option value="">---</option> -->
+                                    <?php foreach($list_mapel as $v_mapel){ ?>
+                                        <option value="<?= $v_mapel['id'] ?>"><?= $v_mapel['nama_mapel'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="alamat_guru">Alamat Guru</label>
+                                <input type="text" class="form-control" id="alamat_guru" name="alamat_guru" value="<?= $list['alamat_guru'] ?>" placeholder="Masukan Alamat Guru">
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="telpon_guru">No Telphone Guru</label>
+                                <input type="text" class="form-control" id="telpon_guru" name="telpon_guru" value="<?= $list['telpon_guru'] ?>" placeholder="Masukan No Telphone Guru">
+                            </div>
+
+                            <input type="hidden" name="id" id="id" value="<?= $list['id']; ?>">
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach ?>

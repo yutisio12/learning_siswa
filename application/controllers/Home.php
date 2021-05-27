@@ -44,7 +44,6 @@ class Home extends CI_Controller {
 		$this->load->view('index', $data);
 	}
 
-	// TAMBAH KELAS
 	function tambah(){
 
 		$insert['nama_kelas']         = $_POST['nama_kelas'];
@@ -54,6 +53,19 @@ class Home extends CI_Controller {
 
         $this->session->set_flashdata('success', 'Kelas Berhasil Di Tambah');
         redirect('home/list_kelas');
+	}
+
+	function edit(){
+
+		$where['id'] = $_POST['id'];
+		$data['nama_kelas'] = $_POST['nama_kelas'];
+		$data['wali_kelas'] = $_POST['wali_kelas'];
+		$data['lokasi_kelas'] = $_POST['lokasi_kelas'];
+	   
+        $this->list_kelas->edit($where, $data);
+		$this->session->set_flashdata('success',"Data Berhasil Di edit");
+        redirect('home/list_kelas');
+
 	}
 
 	// MATA PELAJARAN
@@ -85,6 +97,20 @@ class Home extends CI_Controller {
 
         $this->session->set_flashdata('success', 'Mata Pelajaran Berhasil Di Tambah');
         redirect('home/mapel');
+	}
+
+	function edit_mapel(){
+
+		$where['id'] = $_POST['id'];
+		$data['nama_mapel'] = $_POST['nama_mapel'];
+		$data['kelas_mapel'] = $_POST['kelas_mapel'];
+		$data['pengajar_mapel'] = $_POST['pengajar_mapel'];
+		$data['status'] = $_POST['status'];
+
+        $this->mapel->editMapel($where, $data);
+		$this->session->set_flashdata('success',"Data Berhasil Di edit");
+        redirect('home/mapel');
+
 	}
 
 		// USER
@@ -132,6 +158,21 @@ class Home extends CI_Controller {
         redirect('home/list_siswa');
 		}
 
+		function edit_siswa(){
+
+			$where['id'] = $_POST['id'];
+			$data['nama_siswa'] = $_POST['nama_siswa'];
+			$data['nip_siswa'] = $_POST['nip_siswa'];
+			$data['alamat_siswa'] = $_POST['alamat_siswa'];
+			$data['telpon_siswa'] = $_POST['telpon_siswa'];
+			$data['kelas_siswa'] = $_POST['kelas_siswa'];
+
+			$this->siswa_model->editSiswa($where, $data);
+			$this->session->set_flashdata('success',"Data Berhasil Di edit");
+			redirect('home/list_siswa');
+
+		}
+
 		//DATA GURU
 		function list_guru(){
 			$dataguru = $this->guru_model->list_guru();
@@ -163,6 +204,21 @@ class Home extends CI_Controller {
 			$this->guru_model->insert_guru($insert);
 
 			$this->session->set_flashdata('success', 'Guru Berhasil Di Tambah');
+			redirect('home/list_guru');
+
+		}
+
+		function edit_guru(){
+
+			$where['id'] = $_POST['id'];
+			$data['nama_guru'] = $_POST['nama_guru'];
+			$data['nip_guru'] = $_POST['nip_guru'];
+			$data['alamat_guru'] = $_POST['alamat_guru'];
+			$data['telpon_guru'] = $_POST['telpon_guru'];
+
+		   
+			$this->guru_model->editGuru($where, $data);
+			$this->session->set_flashdata('success',"Data Berhasil Di edit");
 			redirect('home/list_guru');
 
 		}

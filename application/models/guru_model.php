@@ -50,5 +50,10 @@ class guru_model extends CI_Model{
     function insert_guru($data){
         $this->db->insert('guru', $data);
     }
+
+    function editGuru($where, $data){
+        $this->db->where($where);
+        $this->db->update('guru', $data);
+    }
         
 }

@@ -13,6 +13,12 @@ class mapel extends CI_Model{
        $this->db->insert('mapel', $data);
     }
 
+    function editMapel($where, $data){
+        $this->db->where($where);
+        $this->db->update('mapel', $data);    
+    }
+       
+
     function pengajar_mapel($where = NULL){
         if(isset($where)){
             $this->db->where($where);

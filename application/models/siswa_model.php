@@ -21,5 +21,10 @@ class siswa_model extends CI_Model{
         $this->db->insert('siswa', $data);
 
     }
+
+    function editSiswa($where, $data){
+        $this->db->where($where);
+        $this->db->update('siswa', $data);    
+    }
         
 }
