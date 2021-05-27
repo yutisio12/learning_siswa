@@ -55,4 +55,14 @@ class Siswa extends CI_Controller {
         $this->load->view('index', $data);
     }
 
+    public function kerjakan_tugas($id_tugas){
+        $where['id_tugas'] = $id_tugas;
+        $data['soal'] = $this->siswa_model->list_soal($where);
+        // $this->test_var($data['soal']);
+
+        $data['sidebar'] = 'siswa/sidebar';
+        $data['subview'] = 'siswa/pengerjaan_soal';
+        $this->load->view('index', $data);
+    }
+
 }

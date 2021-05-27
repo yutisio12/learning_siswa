@@ -36,7 +36,7 @@
                             <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
                             <td>
-                                <a href="" class="btn btn-success">
+                                <a href="<?= base_url('siswa/kerjakan_tugas/').$value['id'] ?>" class="btn btn-success">
                                     <i class="fas fa-tasks"></i> Kerjakan
                                 </a>
                             </td>

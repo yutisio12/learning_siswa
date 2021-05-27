@@ -17,6 +17,14 @@ class siswa_model extends CI_Model{
         return $db;
     }
 
+    function list_soal($where = NULL){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('tugas_soal')->result_array();
+        return $db;
+    }
+
     function insert_siswa($data){
         $this->db->insert('siswa', $data);
 
