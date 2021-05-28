@@ -46,7 +46,7 @@
                                 <br>
                                 <select class="form-control" id="role" name="role">
                                     <option value="" selected>Pilih Role</option>
-                                    <option value="0">Admin</option>
+                                    <option value="0">Tata Usaha</option>
                                     <option value="1">Guru</option>
                                     <option value="2">Siswa</option>
                                 </select>
@@ -85,7 +85,7 @@
                             <td><?php echo $u->name ?></td>
                             <td><?php echo $u->username ?></td>
                             <td><?php if ($u->role == '0') {
-                                echo "admin";
+                                echo "Tata Usaha";
                             }
                             if ($u->role == '1') {
                                 echo "Guru";
