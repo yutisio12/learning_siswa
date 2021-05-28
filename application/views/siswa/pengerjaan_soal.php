@@ -41,19 +41,19 @@
                                         <div class="col-md-6">
                                             <div class="row">
                                                 <div class="col">
-                                                    <span class="btn btn-warning opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'a')"><b>A)</b> <?= $value_soal['soal_opsi_a'] ?></span>
+                                                    <span class="btn btn-warning opsi_<?= $key_soal ?> a_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'a')"><b>A)</b> <?= $value_soal['soal_opsi_a'] ?></span>
                                                 </div>
                                                 <div class="col">
-                                                    <span class="btn btn-warning opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'b')"><b>B)</b> <?= $value_soal['soal_opsi_b'] ?></span>
+                                                    <span class="btn btn-warning opsi_<?= $key_soal ?> b_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'b')"><b>B)</b> <?= $value_soal['soal_opsi_b'] ?></span>
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="row">
                                                 <div class="col">
-                                                    <span class="btn btn-warning opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'c')"><b>C)</b> <?= $value_soal['soal_opsi_c'] ?></span>
+                                                    <span class="btn btn-warning opsi_<?= $key_soal ?> c_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'c')"><b>C)</b> <?= $value_soal['soal_opsi_c'] ?></span>
                                                 </div>
                                                 <div class="col">
-                                                    <span class="btn btn-warning opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'd')"><b>D)</b> <?= $value_soal['soal_opsi_d'] ?></span>
+                                                    <span class="btn btn-warning opsi_<?= $key_soal ?> d_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'd')"><b>D)</b> <?= $value_soal['soal_opsi_d'] ?></span>
                                                 </div>
                                                 <input type="hidden" name="jawaban[<?=  $key_soal ?>]" class="abcd_<?=  $key_soal ?>">
                                                 <input type="hidden" name="id_soal[<?=  $key_soal ?>]" value="<?= $value_soal['id'] ?>">
@@ -142,6 +142,28 @@
                     function jawaban(no_soal, jawaban){
                         console.log(jawaban)
                         $('.abcd_'+no_soal).val(jawaban)
+
+                        if(jawaban=='a'){
+                            $('.a_'+no_soal).removeClass('btn-warning').addClass('btn-success text-white')
+                            $('.b_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                            $('.c_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                            $('.d_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                        } else if(jawaban=='b'){
+                            $('.b_'+no_soal).removeClass('btn-warning').addClass('btn-success text-white')
+                            $('.a_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                            $('.c_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                            $('.d_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                        } else if(jawaban=='c'){
+                            $('.c_'+no_soal).removeClass('btn-warning').addClass('btn-success text-white')
+                            $('.a_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                            $('.b_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                            $('.d_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                        } else if(jawaban=='d'){
+                            $('.d_'+no_soal).removeClass('btn-warning').addClass('btn-success text-white')
+                            $('.a_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                            $('.c_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                            $('.b_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
+                        }
                     }
 
                 </script>
