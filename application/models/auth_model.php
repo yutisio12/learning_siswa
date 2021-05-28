@@ -9,4 +9,12 @@ class auth_model extends CI_Model{
         return $db;
     }
 
+    function find_siswa($where){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('siswa')->result_array();
+        return $db;
+    }
+
 }

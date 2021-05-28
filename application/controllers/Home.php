@@ -15,6 +15,11 @@ class Home extends CI_Controller {
 		if(get_cookie('user')==NULL){
 			redirect('auth/logout');
 		}
+		$this->permission_cookie = explode(";", str_replace('"', '', get_cookie('user')));
+		if($this->permission_cookie[3]!=0){
+            $this->session->set_flashdata('warning', 'You dant have permission to access this page');
+            redirect('auth/logout');
+        }
 
 
 	} 
