@@ -69,6 +69,7 @@ class Siswa extends CI_Controller {
     public function kerjakan_tugas($id_tugas){
         $data['id_tugas_main']  = $id_tugas;
         $where['id_tugas'] = $id_tugas;
+        $where['status_soal'] = 0;
         $data['soal'] = $this->siswa_model->list_soal($where);
         // $this->test_var($data['soal']);
 
@@ -80,6 +81,7 @@ class Siswa extends CI_Controller {
     public function review_pengumpulan($id_tugas){
         $data['id_tugas_main']  = $id_tugas;
         $where['id_tugas'] = $id_tugas;
+        $where['status_soal'] = 0;
         $data['soal'] = $this->siswa_model->list_soal($where);
         unset($where);
 

@@ -55,7 +55,12 @@ class guru_model extends CI_Model{
         $this->db->insert('tugas_soal', $insert);
     }
 
-    function list_tugas_soal(){
+    function update_soal($where, $data){
+        $this->db->where($where);
+        $this->db->update('tugas_soal', $data);
+    }
+
+    function list_tugas_soal($where = NULL){
         if(isset($where)){
             $this->db->where($where);
         }
