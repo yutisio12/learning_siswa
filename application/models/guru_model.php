@@ -39,11 +39,27 @@ class guru_model extends CI_Model{
         $this->db->insert('tugas', $data);
     }
 
-    function list_guru(){
+    function list_guru($where = NULL){
         if(isset($where)){
             $this->db->where($where);
         }
         $db = $this->db->get('guru')->result_array();
+        return $db;
+    }
+
+    function list_siswa($where = NULL){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('siswa')->result_array();
+        return $db;
+    }
+
+    function list_user($where = NULL){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('user')->result_array();
         return $db;
     }
 
