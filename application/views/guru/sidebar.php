@@ -42,7 +42,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?= base_url('guru/list_tugas') ?>"><i class="fas fa-list"></i> Data Tugas</a>
                         <a class="collapse-item" href="<?= base_url('home/list_kelas') ?>"><i class="fas fa-list"></i> Data Pengumpulan</a>
-                        <a class="collapse-item" href="<?= base_url('home/list_kelas') ?>"><i class="fas fa-list"></i> Data Penilaian</a>
+                        <a class="collapse-item" href="<?= base_url('guru/list_nilai') ?>"><i class="fas fa-list"></i> Data Penilaian</a>
                     </div>
                 </div>
             </li>

@@ -87,7 +87,7 @@
                         <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?= $list['nama_siswa'] ?></td>
-                            <td><?= $list['kelas_siswa'] ?></td>
+                            <td><?= $nama_kelas[$list['kelas_siswa']] ?></td>
                             <td><?= $list['nip_siswa'] ?></td>
                             <td><?= $list['alamat_siswa'] ?></td>
                             <td><?= $list['telpon_siswa'] ?></td>
@@ -137,8 +137,14 @@ foreach ($siswa as $list):
                             </div>
 
                             <div class="modal-body">
-                                <label for="kelas_siswa">Kelas Siswa</label>
-                                <input type="text" class="form-control" name="kelas_siswa" id="kelas_siswa" value="<?= $list['kelas_siswa'] ?>"placeholder="Masukan Kelas Siswa">
+                                <label for="kelas_siswa">Kelas</label>
+                                <br>
+                                <select class="select2 form-control" name="kelas_siswa" style="width: 100%;" required>
+                                <option value="<?= $list['kelas_siswa'] ?>"><?= $nama_kelas[$list['kelas_siswa']] ?></option>
+                                    <?php foreach($kelas as $v_kelas){ ?>
+                                        <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
 
                             <div class="modal-body">

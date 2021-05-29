@@ -40,6 +40,11 @@
                                 <input type="text" class="form-control" name="username" id="username" placeholder="Masukan Username">
                             </div>
 
+                            <div class="modal-body">
+                                <label for="nip">NIP</label>
+                                <input type="text" class="form-control" name="nip" id="nip" placeholder="Masukan Username">
+                            </div>
+
 
                             <div class="modal-body">
                                 <label for="role">Role</label>

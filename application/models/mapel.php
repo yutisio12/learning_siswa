@@ -26,4 +26,12 @@ class mapel extends CI_Model{
         $db = $this->db->get('user')->result_array();
         return $db;
     }
+
+    function kelas($where = NULL){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('kelas')->result_array();
+        return $db;
+    }
 }

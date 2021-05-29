@@ -63,6 +63,14 @@ class guru_model extends CI_Model{
         return $db;
     }
 
+    function list_nilai(){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('penilaian')->result_array();
+        return $db;
+    }
+
     function editGuru($where, $data){
         $this->db->where($where);
         $this->db->update('guru', $data);

@@ -93,7 +93,7 @@
                         <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?= $mapel['nama_mapel'] ?></td>
-                            <td><?= $mapel['kelas_mapel'] ?></td>
+                            <td><?= $nama_kelas[$mapel['kelas_mapel']] ?></td>
                             <td><?= $name[$mapel['pengajar_mapel']] ?></td>
                             <td><?php if ( $mapel['status'] == '1') {
                                 echo "Aktif";
@@ -139,9 +139,16 @@ foreach ($mata_pelajaran as $mapel):
                                 <input type="text" class="form-control" name="nama_mapel" id="nama_mapel" value="<?= $mapel['nama_mapel'] ?>" placeholder="Masukan Nama Mapel">
                             </div>
 
+                            
                             <div class="modal-body">
                                 <label for="kelas_mapel">Kelas</label>
-                                <input type="text" class="form-control" name="kelas_mapel" id="kelas_mapel" value="<?= $mapel['kelas_mapel'] ?>" placeholder="Masukan Kelas Mapel">
+                                <br>
+                                <select class="select2 form-control" name="kelas_mapel" style="width: 100%;" required>
+                                <option value="<?= $mapel['kelas_mapel'] ?>"><?= $nama_kelas[$mapel['kelas_mapel']] ?></option>
+                                    <?php foreach($kelas as $v_kelas){ ?>
+                                        <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
 
                             <div class="modal-body">

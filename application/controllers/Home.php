@@ -86,6 +86,11 @@ class Home extends CI_Controller {
             $data['name'][$value['id']] = $value['name'];
         }
 
+		$data['kelas'] = $this->list_kelas->getKelas();
+        foreach($data['kelas'] as $key => $value){
+            $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
+        }
+
 		$data['sidebar'] = 'home/sidebar';
 		$data['subview'] = 'home/mapel';
 		$this->load->view('index', $data);
@@ -131,6 +136,7 @@ class Home extends CI_Controller {
 			$data = array(
 				'name'  => $this->input->post('name'),
 				'username' => $this->input->post('username'),
+				'nip' => $this->input->post('nip'),
 				'password' => $this->encryption->encrypt('12345'),
 				'role' => $this->input->post('role'),
 				'status' => '1'
@@ -144,6 +150,12 @@ class Home extends CI_Controller {
 		function list_siswa(){
 			$datasiswa = $this->siswa_model->list_siswa();
 			$data['siswa'] = $datasiswa;
+			
+			$data['kelas'] = $this->list_kelas->getKelas();
+			foreach($data['kelas'] as $key => $value){
+			$data['nama_kelas'][$value['id']] = $value['nama_kelas'];
+        
+		}
 
 			$data['sidebar'] = 'home/sidebar';
 			$data['subview'] = 'home/list_siswa';
