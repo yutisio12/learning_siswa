@@ -85,9 +85,9 @@
                             </div>
                         <?php $nos++;}} ?>
                             <hr>
-                            <div class="text-right">
+                            <!-- <div class="text-right">
                                 <button class="btn btn-success" type="submit"><i class="fas fa-sign-in-alt"></i> Submit</button>
-                            </div>
+                            </div> -->
                         </form>
                         <br>
                     </div>

@@ -37,12 +37,13 @@
                                     </div>
                                 </div>
                                 <br>
+                                <?php if($value_soal['jenis_soal']==1){ ?>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <input type="radio" <?= $value_soal['jenis_soal']==0 ? 'checked' : '' ?> class="text-right">&nbsp;Essay
+                                        <input type="radio" <?= $value_soal['jenis_soal']==0 ? 'checked' : '' ?> class="text-right" disabled>&nbsp;Essay
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="radio" <?= $value_soal['jenis_soal']==1 ? 'checked' : '' ?> >&nbsp;Objektif
+                                        <input type="radio" <?= $value_soal['jenis_soal']==1 ? 'checked' : '' ?> disabled>&nbsp;Objektif
                                     </div>
                                     <div class="col-md-6">
                                         <div class="row">
@@ -63,8 +64,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                                 <br>
                             </div>
+                            <div class="text-right">
+                                <button class="btn btn-danger" onclick="hapus_soal('<?= $value_soal["id"] ?>')">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                            <hr>
                         <?php $nos++;}} ?>
                         <form action="<?= base_url('guru/add_soal_process/').$id_tugas ?>" method="POST">
                         <div id="tugas">
@@ -157,6 +165,47 @@
                         $('.soal_'+nomor).remove();
                         no_soal-=1
                         no_div-=1
+                    }
+
+                    function hapus_soal(id_soal){
+                        console.log(id_soal)
+                        Swal.fire({
+                            title: 'Are you sure to <b class="text-danger">&nbsp;Delete&nbsp;</b> this?',
+                            // text: "This joint will permanent deleted!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, Delete it!'
+                          }).then((result) => {
+                            if (result.value) {
+                              $.ajax({
+                                url: "<?php echo base_url();?>guru/hapus_soal",
+                                type: "post",
+                                data: {
+                                  id_soal: id_soal
+                                },
+                                success: function(data) {
+                                if(data.includes("Error")){
+                                   Swal.fire(
+                                      'Ops..',
+                                      data,
+                                      'error'
+                                    );
+                                    
+                                } else {
+
+                                    Swal.fire(
+                                      'Success',
+                                      'Your data has been Updated!',
+                                      'success'
+                                    );
+                                    location.reload();
+                                  }
+                                }
+                              });
+                            }
+                          })
                     }
 
                 </script>

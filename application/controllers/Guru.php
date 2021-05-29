@@ -70,7 +70,8 @@ class Guru extends CI_Controller {
 
     public function tulis_soal($id_tugas){
         
-        $where['id_tuags'] = $id_tugas;
+        $where['id_tugas'] = $id_tugas;
+        $where['status_soal'] = 0;
         $data['soal'] = $this->guru_model->list_tugas_soal($where);
         // $this->test_var($data);
         $data['id_tugas'] = $id_tugas;
@@ -95,6 +96,13 @@ class Guru extends CI_Controller {
         }
         $this->session->set_flashdata('success', 'Soal Berhasil Di Tambahkan');
         redirect('guru');
+    }
+
+    public function hapus_soal(){
+        // $this->test_var($_POST);
+        $where['id'] = $_POST['id_soal'];
+        $data['status_soal'] = 1;
+        $this->guru_model->update_soal($where, $data);
     }
 
 }

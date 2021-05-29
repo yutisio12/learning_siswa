@@ -14,28 +14,11 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Tugas Terbuka</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                Guru</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= COUNT($list_guru) ?></div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-4 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Tugas Selesai</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        <div class="col-auto card">
+                            <i class="fas fa-chalkboard-teacher fa-2x text-gray-1000"></i>
                         </div>
                     </div>
                 </div>
@@ -48,11 +31,28 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Tugas Dinilai</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                Siswa</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= COUNT($list_siswa) ?></div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        <div class="col-auto card">
+                            <i class="fas fa-book-reader fa-2x text-gray-1000"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Pengguna</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= COUNT($list_user) ?></div>
+                        </div>
+                        <div class="col-auto card">
+                            <i class="fas fa-user-lock fa-2x text-gray-1000"></i>
                         </div>
                     </div>
                 </div>

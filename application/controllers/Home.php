@@ -26,6 +26,11 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+
+		$data['list_guru'] = $this->guru_model->list_guru();
+		$data['list_siswa'] = $this->guru_model->list_siswa();
+		$data['list_user'] = $this->guru_model->list_user();
+
 		$data['sidebar'] = 'home/sidebar';
 		$data['subview'] = 'home/dashboard';
 		$this->load->view('index', $data);

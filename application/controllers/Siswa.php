@@ -37,11 +37,12 @@ class Siswa extends CI_Controller {
 	}
 
     public function tugas_tersedia(){
-
+        $where['created_by'] = $this->permission_cookie[0];
         $pengumpulan = $this->siswa_model->list_pengumpulan();
         foreach ($pengumpulan as $key => $value) {
             $data['check_kumpul'][$value['id_tugas']] = 1;
         }
+        unset($where);
 
         $where['id'] = $this->permission_cookie[0];
         $data_user = $this->siswa_model->list_user($where)[0];
@@ -68,6 +69,7 @@ class Siswa extends CI_Controller {
     public function kerjakan_tugas($id_tugas){
         $data['id_tugas_main']  = $id_tugas;
         $where['id_tugas'] = $id_tugas;
+        $where['status_soal'] = 0;
         $data['soal'] = $this->siswa_model->list_soal($where);
         // $this->test_var($data['soal']);
 
@@ -79,8 +81,11 @@ class Siswa extends CI_Controller {
     public function review_pengumpulan($id_tugas){
         $data['id_tugas_main']  = $id_tugas;
         $where['id_tugas'] = $id_tugas;
+        $where['status_soal'] = 0;
         $data['soal'] = $this->siswa_model->list_soal($where);
+        unset($where);
 
+        $where['created_by'] = $this->permission_cookie[0];
         $data_jawaban = $this->siswa_model->list_pengumpulan($where);
         foreach ($data_jawaban as $key => $value) {
             $data['jawaban'][$value['id_tugas_soal']] = $value['jawaban'];
@@ -98,6 +103,8 @@ class Siswa extends CI_Controller {
             $insert['id_tugas_soal']    = $soal;
             $insert['jawaban']          = $_POST['jawaban'][$key];
             $insert['status_jawaban']   = 0;
+            $insert['created_by']       = $this->permission_cookie[0];
+            $insert['created_date']     = DATE('Y-m-d H:i:s');
 
             $this->siswa_model->insert_pengumpulan($insert);
         }
