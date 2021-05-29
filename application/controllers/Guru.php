@@ -56,8 +56,11 @@ class Guru extends CI_Controller {
     }
 
     public function add_tugas_process(){
-        $insert['id_kelas']         = $_POST['kelas'];
-        $insert['id_mapel']         = $_POST['mapel'];
+
+        //$this->test_var($_POST);
+
+        $insert['id_kelas']         = $_POST['kelas'][0];
+        $insert['id_mapel']         = $_POST['mapel'][0];
         $insert['open_date']        = $_POST['date_open'].' '.$_POST['time_open'];
         $insert['close_date']       = $_POST['date_close'].' '.$_POST['time_close'];
         $insert['created_by']       = $this->permission_cookie[0];
