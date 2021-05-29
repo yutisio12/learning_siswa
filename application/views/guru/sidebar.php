@@ -41,8 +41,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?= base_url('guru/list_tugas') ?>"><i class="fas fa-list"></i> Data Tugas</a>
-                        <a class="collapse-item" href="<?= base_url('home/list_kelas') ?>"><i class="fas fa-list"></i> Data Pengumpulan</a>
-                        <a class="collapse-item" href="<?= base_url('guru/list_nilai') ?>"><i class="fas fa-list"></i> Data Penilaian</a>
+                        <a class="collapse-item" href="<?= base_url('guru/list_pengumpulan') ?>"><i class="fas fa-list"></i> Data Pengumpulan</a>
+                        <a class="collapse-item" href="<?= base_url('guru/penilaian') ?>"><i class="fas fa-list"></i> Data Penilaian</a>
                     </div>
                 </div>
             </li>

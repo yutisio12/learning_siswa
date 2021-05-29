@@ -7,6 +7,7 @@ class Guru extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('cookie');
         $this->load->model('guru_model');
+        $this->load->model('siswa_model');
 		if(get_cookie('user')==NULL){
 			redirect('auth/logout');
 		}
@@ -55,6 +56,49 @@ class Guru extends CI_Controller {
 		$this->load->view('index', $data);
     }
 
+    public function list_pengumpulan(){
+        
+        
+        $datatugas = $this->guru_model->list_tugas();
+        $data['tugas'] = $datatugas;
+
+        $data['list_kelas'] = $this->guru_model->list_kelas();
+        foreach($data['list_kelas'] as $key => $value){
+            $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
+        }
+
+        $data['list_mapel'] = $this->guru_model->list_mapel();
+        foreach($data['list_mapel'] as $key => $value){
+            $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
+        }
+
+        $data['sidebar'] = 'guru/sidebar';
+		$data['subview'] = 'guru/list_pengumpulan';
+		$this->load->view('index', $data);
+    }
+
+    public function list_pengumpulan_tugas(){
+        error_reporting(0);
+        
+        $data_siswa = $this->guru_model->list_tugas()[0];
+            unset($where);
+        $where['kelas_siswa']  = $data_siswa['id_kelas'];
+
+        $datasiswa = $this->guru_model->siswa($where);
+        $data['siswa'] = $datasiswa;
+        
+        $data['kelas'] = $this->guru_model->GetKelas();
+        foreach($data['kelas'] as $key => $value){
+        $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
+    
+    }
+
+        $data['sidebar'] = 'guru/sidebar';
+        $data['subview'] = 'guru/list_pengumpulan_tugas';
+        $this->load->view('index', $data);
+    }
+
+   
     public function add_tugas_process(){
 
         //$this->test_var($_POST);
@@ -74,7 +118,6 @@ class Guru extends CI_Controller {
     public function tulis_soal($id_tugas){
         
         $where['id_tugas'] = $id_tugas;
-        $where['status_soal'] = 0;
         $data['soal'] = $this->guru_model->list_tugas_soal($where);
         // $this->test_var($data);
         $data['id_tugas'] = $id_tugas;
@@ -99,13 +142,6 @@ class Guru extends CI_Controller {
         }
         $this->session->set_flashdata('success', 'Soal Berhasil Di Tambahkan');
         redirect('guru');
-    }
-
-    public function hapus_soal(){
-        // $this->test_var($_POST);
-        $where['id'] = $_POST['id_soal'];
-        $data['status_soal'] = 1;
-        $this->guru_model->update_soal($where, $data);
     }
 
 }
