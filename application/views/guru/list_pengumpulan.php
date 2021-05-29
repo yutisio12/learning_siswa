@@ -42,7 +42,7 @@
                             <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
                             <td>
-                                <a href="<?= base_url('guru/list_pengumpulan_tugas/').$value['id'] ?>" class="btn btn-danger"><i class="fas fa-eye"></i> Lihat Pengumpulan Tugas</a>
+                                <a href="<?= base_url('guru/list_pengumpulan_tugas/').$value['id'].'/'.$value['id_kelas'] ?>" class="btn btn-danger"><i class="fas fa-eye"></i> Lihat Pengumpulan Tugas</a>
                             </td>
                         </tr>
                         <?php 

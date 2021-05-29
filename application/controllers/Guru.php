@@ -72,6 +72,7 @@ class Guru extends CI_Controller {
         
         $datatugas = $this->guru_model->list_tugas();
         $data['tugas'] = $datatugas;
+        // $this->test_var($datatugas);
 
         $data['list_kelas'] = $this->guru_model->list_kelas();
         foreach($data['list_kelas'] as $key => $value){
@@ -88,21 +89,19 @@ class Guru extends CI_Controller {
 		$this->load->view('index', $data);
     }
 
-    public function list_pengumpulan_tugas(){
+    public function list_pengumpulan_tugas($idtugas, $idkelas){
         error_reporting(0);
         
-        $data_siswa = $this->guru_model->list_tugas()[0];
-            unset($where);
-        $where['kelas_siswa']  = $data_siswa['id_kelas'];
+        $data['id_tugas'] = $idtugas;
 
+        $where['kelas_siswa']  = $idkelas;
         $datasiswa = $this->guru_model->siswa($where);
         $data['siswa'] = $datasiswa;
         
         $data['kelas'] = $this->guru_model->GetKelas();
         foreach($data['kelas'] as $key => $value){
-        $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
-    
-    }
+            $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
+        }
 
         $data['sidebar'] = 'guru/sidebar';
         $data['subview'] = 'guru/list_pengumpulan_tugas';
@@ -169,6 +168,23 @@ class Guru extends CI_Controller {
         $data['status'] = 1;
         $this->guru_model->update_tugas($where, $data);
 
+    }
+
+    public function review_pengumpulan_tugas($id_siswa, $id_tugas){
+        $data['id_tugas_main']  = $id_tugas;
+
+        $where['id_tugas'] = $id_tugas;
+        $data['soal'] = $this->siswa_model->list_soal($where);
+
+        $where['created_by'] = $id_siswa;
+        $data_jawaban = $this->siswa_model->list_pengumpulan($where);
+        foreach ($data_jawaban as $key => $value) {
+            $data['jawaban'][$value['id_tugas_soal']] = $value['jawaban'];
+        }
+
+        $data['sidebar'] = 'guru/sidebar';
+        $data['subview'] = 'guru/review_pengumpulan';
+        $this->load->view('index', $data);
     }
 
 }

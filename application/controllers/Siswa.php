@@ -81,6 +81,7 @@ class Siswa extends CI_Controller {
         $where['id_tugas'] = $id_tugas;
         $data['soal'] = $this->siswa_model->list_soal($where);
 
+        $where['created_by'] = $this->permission_cookie[0];
         $data_jawaban = $this->siswa_model->list_pengumpulan($where);
         foreach ($data_jawaban as $key => $value) {
             $data['jawaban'][$value['id_tugas_soal']] = $value['jawaban'];

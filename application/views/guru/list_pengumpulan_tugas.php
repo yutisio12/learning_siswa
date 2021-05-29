@@ -41,7 +41,7 @@
                             <td><?= $nama_kelas[$list['kelas_siswa']] ?></td>
                             <td><?= $list['nip_siswa'] ?></td>
                             <td>
-                                <a href="<?= base_url('guru/review_pengumpulan_tugas/').$value['id'] ?>" class="btn btn-danger"><i class="fas fa-eye"></i> Lihat Jawaban</a>
+                                <a href="<?= base_url('guru/review_pengumpulan_tugas/').$list['id'].'/'.$id_tugas ?>" class="btn btn-danger"><i class="fas fa-eye"></i> Lihat Jawaban</a>
                             </td>
                         </tr>
                         <?php endforeach ?>
