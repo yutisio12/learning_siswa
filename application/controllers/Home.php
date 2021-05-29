@@ -231,6 +231,9 @@ class Home extends CI_Controller {
 		}
 
 		function edit_guru(){
+			// echo '<pre>';
+			// print_r($_POST);
+			// exit;
 
 			$where['id'] = $_POST['id'];
 			$data['nama_guru'] = $_POST['nama_guru'];
@@ -238,6 +241,8 @@ class Home extends CI_Controller {
 			$data['alamat_guru'] = $_POST['alamat_guru'];
 			$data['telpon_guru'] = $_POST['telpon_guru'];
 
+			$data['id_kelas'] = implode('; ', $_POST['kelas']);
+			$data['id_mapel'] = implode('; ', $_POST['mapel']);
 		   
 			$this->guru_model->editGuru($where, $data);
 			$this->session->set_flashdata('success',"Data Berhasil Di edit");

@@ -36,16 +36,27 @@ class Guru extends CI_Controller {
 	}
 
     public function list_tugas(){
+
+        $where['nip_guru'] = $this->permission_cookie[4];
+        $id_guru = $this->guru_model->list_guru($where)[0];
+        unset($where);
+        // $this->test_var($id_guru);
+
         $where['created_by'] = $this->permission_cookie[0];
         $datatugas = $this->guru_model->list_tugas($where);
         $data['tugas'] = $datatugas;
+        unset($where);
 
-        $data['list_kelas'] = $this->guru_model->list_kelas();
+        $where['id'] = $id_guru['id_kelas'];
+        $data['list_kelas'] = $this->guru_model->list_kelas($where);
+        unset($where);
         foreach($data['list_kelas'] as $key => $value){
             $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
         }
 
-        $data['list_mapel'] = $this->guru_model->list_mapel();
+        $where['id'] = $id_guru['id_mapel'];
+        $data['list_mapel'] = $this->guru_model->list_mapel($where);
+        unset($where);
         foreach($data['list_mapel'] as $key => $value){
             $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
         }

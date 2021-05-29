@@ -42,7 +42,7 @@
 
                             <div class="modal-body">
                                 <label for="nip">NIP</label>
-                                <input type="text" class="form-control" name="nip" id="nip" placeholder="Masukan Username">
+                                <input type="text" class="form-control" name="nip" id="nip" placeholder="Masukan NIP">
                             </div>
 
 
@@ -76,6 +76,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Username</th>
+                            <th>NIP</th>
                             <th scope="col">role</th>
                             <th scope="col">Status</th>
                         </tr>
@@ -89,6 +90,7 @@
                             <td><?php echo $no++ ?></td>
                             <td><?php echo $u->name ?></td>
                             <td><?php echo $u->username ?></td>
+                            <td><?php echo $u->nip ?></td>
                             <td><?php if ($u->role == '0') {
                                 echo "Tata Usaha";
                             }
