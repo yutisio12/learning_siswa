@@ -47,14 +47,14 @@ class Guru extends CI_Controller {
         $data['tugas'] = $datatugas;
         unset($where);
 
-        $where['id'] = $id_guru['id_kelas'];
+        $where['id IN ('.str_replace(';',',',$id_guru['id_kelas']).')'] = NULL;
         $data['list_kelas'] = $this->guru_model->list_kelas($where);
         unset($where);
         foreach($data['list_kelas'] as $key => $value){
             $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
         }
 
-        $where['id'] = $id_guru['id_mapel'];
+        $where['id IN ('.str_replace(';',',',$id_guru['id_mapel']).')'] = NULL;
         $data['list_mapel'] = $this->guru_model->list_mapel($where);
         unset($where);
         foreach($data['list_mapel'] as $key => $value){
