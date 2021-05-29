@@ -37,13 +37,18 @@
 
                             <div class="modal-body">
                                 <label for="kelas_mapel">Kelas</label>
-                                <input type="text" class="form-control" name="kelas_mapel" id="kelas_mapel" placeholder="Masukan Nama Mapel">
+                                <select class="select2 form-control" name="kelas_mapel" style="width: 100%;" >
+                                    <option value="">Pilih Kelas</option>
+                                    <?php foreach($kelas as $v_kelas){ ?>
+                                        <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
 
                             <div class="modal-body">
                                 <label for="pengajar_mapel">Pengajar</label>
                                 <br>
-                                <select class="select2 form-control" id="pengajar_mapel" name="pengajar_mapel" style="width: 100%;" required>
+                                <select class="select2 form-control" id="pengajar_mapel" name="pengajar_mapel" style="width: 100%;" >
                                     <option value="">Pilih Pengajar</option>
                                     <?php foreach($pengajar_mapel as $v_pengajar){ ?>
                                         <option value="<?= $v_pengajar['id'] ?>"><?= $v_pengajar['name'] ?></option>
@@ -74,7 +79,7 @@
                 <br>
                 
 
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered data-table">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">#</th>

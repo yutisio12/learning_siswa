@@ -108,7 +108,7 @@
                             <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
                             <td>
-                                <select class="form-control">
+                                <select class="form-control" onchange="ubah_status(this, '<?= $value['id'] ?>')">
                                     <option value="0" <?= $value['status']==0 ? 'selected' : '' ?>>Open</option>
                                     <option value="1" <?= $value['status']==1 ? 'selected' : '' ?>>Close</option>
                                     <option value="2" <?= $value['status']==2 ? 'selected' : '' ?>>Scored</option>
@@ -130,3 +130,47 @@
 </div>
 <!-- /.container-fluid -->
 </div>
+<script type="text/javascript">
+    function ubah_status(thiss, id){
+        var status = $(thiss).val()
+        console.log(status)
+        Swal.fire({
+        title: 'Are you sure to <b class="text-warning">&nbsp;Change&nbsp;</b> this?',
+        // text: "This joint will permanent deleted!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Change it!'
+        }).then((result) => {
+        if (result.value) {
+          $.ajax({
+            url: "<?php echo base_url();?>guru/ubah_status_tugas",
+            type: "post",
+            data: {
+              id: id,
+              status: status
+            },
+            success: function(data) {
+            if(data.includes("Error")){
+               Swal.fire(
+                  'Ops..',
+                  data,
+                  'error'
+                );
+                
+            } else {
+
+                Swal.fire(
+                  'Success',
+                  'Your data has been Updated!',
+                  'success'
+                );
+                location.reload();
+              }
+            }
+          });
+        }
+        })
+        }
+</script>

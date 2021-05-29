@@ -37,13 +37,13 @@
 
                             <div class="modal-body">
                                 <label for="nip_siswa">NIP Siswa</label>
-                                <input type="text" class="form-control" name="nip_siswa" id="nip_siswa" placeholder="Masukan NIP Siswa">
+                                <input type="text" class="form-control" name="nip_siswa" id="nip_siswa" placeholder="Masukan NIP Siswa" required="">
                             </div>
 
                             <div class="modal-body">
                                 <label for="kelas_siswa">Kelas</label>
                                 <br>
-                                <select class="select2 form-control" name="kelas_siswa" style="width: 100%;" required>
+                                <select class="select2 form-control" name="kelas_siswa" style="width: 100%;">
                                 <option value="<?= $list['kelas_siswa'] ?>"><?= $nama_kelas[$list['kelas_siswa']] ?></option>
                                     <?php foreach($kelas as $v_kelas){ ?>
                                         <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
@@ -73,7 +73,7 @@
                 <br>
                 
 
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered data-table">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">#</th>

@@ -17,4 +17,9 @@ class auth_model extends CI_Model{
         return $db;
     }
 
+    function change_password($where, $data){
+        $this->db->where($where);
+        $this->db->update('user', $data);
+    }
+
 }

@@ -77,6 +77,9 @@
             $('.multiSelect2').val(null).select2({
                 multiple: true,
             });
+            $('.multiSelect2-nonull').select2({
+                multiple: true,
+            });
 
         });
     </script>

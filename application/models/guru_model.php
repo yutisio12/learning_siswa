@@ -92,6 +92,25 @@ class guru_model extends CI_Model{
         return $db;
     }
 
+    function insert_guru($data){
+        $this->db->insert('guru', $data);
+    }
+
+    function insert_soal($insert){
+        $this->db->insert('tugas_soal', $insert);
+    }
+
+    function update_soal($where, $data){
+        $this->db->where($where);
+        $this->db->update('tugas_soal', $data);
+    }
+
+    function update_tugas($where, $data){
+        $this->db->where($where);
+        $this->db->update('tugas', $data);
+    }
+
+    function list_tugas_soal($where = NULL){
     function GetKelas($where = NULL){
         if(isset($where)){
             $this->db->where($where);
