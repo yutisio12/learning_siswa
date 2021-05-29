@@ -62,7 +62,7 @@
                 <br>
                 
 
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered data-table">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">#</th>

@@ -45,7 +45,7 @@
                                 ?>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Change Password</a>
+                                <a class="dropdown-item" href="<?= base_url('auth/change_password') ?>"><i class="fas fa-cog"></i> Change Password</a>
                                 <a class="dropdown-item" href="<?= base_url('auth/logout') ?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
                             </div>
                         </div>

@@ -119,4 +119,13 @@ class Guru extends CI_Controller {
         $this->guru_model->update_soal($where, $data);
     }
 
+    public function ubah_status_tugas(){
+        //$this->test_var($_POST);
+
+        $where['id'] = $_POST['id'];
+        $data['status'] = 1;
+        $this->guru_model->update_tugas($where, $data);
+
+    }
+
 }

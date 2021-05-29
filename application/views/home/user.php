@@ -70,7 +70,7 @@
                 <br>
                 
 
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered data-table">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">#</th>
@@ -79,6 +79,7 @@
                             <th>NIP</th>
                             <th scope="col">role</th>
                             <th scope="col">Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,6 +108,11 @@
                             if ($u->status == '1') {
                                 echo "Aktif";
                             } ?></td>
+                            <td>
+                                <button class="btn btn-danger" onclick="reset_password('<?= $u->id ?>')">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                            </td>
                         </tr>
                        <?php endforeach ?>
                     </tbody>
@@ -118,3 +124,42 @@
 </div>
 <!-- /.container-fluid -->
 </div>
+<script type="text/javascript">
+    function reset_password(id){
+        Swal.fire({
+          icon: 'warning',
+          title: 'Do you want to reset the Password?',
+          showDenyButton: true,
+          confirmButtonText: `Reset`,
+          denyButtonText: `Don't Reset`,
+        }).then((result) => {
+          if (result.value) {
+              $.ajax({
+                url: "<?php echo base_url();?>auth/reset_password",
+                type: "post",
+                data: {
+                  id: id
+                },
+                success: function(data) {
+                if(data.includes("Error")){
+                   Swal.fire(
+                      'Ops..',
+                      data,
+                      'error'
+                    );
+                    
+                } else {
+
+                    Swal.fire(
+                      'Success',
+                      'Your data has been Updated!',
+                      'success'
+                    );
+                    // location.reload();
+                  }
+                }
+              });
+            }
+        })
+    }
+</script>

@@ -72,4 +72,31 @@ class Auth extends CI_Controller {
         redirect('auth/index');
     }
 
+    public function change_password(){
+        $cookie = explode(';',get_cookie('user'));
+        
+        $where["id"] = str_replace('"', '', $cookie[0]);
+        $datadb = $this->auth_model->find_user($where)[0];
+        $data['akun'] = $datadb;
+        // $this->test_var($datadb);
+
+        $this->load->view('auth/change_password', $data);
+    }
+
+    public function change_password_process(){
+        // $this->test_var($_POST);
+
+        $where['username'] = $_POST['username'];
+        $data['password']  = $this->encryption->encrypt($_POST['password']);
+        $this->auth_model->change_password($where, $data);
+        redirect('auth/logout');
+    }
+
+    public function reset_password(){
+        // $this->test_var($_POST);
+        $where['id'] = $_POST['id'];
+        $data['password']  = $this->encryption->encrypt('12345');
+        $this->auth_model->change_password($where, $data);
+    }
+
 }

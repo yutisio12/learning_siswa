@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Bulan Mei 2021 pada 10.26
+-- Waktu pembuatan: 29 Bulan Mei 2021 pada 12.15
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.4.8
 
@@ -42,7 +42,7 @@ CREATE TABLE `guru` (
 --
 
 INSERT INTO `guru` (`id`, `nama_guru`, `nip_guru`, `alamat_guru`, `telpon_guru`, `id_kelas`, `id_mapel`) VALUES
-(9, 'Guru Kimia', 'kimia', 'kimia', '1', '1', '2'),
+(9, 'Guru Kimia', 'kimia', 'kimia', '1', '1; 2', '1; 2'),
 (10, 'Guru Fisika', 'fisika', 'fisika', '1', '2', '1');
 
 -- --------------------------------------------------------
@@ -110,7 +110,9 @@ CREATE TABLE `pengumpulan` (
 
 INSERT INTO `pengumpulan` (`id`, `id_tugas`, `id_tugas_soal`, `jawaban`, `created_by`, `created_date`, `status_jawaban`) VALUES
 (3, 0, 5, 'P = VxNxRxt', '11', '2021-05-29 10:25:58', 0),
-(4, 0, 6, 'a', '11', '2021-05-29 10:25:58', 0);
+(4, 0, 6, 'a', '11', '2021-05-29 10:25:58', 0),
+(5, 1, 5, 'p v n r t', '11', '2021-05-29 11:52:21', 0),
+(6, 1, 6, 'a', '11', '2021-05-29 11:52:21', 0);
 
 -- --------------------------------------------------------
 
@@ -157,7 +159,7 @@ CREATE TABLE `tugas` (
 --
 
 INSERT INTO `tugas` (`id`, `id_mapel`, `id_kelas`, `open_date`, `close_date`, `created_by`, `created_datetime`, `status`) VALUES
-(0, 1, 2, '2021-05-29 10:00:00', '2021-05-29 11:00:00', '8', '2021-05-29 10:23:54', 0);
+(1, 1, 2, '2021-05-29 10:00:00', '2021-05-29 11:00:00', '8', '2021-05-29 10:23:54', 1);
 
 -- --------------------------------------------------------
 
@@ -182,8 +184,8 @@ CREATE TABLE `tugas_soal` (
 --
 
 INSERT INTO `tugas_soal` (`id`, `id_tugas`, `soal`, `soal_opsi_a`, `soal_opsi_b`, `soal_opsi_c`, `soal_opsi_d`, `jenis_soal`, `status_soal`) VALUES
-(5, 0, 'Apa rumus tekanan ?', NULL, NULL, NULL, NULL, 0, 0),
-(6, 0, 'Siapa Thomas Alfa Edison', 'Penemu', 'Penipu', 'Puncuri', 'Pembunuh', 1, 0);
+(5, 1, 'Apa rumus tekanan ?', NULL, NULL, NULL, NULL, 0, 0),
+(6, 1, 'Siapa Thomas Alfa Edison', 'Penemu', 'Penipu', 'Puncuri', 'Pembunuh', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -206,8 +208,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `password`, `role`, `nip`, `status`) VALUES
-(1, 'tata usaha', 'admin', '0cbc56ec9d8fc81863be950e8abacc38415ab00c2d00a947bd6a11946e44bccc3a063115e16b6fbabe63a7cf9fae30330379275586f1401be489a7171f304253muKE4ItKNaRzYC1NyjsgUmL9b5L/Nuk800fMAMwQ70I=', 0, '10042932', 1),
-(8, 'Guru Fisika', 'fisika', '33f933478662943cf12ffd2d396690fe47ebfb09e980547a745dab8af81c6c5f40bc8c28156d41dca66fffc855494e1111dd05ec7f4a10d2d096ef47438f6356+i6mbS4+bdBAiLt2pS0tMKKGqzgMNe2tAKcu0+wHxyM=', 1, 'fisika', 1),
+(1, 'tata usaha', 'admin', '0e159e02ac79f402696862cef65057c4df93352a929ac0ffcb4e33bfda1e3f119a5c9b430fc9b836af4b175b7687f12bad9f051691bf0129deb47242b03f27c06DrT0WBaUuvt0nJVnBD8KZb4AKanm2x/+CY6DdO0xSo=', 0, '10042932', 1),
+(8, 'Guru Fisika', 'fisika', '945ef024349973241e2832b49dcf1294fd4806756484d265132120b40434fbab99a7243d49c6eb845be0ea0d00105035354ce95f14dd8ee5c5d882b14bbc40c0MtKXpFSfGiZDRGdzEeuYrg7mDT8g+RtkVaREJBn3mns=', 1, 'fisika', 1),
 (9, 'Guru Kimia', 'kimia', '20886a86118ed516e7d206da049c9057444859db01fcb1a312e1fde25c07a910ec2aa96a8b2aedd2864d705dfd0f243bf6ab462327b86a099e43f364d316bea6Al/qFJHXjgBIyKWviwUKk9fKiWOUevoAunPOWmtRoKE=', 1, 'kimia', 1),
 (10, 'siswa 1', 'siswa_1', 'c447bac691de1ce480619247887582f86697f7059fe8006dc4fea6fc25e48d77d69b9540cd43283bca1172d4c0bd22f3352bcae552cd4eeb6cd5c8fcf7129dc6NcQThdo3R1s9FWv0/qxe6TSBwdw4d7ibruZxBUIyGs8=', 2, 'siswa_1', 1),
 (11, 'siswa 2', 'siswa_2', 'fa41a44e5c608cede94dde415c67cda37d8c5887a978974c467c9b16ee6a481714f2f2c93f3b15f5c952fc70782910648788154feeea79da6414f42cc0700386EAZ3/rL2g8Gsvk48k8cLGT2QDriiHQ2PYFQkWKKHewc=', 2, 'siswa_2', 1);
@@ -264,7 +266,8 @@ ALTER TABLE `tugas_soal`
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -292,13 +295,19 @@ ALTER TABLE `mapel`
 -- AUTO_INCREMENT untuk tabel `pengumpulan`
 --
 ALTER TABLE `pengumpulan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `tugas`
+--
+ALTER TABLE `tugas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tugas_soal`

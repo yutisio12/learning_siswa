@@ -76,6 +76,11 @@ class guru_model extends CI_Model{
         $this->db->update('tugas_soal', $data);
     }
 
+    function update_tugas($where, $data){
+        $this->db->where($where);
+        $this->db->update('tugas', $data);
+    }
+
     function list_tugas_soal($where = NULL){
         if(isset($where)){
             $this->db->where($where);
