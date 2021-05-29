@@ -42,7 +42,13 @@
 
                             <div class="modal-body">
                                 <label for="kelas_siswa">Kelas</label>
-                                <input type="text" class="form-control" id="kelas_siswa" name="kelas_siswa" placeholder="Masukan Kelas">
+                                <br>
+                                <select class="select2 form-control" name="kelas_siswa" style="width: 100%;" required>
+                                <option value="<?= $list['kelas_siswa'] ?>"><?= $nama_kelas[$list['kelas_siswa']] ?></option>
+                                    <?php foreach($kelas as $v_kelas){ ?>
+                                        <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
 
                             <div class="modal-body">
