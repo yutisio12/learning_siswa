@@ -159,10 +159,12 @@ class Guru extends CI_Controller {
 
     public function tulis_soal($id_tugas){
         
-        $where['id_tugas'] = $id_tugas;
-        $data['soal'] = $this->guru_model->list_tugas_soal($where);
-        // $this->test_var($data);
-        $data['id_tugas'] = $id_tugas;
+        $tugas['id'] = $id_tugas;
+        $where_tugas = $this->guru_model->list_tugas($tugas)[0];
+            // $this->test_var($where_tugas);
+        $where_soal['id_tugas'] = $where_tugas['id'];
+        $data['soal'] = $this->guru_model->list_tugas_soal($where_soal);
+
         $data['sidebar'] = 'guru/sidebar';
         $data['subview'] = 'guru/list_soal';
         $this->load->view('index', $data);
