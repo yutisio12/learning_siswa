@@ -117,4 +117,24 @@ class guru_model extends CI_Model{
         $db = $this->db->get('pengumpulan')->result_array();
         return $db;
     }
+
+    function score($where = NULL){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('penilaian')->result_array();
+        return $db;
+    }
+
+    function insert_score($data){
+        $this->db->insert('penilaian', $data);
+    }
+
+    function list_nilai($where = NULL){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('penilaian')->result_array();
+        return $db;
+    }
 }

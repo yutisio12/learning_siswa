@@ -146,10 +146,46 @@
 
                 </script>
                 <br>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalScore">
+                    <i class="fas fa-plus"></i>Add Score
+                </button>
             </div>
         </div>
-        <!-- =================================================================== -->
     </div>
-</div>
 <!-- /.container-fluid -->
 </div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="modalScore" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Form Add Score</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url('guru/add_score/')?>" method="POST">
+                           
+                        <div class="modal-body">
+                                <label for="nilai">Nilai</label>
+                                <input type="text" class="form-control" id="nilai" name="nilai" placeholder="Masukan Nilai">
+                        </div>
+
+                        <input type="hidden" name="id_tugas" id="id_tugas"  value="<?= $value_soal['id_tugas'] ?>">
+                        <?php foreach ($siswa as $list): ?>
+                        <input type="hidden" name="id_siswa" id="id_siswa"  value="<?= $list['id'] ?>">
+                        <?php endforeach ?>
+                        <?php foreach ($mapel as $list): ?>
+                        <input type="hidden" name="id_mapel" id="id_mapel"  value="<?= $list['id'] ?>">
+                        <?php endforeach ?>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save </button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
