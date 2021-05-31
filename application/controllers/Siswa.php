@@ -38,9 +38,16 @@ class Siswa extends CI_Controller {
 
     public function tugas_tersedia(){
 
-        $pengumpulan = $this->siswa_model->list_pengumpulan();
+        $where_peng['created_by'] =  $this->permission_cookie[0];
+        $pengumpulan = $this->siswa_model->list_pengumpulan($where_peng);
         foreach ($pengumpulan as $key => $value) {
             $data['check_kumpul'][$value['id_tugas']] = 1;
+        }
+
+        $where_pen['id_siswa']  =  $this->permission_cookie[0];
+        $penilaia      = $this->siswa_model->list_penilaian($where_pen);
+        foreach ($penilaia as $key => $value) {
+            $data['check_nilai'][$value['id_tugas']] = 1;
         }
 
         $where['id'] = $this->permission_cookie[0];
@@ -81,12 +88,17 @@ class Siswa extends CI_Controller {
         $where['id_tugas'] = $id_tugas;
         $data['soal'] = $this->siswa_model->list_soal($where);
 
+        $nilai['id_siswa'] = $this->permission_cookie[0];
+        $nilai['id_tugas'] = $id_tugas;
+        $data['nilai'] = $this->siswa_model->list_penilaian($nilai)[0];
+        // $this->test_var($data['nilai']);
+
         $where['created_by'] = $this->permission_cookie[0];
         $data_jawaban = $this->siswa_model->list_pengumpulan($where);
         foreach ($data_jawaban as $key => $value) {
             $data['jawaban'][$value['id_tugas_soal']] = $value['jawaban'];
         }
-
+            // $this->test_var($data_jawaban);
         $data['sidebar'] = 'siswa/sidebar';
         $data['subview'] = 'siswa/review_pengumpulan';
         $this->load->view('index', $data);
@@ -97,6 +109,10 @@ class Siswa extends CI_Controller {
         foreach ($_POST['id_soal'] as $key => $soal) {
             $insert['id_tugas']         = $id_tugas;
             $insert['id_tugas_soal']    = $soal;
+
+            $insert['created_by']       = $this->permission_cookie[0];
+            $insert['created_date']     = DATE('Y-m-d H:i:s');
+
             $insert['jawaban']          = $_POST['jawaban'][$key];
             $insert['status_jawaban']   = 0;
 

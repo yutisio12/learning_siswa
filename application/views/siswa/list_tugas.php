@@ -41,10 +41,15 @@
                                         <i class="fas fa-tasks"></i> Kerjakan
                                     </a>
                                 <?php } else { ?>
+                                    <?php if($check_nilai[$value['id']]==1){ ?>
+                                    <a href="<?= base_url('siswa/review_pengumpulan/').$value['id'] ?>" class="btn btn-primary">
+                                        <i class="fas fa-clipboard-check"></i> Lihat Nilai
+                                    </a>
+                                    <?php } elseif($check_kumpul[$value['id']]==1) { ?>
                                     <a href="<?= base_url('siswa/review_pengumpulan/').$value['id'] ?>" class="btn btn-secondary">
                                         <i class="fas fa-eye"></i> Lihat Jawaban
                                     </a>
-                                <?php } ?>
+                                <?php }} ?>
                             </td>
                         </tr>
                         <?php 

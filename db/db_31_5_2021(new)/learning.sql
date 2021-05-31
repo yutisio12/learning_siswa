@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2021 at 11:07 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Generation Time: May 31, 2021 at 10:25 AM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `guru`
 --
 
+DROP TABLE IF EXISTS `guru`;
 CREATE TABLE `guru` (
   `id` int(11) NOT NULL,
   `nama_guru` varchar(255) NOT NULL,
@@ -52,6 +53,7 @@ INSERT INTO `guru` (`id`, `nama_guru`, `nip_guru`, `alamat_guru`, `telpon_guru`,
 -- Table structure for table `kelas`
 --
 
+DROP TABLE IF EXISTS `kelas`;
 CREATE TABLE `kelas` (
   `id` int(11) NOT NULL,
   `nama_kelas` varchar(255) DEFAULT NULL,
@@ -73,6 +75,7 @@ INSERT INTO `kelas` (`id`, `nama_kelas`, `wali_kelas`, `lokasi_kelas`) VALUES
 -- Table structure for table `mapel`
 --
 
+DROP TABLE IF EXISTS `mapel`;
 CREATE TABLE `mapel` (
   `id` int(11) NOT NULL,
   `nama_mapel` varchar(255) DEFAULT NULL,
@@ -95,6 +98,7 @@ INSERT INTO `mapel` (`id`, `nama_mapel`, `kelas_mapel`, `pengajar_mapel`, `statu
 -- Table structure for table `pengumpulan`
 --
 
+DROP TABLE IF EXISTS `pengumpulan`;
 CREATE TABLE `pengumpulan` (
   `id` int(11) NOT NULL,
   `id_tugas` int(11) NOT NULL,
@@ -110,10 +114,8 @@ CREATE TABLE `pengumpulan` (
 --
 
 INSERT INTO `pengumpulan` (`id`, `id_tugas`, `id_tugas_soal`, `jawaban`, `created_by`, `created_date`, `status_jawaban`) VALUES
-(3, 0, 5, 'P = VxNxRxt', '11', '2021-05-29 10:25:58', 0),
-(4, 0, 6, 'a', '11', '2021-05-29 10:25:58', 0),
-(5, 1, 5, 'p v n r t', '11', '2021-05-29 11:52:21', 0),
-(6, 1, 6, 'a', '11', '2021-05-29 11:52:21', 0);
+(7, 3, 8, 'anak manusia', '10', '0000-00-00 00:00:00', 0),
+(8, 3, 9, 'a', '10', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -121,6 +123,7 @@ INSERT INTO `pengumpulan` (`id`, `id_tugas`, `id_tugas_soal`, `jawaban`, `create
 -- Table structure for table `penilaian`
 --
 
+DROP TABLE IF EXISTS `penilaian`;
 CREATE TABLE `penilaian` (
   `id` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
@@ -135,7 +138,7 @@ CREATE TABLE `penilaian` (
 --
 
 INSERT INTO `penilaian` (`id`, `id_siswa`, `id_mapel`, `id_tugas`, `nilai`, `created_by`) VALUES
-(20, 11, 1, 1, '100', '8');
+(21, 10, 2, 3, '90', '9');
 
 -- --------------------------------------------------------
 
@@ -143,10 +146,11 @@ INSERT INTO `penilaian` (`id`, `id_siswa`, `id_mapel`, `id_tugas`, `nilai`, `cre
 -- Table structure for table `siswa`
 --
 
+DROP TABLE IF EXISTS `siswa`;
 CREATE TABLE `siswa` (
   `id` int(11) NOT NULL,
   `nama_siswa` varchar(250) NOT NULL,
-  `nip_siswa` varchar(250) NOT NULL,
+  `nip_siswa` varchar(20) NOT NULL,
   `alamat_siswa` text NOT NULL,
   `telpon_siswa` varchar(250) NOT NULL,
   `kelas_siswa` int(11) DEFAULT NULL
@@ -166,6 +170,7 @@ INSERT INTO `siswa` (`id`, `nama_siswa`, `nip_siswa`, `alamat_siswa`, `telpon_si
 -- Table structure for table `tugas`
 --
 
+DROP TABLE IF EXISTS `tugas`;
 CREATE TABLE `tugas` (
   `id` int(11) NOT NULL,
   `id_mapel` int(11) NOT NULL,
@@ -174,7 +179,7 @@ CREATE TABLE `tugas` (
   `close_date` datetime NOT NULL,
   `created_by` varchar(250) NOT NULL,
   `created_datetime` datetime NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0
+  `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -192,16 +197,17 @@ INSERT INTO `tugas` (`id`, `id_mapel`, `id_kelas`, `open_date`, `close_date`, `c
 -- Table structure for table `tugas_soal`
 --
 
+DROP TABLE IF EXISTS `tugas_soal`;
 CREATE TABLE `tugas_soal` (
   `id` int(11) NOT NULL,
   `id_tugas` int(11) NOT NULL,
   `soal` text NOT NULL,
-  `soal_opsi_a` text DEFAULT NULL,
-  `soal_opsi_b` text DEFAULT NULL,
-  `soal_opsi_c` text DEFAULT NULL,
-  `soal_opsi_d` text DEFAULT NULL,
-  `jenis_soal` int(11) NOT NULL DEFAULT 0 COMMENT '0 : Pertanyaan, 1 : Opsional',
-  `status_soal` int(11) NOT NULL DEFAULT 0
+  `soal_opsi_a` text,
+  `soal_opsi_b` text,
+  `soal_opsi_c` text,
+  `soal_opsi_d` text,
+  `jenis_soal` int(11) NOT NULL DEFAULT '0' COMMENT '0 : Pertanyaan, 1 : Opsional',
+  `status_soal` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -210,7 +216,9 @@ CREATE TABLE `tugas_soal` (
 
 INSERT INTO `tugas_soal` (`id`, `id_tugas`, `soal`, `soal_opsi_a`, `soal_opsi_b`, `soal_opsi_c`, `soal_opsi_d`, `jenis_soal`, `status_soal`) VALUES
 (5, 1, 'Apa rumus tekanan ?', NULL, NULL, NULL, NULL, 0, 0),
-(6, 1, 'Siapa Thomas Alfa Edison', 'Penemu', 'Penipu', 'Puncuri', 'Pembunuh', 1, 0);
+(6, 1, 'Siapa Thomas Alfa Edison', 'Penemu', 'Penipu', 'Puncuri', 'Pembunuh', 1, 0),
+(8, 3, 'Siapa rohani ?', NULL, NULL, NULL, NULL, 0, 0),
+(9, 3, 'kenapa dia', 'gpp', 'ok', 'lol', 'ccd', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -218,6 +226,7 @@ INSERT INTO `tugas_soal` (`id`, `id_tugas`, `soal`, `soal_opsi_a`, `soal_opsi_b`
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
@@ -297,8 +306,7 @@ ALTER TABLE `tugas_soal`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -326,13 +334,13 @@ ALTER TABLE `mapel`
 -- AUTO_INCREMENT for table `pengumpulan`
 --
 ALTER TABLE `pengumpulan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `penilaian`
 --
 ALTER TABLE `penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `siswa`
@@ -350,7 +358,7 @@ ALTER TABLE `tugas`
 -- AUTO_INCREMENT for table `tugas_soal`
 --
 ALTER TABLE `tugas_soal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`

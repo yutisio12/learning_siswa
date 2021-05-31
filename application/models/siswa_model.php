@@ -45,5 +45,13 @@ class siswa_model extends CI_Model{
         $db = $this->db->get('pengumpulan')->result_array();
         return $db;
     }
+
+    function list_penilaian($where = NULL){
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->get('penilaian')->result_array();
+        return $db;
+    }
         
 }

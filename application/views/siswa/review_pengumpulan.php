@@ -17,8 +17,60 @@
                 <div class="text-left">
                 </div> 
                 <br>
+                <?php if(isset($nilai)){ ?>
                 <div class="card">
                     <div class="col">
+                        <br>
+                        <div class="col">
+                            <tr>
+                                <td>
+                                    <h4>Nilai Kamu</h4>
+                                </td>
+                                <td>
+                                    <button class="btn btn-success">
+                                        <?php  
+                                            if($nilai>=90){
+                                                $warna = 'btn-success';
+                                                $pesan = 'Luar niasa, pertahanin prestasi kamu ya!';
+                                            } elseif($nilai>=70){
+                                                $warna = 'btn-success';
+                                                $pesan = 'Hebat, terus tingkatin prestasi kamu ya!';
+                                            } else {
+                                                $warna = 'btn-danger';
+                                                $pesan = 'Lumayan, jangan patah semangat dan tetap rajin ya!';
+                                            }
+                                        ?>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h1 class="text-middle text-center">
+                                                    <?= $nilai['nilai'] ?>
+                                                </h1>
+                                            </div>
+                                            <div class="col">
+                                                <?php if($nilai>=90){ ?>
+                                                    <i class="fas fa-praying-hands fa-3x"></i>
+                                                <?php } elseif($nilai>=70){ ?>
+                                                    <i class="fas fa-thumbs-up fa-3x"></i>
+                                                <?php } else { ?>
+                                                    <i class="fas fa-smile fa-3x"></i>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </td>
+                                <td>
+                                    &nbsp;&nbsp;<?= $pesan ?>
+                                </td>
+                            </tr>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <?php } ?>
+                <br>
+                <div class="card">
+                    <div class="col">
+                        di
                         <form action="<?= base_url('siswa/pengumpulan_soal/').$id_tugas_main ?>" method="POST">
                         <?php 
                             if(isset($soal)){ 

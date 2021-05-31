@@ -159,6 +159,7 @@ class Guru extends CI_Controller {
 
     public function tulis_soal($id_tugas){
         
+        $data['id_tugas'] = $id_tugas;
         $tugas['id'] = $id_tugas;
         $where_tugas = $this->guru_model->list_tugas($tugas)[0];
             // $this->test_var($where_tugas);
@@ -254,7 +255,6 @@ class Guru extends CI_Controller {
         $insert['created_by']    = $this->permission_cookie[0];
 
         $this->guru_model->insert_score($insert);
-        print_r($insert); exit;
         $this->session->set_flashdata('success', 'Penilaian Berhasil');
         redirect('guru/list_pengumpulan');
     }
