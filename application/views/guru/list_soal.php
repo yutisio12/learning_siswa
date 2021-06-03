@@ -68,7 +68,7 @@
                                 <br>
                             </div>
                             <div class="text-right">
-                                <button class="btn btn-danger" onclick="hapus_soal('<?= $value_soal["id"] ?>')">
+                                <button class="btn btn-danger" onclick="hapus_soal('<?= $value_soal['id'] ?>')">
                                     <i class="fas fa-trash"></i> Hapus
                                 </button>
                             </div>

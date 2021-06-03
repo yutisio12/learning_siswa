@@ -87,6 +87,9 @@
                     $no = 1;
                     foreach ($user as $u):
                     ?>
+                    <?php if ( $u->status != '1' ) : ?>
+
+                    <?php else : ?>
                         <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?php echo $u->name ?></td>
@@ -112,8 +115,13 @@
                                 <button class="btn btn-danger" onclick="reset_password('<?= $u->id ?>')">
                                     <i class="fas fa-sync"></i>
                                 </button>
+                                <button class="btn btn-danger" onclick="hapus_user('<?= $u->id ?>')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
+                        <?php endif; ?>
+
                        <?php endforeach ?>
                     </tbody>
                 </table>
@@ -162,4 +170,46 @@
             }
         })
     }
+</script>
+
+<script>
+ function hapus_user(id){
+                        Swal.fire({
+                            title: 'Are you sure to <b class="text-danger">&nbsp;Delete&nbsp;</b> this?',
+                            // text: "This joint will permanent deleted!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, Delete it!'
+                          }).then((result) => {
+                            if (result.value) {
+                              $.ajax({
+                                url: "<?php echo base_url();?>home/hapus_user",
+                                type: "post",
+                                data: {
+                                  id: id
+                                },
+                                success: function(data) {
+                                if(data.includes("Error")){
+                                   Swal.fire(
+                                      'Ops..',
+                                      data,
+                                      'error'
+                                    );
+                                    
+                                } else {
+
+                                    Swal.fire(
+                                      'Success',
+                                      'Your data has been Updated!',
+                                      'success'
+                                    );
+                                    location.reload();
+                                  }
+                                }
+                              });
+                            }
+                          })
+                    }
 </script>

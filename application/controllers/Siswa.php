@@ -84,6 +84,8 @@ class Siswa extends CI_Controller {
     }
 
     public function review_pengumpulan($id_tugas){
+        error_reporting(0);
+
         $data['id_tugas_main']  = $id_tugas;
         $where['id_tugas'] = $id_tugas;
         $data['soal'] = $this->siswa_model->list_soal($where);

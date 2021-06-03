@@ -31,10 +31,10 @@
                                         <?php  
                                             if($nilai>=90){
                                                 $warna = 'btn-success';
-                                                $pesan = 'Luar niasa, pertahanin prestasi kamu ya!';
+                                                $pesan = 'Luar biasa, pertahanin prestasi kamu ya!';
                                             } elseif($nilai>=70){
                                                 $warna = 'btn-success';
-                                                $pesan = 'Hebat, terus tingkatin prestasi kamu ya!';
+                                                $pesan = 'Hebat, terus tingkatkan prestasi kamu ya!';
                                             } else {
                                                 $warna = 'btn-danger';
                                                 $pesan = 'Lumayan, jangan patah semangat dan tetap rajin ya!';
@@ -70,7 +70,7 @@
                 <br>
                 <div class="card">
                     <div class="col">
-                        di
+                        
                         <form action="<?= base_url('siswa/pengumpulan_soal/').$id_tugas_main ?>" method="POST">
                         <?php 
                             if(isset($soal)){ 

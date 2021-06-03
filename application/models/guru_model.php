@@ -102,6 +102,11 @@ class guru_model extends CI_Model{
         $this->db->update('tugas', $data);
     }
 
+    function hapus_tugas($id){
+        $this->db->where('id', $id);
+        $this->db->delete('tugas');
+    }
+
     function GetKelas($where = NULL){
         if(isset($where)){
             $this->db->where($where);

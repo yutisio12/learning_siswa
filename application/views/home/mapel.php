@@ -67,6 +67,9 @@
                                 
                             </div>
 
+                            <input type="hidden" name="status_hapus" id="status_hapus">
+
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
@@ -95,6 +98,9 @@
                     $no = 1;
                     foreach ($mata_pelajaran as $mapel):
                     ?>
+                    <?php if ( $mapel['status_hapus'] != '1' ) : ?>
+
+                    <?php else : ?> 
                         <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?= $mapel['nama_mapel'] ?></td>
@@ -109,8 +115,13 @@
                             <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal<?= $mapel['id']; ?>">
                             <i class="fas fa-edit"></i>
                             Edit Mapel
+                            </button>
+                            <button class="btn btn-danger" onclick="hapus_mapel('<?= $mapel['id'] ?>')">
+                            <i class="fas fa-trash"></i> Hapus
                             </button></td>
                         </tr>
+                        <?php endif; ?>
+
                        <?php endforeach ?>
                     </tbody>
                 </table>
@@ -194,3 +205,46 @@ foreach ($mata_pelajaran as $mapel):
   </div>
 </div>
 <?php endforeach ?>
+
+<script>
+ function hapus_mapel(id){
+                        console.log(id)
+                        Swal.fire({
+                            title: 'Are you sure to <b class="text-danger">&nbsp;Delete&nbsp;</b> this?',
+                            // text: "This joint will permanent deleted!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, Delete it!'
+                          }).then((result) => {
+                            if (result.value) {
+                              $.ajax({
+                                url: "<?php echo base_url();?>home/hapus_mapel",
+                                type: "post",
+                                data: {
+                                  id: id
+                                },
+                                success: function(data) {
+                                if(data.includes("Error")){
+                                   Swal.fire(
+                                      'Ops..',
+                                      data,
+                                      'error'
+                                    );
+                                    
+                                } else {
+
+                                    Swal.fire(
+                                      'Success',
+                                      'Your data has been Updated!',
+                                      'success'
+                                    );
+                                    location.reload();
+                                  }
+                                }
+                              });
+                            }
+                          })
+                    }
+</script>

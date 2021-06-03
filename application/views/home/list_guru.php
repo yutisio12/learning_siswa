@@ -72,6 +72,8 @@
                                 <input type="text" class="form-control" id="telpon_guru" name="telpon_guru" placeholder="Masukan No Telphone Guru">
                             </div>
 
+                            <input type="hidden" name="status" id="status">
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
@@ -103,6 +105,9 @@
                     $no = 1;
                     foreach ($guru as $list):
                     ?>
+                    <?php if ( $list['status'] != '1' ) : ?>
+
+                    <?php else : ?>
                         <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?= $list['nama_guru'] ?></td>
@@ -126,8 +131,12 @@
                             <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal<?= $list['id']; ?>">
                             <i class="fas fa-edit"></i>
                             Edit Guru
+                            </button>
+                            <button class="btn btn-danger"  onclick="hapus_guru('<?= $list['id'] ?>')">
+                            <i class="fas fa-trash"></i> Hapus
                             </button></td>
                         </tr>
+                        <?php endif; ?>
                         <?php endforeach ?>
                     </tbody>
                 </table>
@@ -152,7 +161,7 @@ foreach ($guru as $list):
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelx">Edit Data Kelas</h5>
+        <h5 class="modal-title" id="exampleModalLabelx">Edit Data Guru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -218,3 +227,46 @@ foreach ($guru as $list):
   </div>
 </div>
 <?php endforeach ?>
+
+<script>
+ function hapus_guru(id){
+                        console.log(id)
+                        Swal.fire({
+                            title: 'Are you sure to <b class="text-danger">&nbsp;Delete&nbsp;</b> this?',
+                            // text: "This joint will permanent deleted!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, Delete it!'
+                          }).then((result) => {
+                            if (result.value) {
+                              $.ajax({
+                                url: "<?php echo base_url();?>home/hapus_guru",
+                                type: "post",
+                                data: {
+                                  id: id
+                                },
+                                success: function(data) {
+                                if(data.includes("Error")){
+                                   Swal.fire(
+                                      'Ops..',
+                                      data,
+                                      'error'
+                                    );
+                                    
+                                } else {
+
+                                    Swal.fire(
+                                      'Success',
+                                      'Your data has been Updated!',
+                                      'success'
+                                    );
+                                    location.reload();
+                                  }
+                                }
+                              });
+                            }
+                          })
+                    }
+</script>

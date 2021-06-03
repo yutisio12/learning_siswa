@@ -59,6 +59,7 @@ class Home extends CI_Controller {
 		$insert['nama_kelas']         = $_POST['nama_kelas'];
         $insert['wali_kelas']         = $_POST['wali_kelas'];
 		$insert['lokasi_kelas']       = $_POST['lokasi_kelas'];
+		$insert['status']       	  = 1;
         $this->list_kelas->tambah($insert);
 
         $this->session->set_flashdata('success', 'Kelas Berhasil Di Tambah');
@@ -75,6 +76,13 @@ class Home extends CI_Controller {
         $this->list_kelas->edit($where, $data);
 		$this->session->set_flashdata('success',"Data Berhasil Di edit");
         redirect('home/list_kelas');
+
+	}
+
+	function hapus_kelas(){
+		$where['id'] = $_POST['id'];
+		$data['status'] = 0;
+		$this->list_kelas->edit($where, $data);
 
 	}
 
@@ -103,10 +111,12 @@ class Home extends CI_Controller {
 
 	function tambah_mapel(){
 
-		$insert['nama_mapel']         = $_POST['nama_mapel'];
-        $insert['kelas_mapel']         = $_POST['kelas_mapel'];
+		$insert['nama_mapel']         	= $_POST['nama_mapel'];
+        $insert['kelas_mapel']         	= $_POST['kelas_mapel'];
 		$insert['pengajar_mapel']       = $_POST['pengajar_mapel'];
-		$insert['status']       = $_POST['status'];
+		$insert['status']       		= $_POST['status'];
+		$insert['status_hapus']       	= 1;
+
 
 		$this->mapel->tambah_mapel($insert);
 
@@ -126,6 +136,12 @@ class Home extends CI_Controller {
 		$this->session->set_flashdata('success',"Data Berhasil Di edit");
         redirect('home/mapel');
 
+	}
+
+	function hapus_mapel(){
+		$where['id'] = $_POST['id'];
+		$data['status_hapus'] = 0;
+		$this->mapel->editMapel($where, $data);
 	}
 
 		// USER
@@ -149,6 +165,12 @@ class Home extends CI_Controller {
 			$this->user->tambah_user($data);
 			$this->session->set_flashdata('notif','<div class="alert alert-success" role="alert"> Data Berhasil ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 			redirect('home/user');
+		}
+
+		function hapus_user(){
+			$where['id'] = $_POST['id'];
+			$data['status'] = 0;
+			$this->user->hapus_user($where, $data);
 		}
 
 		// DATA SISWA
@@ -188,11 +210,18 @@ class Home extends CI_Controller {
 			$data['alamat_siswa'] = $_POST['alamat_siswa'];
 			$data['telpon_siswa'] = $_POST['telpon_siswa'];
 			$data['kelas_siswa'] = $_POST['kelas_siswa'];
+			$insert['status']       	= 1;
 
 			$this->siswa_model->editSiswa($where, $data);
 			$this->session->set_flashdata('success',"Data Berhasil Di edit");
 			redirect('home/list_siswa');
 
+		}
+
+		function hapus_siswa(){
+			$where['id'] = $_POST['id'];
+			$data['status'] = 0;
+			$this->siswa_model->editSiswa($where, $data);
 		}
 
 		//DATA GURU
@@ -220,8 +249,9 @@ class Home extends CI_Controller {
 			$insert['nip_guru']         = $_POST['nip_guru'];
 			$insert['id_kelas']         = implode('; ', $_POST['kelas']);
 			$insert['id_mapel']         = implode('; ', $_POST['mapel']);
-			$insert['alamat_guru']       = $_POST['alamat_guru'];
-			$insert['telpon_guru']       = $_POST['telpon_guru'];
+			$insert['alamat_guru']      = $_POST['alamat_guru'];
+			$insert['telpon_guru']      = $_POST['telpon_guru'];
+			$insert['status']       	= 1;
 	
 			$this->guru_model->insert_guru($insert);
 
@@ -248,6 +278,12 @@ class Home extends CI_Controller {
 			$this->session->set_flashdata('success',"Data Berhasil Di edit");
 			redirect('home/list_guru');
 
+		}
+
+		function hapus_guru(){
+			$where['id'] = $_POST['id'];
+			$data['status'] = 0;
+			$this->guru_model->editGuru($where, $data);
 		}
 
 }

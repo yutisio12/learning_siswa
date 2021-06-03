@@ -54,6 +54,9 @@
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
+
+                            <input type="hidden" name="status" id="status">
+
                         </form>
                         </div>
                         </div>
@@ -77,7 +80,11 @@
                     $no = 1;
                     foreach ($kelas as $list):
                     ?>
-                        <tr>
+                        <?php if ( $list['status'] != '1' ) : ?>
+
+                        <?php else : ?>
+
+                            <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?= $list['nama_kelas'] ?></td>
                             <td><?= $name[$list['wali_kelas']] ?></td>
@@ -85,8 +92,13 @@
                             <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal<?= $list['id']; ?>">
                         <i class="fas fa-edit"></i>
                          Edit Kelas
+                    </button>
+                    <button class="btn btn-danger"  onclick="hapus_kelas('<?= $list['id'] ?>')">
+                    <i class="fas fa-trash"></i> Hapus
                     </button></td>
                         </tr>
+                        <?php endif; ?>
+
                        <?php endforeach ?>
                     </tbody>
                 </table>
@@ -148,3 +160,46 @@ foreach ($kelas as $list):
   </div>
 </div>
 <?php endforeach ?>
+
+<script>
+ function hapus_kelas(id){
+                        console.log(id)
+                        Swal.fire({
+                            title: 'Are you sure to <b class="text-danger">&nbsp;Delete&nbsp;</b> this?',
+                            // text: "This joint will permanent deleted!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, Delete it!'
+                          }).then((result) => {
+                            if (result.value) {
+                              $.ajax({
+                                url: "<?php echo base_url();?>home/hapus_kelas",
+                                type: "post",
+                                data: {
+                                  id: id
+                                },
+                                success: function(data) {
+                                if(data.includes("Error")){
+                                   Swal.fire(
+                                      'Ops..',
+                                      data,
+                                      'error'
+                                    );
+                                    
+                                } else {
+
+                                    Swal.fire(
+                                      'Success',
+                                      'Your data has been Updated!',
+                                      'success'
+                                    );
+                                    location.reload();
+                                  }
+                                }
+                              });
+                            }
+                          })
+                    }
+</script>

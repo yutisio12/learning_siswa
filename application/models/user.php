@@ -11,4 +11,9 @@ class user extends CI_Model{
     function tambah_user($data){
        $this->db->insert('user', $data);
     }
+
+    function hapus_user($where, $data){
+        $this->db->where($where);
+        $this->db->update('user', $data);
+    }
 }

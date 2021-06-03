@@ -60,6 +60,7 @@
                                 <label for="telpon_siswa">No Telphone Siswa</label>
                                 <input type="text" class="form-control" id="telpon_siswa" name="telpon_siswa" placeholder="Masukan Kelas">
                             </div>
+                            <input type="hidden" name="status" id="status">
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -75,6 +76,7 @@
 
                     <table class="table table-hover table-bordered data-table">
                     <thead class="bg-primary text-white">
+
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nama Siswa</th>
@@ -90,6 +92,10 @@
                     $no = 1;
                     foreach ($siswa as $list):
                     ?>
+                     <?php if ( $list['status'] != '1' ) : ?>
+
+                    <?php else : ?>
+
                         <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?= $list['nama_siswa'] ?></td>
@@ -100,9 +106,14 @@
                             <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal<?= $list['id']; ?>">
                             <i class="fas fa-edit"></i>
                             Edit Siswa
+                            </button>
+                            <button class="btn btn-danger"  onclick="hapus_siswa('<?= $list['id'] ?>')">
+                            <i class="fas fa-trash"></i> Hapus
                             </button></td>
 
                         </tr>
+                        <?php endif; ?>
+
                         <?php endforeach ?>
                     </tbody>
                 </table>
@@ -175,3 +186,46 @@ foreach ($siswa as $list):
   </div>
 </div>
 <?php endforeach ?>
+
+<script>
+ function hapus_siswa(id){
+                        console.log(id)
+                        Swal.fire({
+                            title: 'Are you sure to <b class="text-danger">&nbsp;Delete&nbsp;</b> this?',
+                            // text: "This joint will permanent deleted!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, Delete it!'
+                          }).then((result) => {
+                            if (result.value) {
+                              $.ajax({
+                                url: "<?php echo base_url();?>home/hapus_siswa",
+                                type: "post",
+                                data: {
+                                  id: id
+                                },
+                                success: function(data) {
+                                if(data.includes("Error")){
+                                   Swal.fire(
+                                      'Ops..',
+                                      data,
+                                      'error'
+                                    );
+                                    
+                                } else {
+
+                                    Swal.fire(
+                                      'Success',
+                                      'Your data has been Updated!',
+                                      'success'
+                                    );
+                                    location.reload();
+                                  }
+                                }
+                              });
+                            }
+                          })
+                    }
+</script>

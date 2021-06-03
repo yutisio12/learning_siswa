@@ -116,6 +116,9 @@
                             </td>
                             <td>
                                 <a href="<?= base_url('guru/tulis_soal/').$value['id'] ?>" class="btn btn-danger"><i class="fas fa-pencil-alt"></i> Soal</a>
+
+                                <a href="<?php echo site_url('guru/hapus_tugas/'.$value['id']);?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+
                             </td>
                         </tr>
                         <?php 

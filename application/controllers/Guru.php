@@ -67,6 +67,13 @@ class Guru extends CI_Controller {
 		$this->load->view('index', $data);
     }
 
+    function hapus_tugas($id){
+        $this->guru_model->hapus_tugas($id);
+
+        $this->session->set_flashdata('success', 'Tugas Berhasil Di Hapus');
+        redirect('guru/list_tugas');
+    }
+
     public function list_pengumpulan(){
         
         $where['nip_guru'] = $this->permission_cookie[4];
