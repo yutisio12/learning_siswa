@@ -40,8 +40,8 @@
                                 <br>
                                 <select class="select2 form-control" id="wali_kelas" name="wali_kelas" style="width: 100%;">
                                     <option value="">Pilih Wali Kelas</option>
-                                    <?php foreach($wali_kelas as $v_wali){ ?>
-                                        <option value="<?= $v_wali['id'] ?>"><?= $v_wali['name'] ?></option>
+                                    <?php foreach($pengajar_mapel as $v_pengajar){ ?>
+                                        <option value="<?= $v_pengajar['id'] ?>"><?= $v_pengajar['nama_guru'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>

@@ -18,11 +18,11 @@ class list_kelas extends CI_Model{
         $this->db->update('kelas', $data);
     }
 
-    function wali_kelas($where = NULL){
-        if(isset($where)){
-            $this->db->where($where);
-        }
-        $db = $this->db->get('user')->result_array();
-        return $db;
-    }
+    // function wali_kelas($where = NULL){
+    //     if(isset($where)){
+    //         $this->db->where($where);
+    //     }
+    //     $db = $this->db->get('user')->result_array();
+    //     return $db;
+    // }
 }

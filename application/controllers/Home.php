@@ -43,10 +43,15 @@ class Home extends CI_Controller {
         $data['kelas'] = $datakelas;
 
 
-		$where_role['role'] = 1;
-		$data['wali_kelas'] = $this->list_kelas->wali_kelas($where_role);
+		// $where_role['role'] = 1;
+		// $data['wali_kelas'] = $this->list_kelas->wali_kelas($where_role);
+        // foreach($data['wali_kelas'] as $key => $value){
+        //     $data['name'][$value['id']] = $value['name'];
+        // }
+
+		$data['wali_kelas'] = $this->guru_model->list_guru();
         foreach($data['wali_kelas'] as $key => $value){
-            $data['name'][$value['id']] = $value['name'];
+            $data['name'][$value['id']] = $value['nama_guru'];
         }
 
 		$data['sidebar'] = 'home/sidebar';
@@ -168,7 +173,7 @@ class Home extends CI_Controller {
 				'status' => '1'
 			);
 			$this->user->tambah_user($data);
-			$this->session->set_flashdata('notif','<div class="alert alert-success" role="alert"> Data Berhasil ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+			$this->session->set_flashdata('success',"Data Berhasil Di Tambahkan");
 			redirect('home/user');
 		}
 
@@ -200,6 +205,7 @@ class Home extends CI_Controller {
 		$insert['kelas_siswa']       = $_POST['kelas_siswa'];
 		$insert['alamat_siswa']       = $_POST['alamat_siswa'];
 		$insert['telpon_siswa']       = $_POST['telpon_siswa'];
+		$insert['status']       	= 1;
 
         $this->siswa_model->insert_siswa($insert);
 
