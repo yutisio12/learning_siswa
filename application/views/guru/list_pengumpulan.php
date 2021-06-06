@@ -25,6 +25,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Kelas</th>
                             <th scope="col">Mata Pelajaran</th>
+                            <th>Kode Tugas</th>
                             <th scope="col">Open Date</th>
                             <th scope="col">Close Date</th>
                             <th scope="col">Action</th>
@@ -39,6 +40,7 @@
                             <td><?= $no ?></td>
                             <td><?= $nama_kelas[$value['id_kelas']] ?></td>
                             <td><?= $nama_mapel[$value['id_mapel']] ?></td>
+                            <td><?= $value['running_number'] ?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
                             <td>

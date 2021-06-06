@@ -25,6 +25,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">Mata Pelajaran</th>
+                            <th>Kode Tugas</th>
                             <th scope="col">Nilai</th>
                         </tr>
                     </thead>
@@ -37,6 +38,7 @@
                             <td><?= $no ?></td>
                             <td><?= $name[$value['id_siswa']] ?></td>
                             <td><?= $nama_mapel[$value['id_mapel']] ?></td>
+                            <td><?= $tugas[$value['id_tugas']] ?></td>
                             <td><?= $value['nilai'] ?></td>
                         </tr>
                         <?php 

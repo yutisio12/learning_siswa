@@ -142,6 +142,11 @@ class Guru extends CI_Controller {
             $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
         }
 
+        $data['tugas'] = $this->guru_model->list_tugas();
+        foreach($data['tugas'] as $key => $value){
+            $data['tugas'][$value['id']] = $value['running_number'];
+        }
+
         $data['sidebar'] = 'guru/sidebar';
 		$data['subview'] = 'guru/list_nilai';
 		$this->load->view('index', $data);
@@ -150,7 +155,16 @@ class Guru extends CI_Controller {
    
     public function add_tugas_process(){
 
-        //$this->test_var($_POST);
+        $where['id_mapel'] = $_POST['mapel'][0];
+        $datadb = $this->guru_model->list_tugas($where);
+        if(count($datadb)<1){
+            $insert['running_number'] = '000001';
+        } else {
+            $where['id_mapel'] = $_POST['mapel'][0];
+            $str = $this->guru_model->get_running_number($where)[0]['running_number']+1;
+
+            $insert['running_number'] = str_pad($str,6,0,STR_PAD_LEFT);
+        }
 
         $insert['id_kelas']         = $_POST['kelas'][0];
         $insert['id_mapel']         = $_POST['mapel'][0];

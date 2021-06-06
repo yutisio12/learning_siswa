@@ -17,6 +17,15 @@ class guru_model extends CI_Model{
         return $db;
     }
 
+    function get_running_number($where = NULL){
+        $this->db->select('MAX(running_number) as running_number');
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $db = $this->db->from('tugas')->get()->result_array();
+        return $db;
+    }
+
     function list_mapel($where = NULL){
         if(isset($where)){
             $this->db->where($where);

@@ -13,6 +13,7 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
+        // print_r($this->encryption->encrypt('12345'));
 		$data['subview'] = 'auth/login';
 		$this->load->view('auth/login', $data);
 	}

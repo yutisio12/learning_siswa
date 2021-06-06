@@ -32,7 +32,7 @@
                         <form action="<?php echo base_url('home/tambah_mapel')?>" method="post">
                             <div class="modal-body">
                                 <label for="nama_mapel">Nama Mapel</label>
-                                <input type="text" class="form-control" name="nama_mapel" id="nama_mapel" placeholder="Masukan Nama Mapel">
+                                <input type="text" class="form-control" name="nama_mapel" id="nama_mapel" placeholder="Masukan Nama Mapel" required>
                             </div>
 
                             <div class="modal-body">
@@ -51,7 +51,7 @@
                                 <select class="select2 form-control" id="pengajar_mapel" name="pengajar_mapel" style="width: 100%;" >
                                     <option value="">Pilih Pengajar</option>
                                     <?php foreach($pengajar_mapel as $v_pengajar){ ?>
-                                        <option value="<?= $v_pengajar['id'] ?>"><?= $v_pengajar['name'] ?></option>
+                                        <option value="<?= $v_pengajar['id'] ?>"><?= $v_pengajar['nama_guru'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -59,7 +59,7 @@
                             <div class="modal-body">
                                 <label for="status">Status</label>
                                 <br>
-                                <select class="form-control" id="status" name="status">
+                                <select class="form-control" id="status" name="status" required>
                                 <option value="0" selected>Pilih Status Mata Pelajaran</option>
                                 <option value="1">Aktif</option>
                                 <option value="-1">Tidak Aktif</option>
@@ -142,7 +142,7 @@ foreach ($mata_pelajaran as $mapel):
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Data Siswa</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data Mata Pelajaran</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -173,7 +173,7 @@ foreach ($mata_pelajaran as $mapel):
                                 <select class="select2 form-control" name="pengajar_mapel" style="width: 100%;" required>
                                 <option value="<?= $mapel['pengajar_mapel'] ?>"><?= $name[$mapel['pengajar_mapel']] ?></option>
                                     <?php foreach($pengajar_mapel as $v_pengajar){ ?>
-                                        <option value="<?= $v_pengajar['id'] ?>"><?= $v_pengajar['name'] ?></option>
+                                        <option value="<?= $v_pengajar['id'] ?>"><?= $v_pengajar['nama_guru'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>

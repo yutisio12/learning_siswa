@@ -93,10 +93,15 @@ class Home extends CI_Controller {
         $data['mata_pelajaran'] = $datamapel;
 
 
-		$where_role['role'] = 1;
-		$data['pengajar_mapel'] = $this->mapel->pengajar_mapel($where_role);
+		// $where_role['role'] = 1;
+		// $data['pengajar_mapel'] = $this->mapel->pengajar_mapel($where_role);
+  //       foreach($data['pengajar_mapel'] as $key => $value){
+  //           $data['name'][$value['id']] = $value['name'];
+  //       }
+        // $where_role['role'] = 1;
+		$data['pengajar_mapel'] = $this->guru_model->list_guru();
         foreach($data['pengajar_mapel'] as $key => $value){
-            $data['name'][$value['id']] = $value['name'];
+            $data['name'][$value['id']] = $value['nama_guru'];
         }
 
 		$data['kelas'] = $this->list_kelas->getKelas();

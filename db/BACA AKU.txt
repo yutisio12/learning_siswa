@@ -1,0 +1,1 @@
+Harap drop semua isi table, sebelum merunning query sql diatas, terimakasih :)
