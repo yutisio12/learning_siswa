@@ -40,8 +40,8 @@
                                 <br>
                                 <select class="select2 form-control" id="wali_kelas" name="wali_kelas" style="width: 100%;">
                                     <option value="">Pilih Wali Kelas</option>
-                                    <?php foreach($pengajar_mapel as $v_pengajar){ ?>
-                                        <option value="<?= $v_pengajar['id'] ?>"><?= $v_pengajar['nama_guru'] ?></option>
+                                    <?php foreach($wali_kelas as $v_wali){ ?>
+                                        <option value="<?= $v_wali['id'] ?>"><?= $v_wali['nama_guru'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -135,11 +135,11 @@ foreach ($kelas as $list):
                             <div class="modal-body">
                                 <label for="wali_kelas">Wali Kelas</label>
                                 <br>
-                                <select class="select2 form-control" name="wali_kelas" style="width: 100%;" required>
-                                <option value="<?= $list['wali_kelas'] ?>"><?= $name[$list['wali_kelas']] ?></option>    
-                                <?php foreach($wali_kelas as $v_wali){ ?>
-                                    <option value="<?= $v_wali['id'] ?>"><?= $v_wali['name'] ?></option>
-                                <?php } ?>
+                                <select class="select2 form-control" id="wali_kelas" name="wali_kelas" style="width: 100%;">
+                                    <option value="">Pilih Wali Kelas</option>
+                                    <?php foreach($wali_kelas as $v_wali){ ?>
+                                        <option value="<?= $v_wali['id'] ?>"><?= $v_wali['nama_guru'] ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
 
