@@ -37,6 +37,7 @@ class Siswa extends CI_Controller {
 	}
 
     public function tugas_tersedia(){
+        error_reporting(0);
 
         $where_peng['created_by'] =  $this->permission_cookie[0];
         $pengumpulan = $this->siswa_model->list_pengumpulan($where_peng);
