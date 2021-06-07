@@ -149,6 +149,7 @@
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalScore">
                     <i class="fas fa-plus"></i>Add Score
                 </button>
+                <br><br>
             </div>
         </div>
     </div>

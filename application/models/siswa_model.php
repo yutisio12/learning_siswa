@@ -34,6 +34,12 @@ class siswa_model extends CI_Model{
         $this->db->update('siswa', $data);    
     }
 
+    function edit_pengguna($where, $data){
+        $this->db->where($where);
+        $this->db->update('user', $data);    
+    }
+
+
     function insert_pengumpulan($data){
         $this->db->insert('pengumpulan', $data);
     }

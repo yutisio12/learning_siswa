@@ -297,4 +297,23 @@ class Home extends CI_Controller {
 			$this->guru_model->editGuru($where, $data);
 		}
 
+		function edit_user(){
+
+			// echo '<pre>';
+			// print_r($_POST);
+			// exit;
+
+			$where['id'] = $_POST['id'];
+
+			$data['name'] = $_POST['name'];
+			$data['username'] = $_POST['username'];
+			$data['nip'] = $_POST['nip'];
+			$data['role'] = $_POST['role'];
+
+			$this->siswa_model->edit_pengguna($where, $data);
+			$this->session->set_flashdata('success',"Data Berhasil Di edit");
+			redirect('home/user');
+
+		}
+
 }

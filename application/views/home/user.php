@@ -112,6 +112,8 @@
                                 echo "Aktif";
                             } ?></td>
                             <td>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal<?= $u->id; ?>"><i class="fas fa-edit"></i>
+                                </button>
                                 <button class="btn btn-danger" onclick="reset_password('<?= $u->id ?>')">
                                     <i class="fas fa-sync"></i>
                                 </button>
@@ -132,6 +134,63 @@
 </div>
 <!-- /.container-fluid -->
 </div>
+
+<!-- Modal Edit -->
+<?php 
+foreach ($user as $list):
+?>
+
+<div class="modal fade" id="modal<?= $list->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data Pengguna</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="<?= base_url('home/edit_user')?>" method="POST">
+      
+        <div class="modal-body">
+                                <label for="nama_siswa">Nama</label>
+                                <input type="text" class="form-control" name="name" id="nama_siswa" value="<?= $list->name ?>" placeholder="Masukan Nama">
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="nip_siswa">Username</label>
+                                <input type="text" class="form-control" name="username" id="nip_siswa" value="<?= $list->username ?>"placeholder="Masukan Username">
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="nip_siswa">NIP</label>
+                                <input type="text" class="form-control" name="nip" id="nip_siswa" value="<?= $list->nip ?>"placeholder="Masukan NIP">
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="kelas_siswa">Kelas</label>
+                                <br>
+                                <select class="form-control" id="role" name="role">
+                                    <option value="" selected>Pilih Role</option>
+                                    <option value="0" <?= $list->role==0 ? 'selected' : '' ?>>Tata Usaha</option>
+                                    <option value="1" <?= $list->role==1 ? 'selected' : '' ?>>Guru</option>
+                                    <option value="2" <?= $list->role==2 ? 'selected' : '' ?>>Siswa</option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" name="id" id="id" value="<?= $list->id; ?>">
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach ?>
+
 <script type="text/javascript">
     function reset_password(id){
         Swal.fire({
