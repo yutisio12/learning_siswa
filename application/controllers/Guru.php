@@ -221,7 +221,7 @@ class Guru extends CI_Controller {
         //$this->test_var($_POST);
 
         $where['id'] = $_POST['id'];
-        $data['status'] = 1;
+        $data['status'] = $_POST['status'];
         $this->guru_model->update_tugas($where, $data);
 
     }
