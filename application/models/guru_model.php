@@ -64,7 +64,7 @@ class guru_model extends CI_Model{
         $this->db->insert('tugas', $data);
     }
 
-    function list_guru(){
+    function list_guru($where = NULL){
         if(isset($where)){
             $this->db->where($where);
         }

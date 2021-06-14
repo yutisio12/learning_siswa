@@ -19,7 +19,7 @@
                 </div>
                 <br>
                                 
-                <table class="table table-hover table-bordered data-table">
+                <table class="table table-hover table-bordered data-table-filter">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">#</th>
@@ -53,3 +53,30 @@
 </div>
 <!-- /.container-fluid -->
 </div>
+
+<script>
+$(document).ready(function() {
+    $('.data-table-filter').DataTable({
+                initComplete: function () {
+                     this.api().columns(2).every(function () {
+                         var column = this;
+                         $(column.header()).append("<br>")
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.header()))
+                             .on('change', function () {
+                                 var val = $.fn.dataTable.util.escapeRegex(
+                                     $(this).val()
+                                 );
+
+                                 column
+                                     .search(val ? '^' + val + '$' : '', true, false)
+                                     .draw();
+                             });
+                         column.data().unique().sort().each(function (d, j) {
+                             select.append('<option value="' + d + '">' + d + '</option>')
+                } );
+            } );
+            }
+            });
+        });
+</script>
