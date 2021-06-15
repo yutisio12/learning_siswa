@@ -2,6 +2,8 @@
 <style>
 
 </style>
+<script src="<?= base_url('assets/ckeditor/') ?>ckeditor.js"></script>
+
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
@@ -70,7 +72,7 @@
                                             <div class="col">
                                                 <div class="col">
                                                     <div class="col">
-                                                    <textarea class="form-control abcd_<?=  $key_soal ?>" name="jawaban[<?=  $key_soal ?>]" rows="5">..........</textarea>
+                                                    <textarea class="form-control abcd_<?=  $key_soal ?>" name="jawaban[<?=  $key_soal ?>]" rows="5" id="ckeditor">..........</textarea>
                                                     <input type="hidden" name="id_soal[<?=  $key_soal ?>]" value="<?= $value_soal['id'] ?>">
                                                     </div>
                                                 </div>
@@ -165,6 +167,10 @@
                             $('.b_'+no_soal).removeClass('btn-success text-white').addClass('btn-warning')
                         }
                     }
+                    
+
+                    CKEDITOR.replace( 'ckeditor' );
+
 
                 </script>
                 <br>
