@@ -100,6 +100,7 @@ class Siswa extends CI_Controller {
         $data_jawaban = $this->siswa_model->list_pengumpulan($where);
         foreach ($data_jawaban as $key => $value) {
             $data['jawaban'][$value['id_tugas_soal']] = $value['jawaban'];
+            $data['file'][$value['id_tugas_soal']] = $value['file'];
         }
             // $this->test_var($data_jawaban);
         $data['sidebar'] = 'siswa/sidebar';
@@ -108,10 +109,22 @@ class Siswa extends CI_Controller {
     }
 
     public function pengumpulan_soal($id_tugas){
-        // $this->test_var($_POST);
+        // $this->test_var($_FILES);
         foreach ($_POST['id_soal'] as $key => $soal) {
+
+            // ambil data file
+            $namaFile = 'Jawaban'.$key.DATE('YmdHis').'.jpg';
+            $namaSementara = $_FILES['foto']['tmp_name'][$key];
+
+            // tentukan lokasi file akan dipindahkan
+            $dirUpload = "upload/";
+
+            // pindahkan file
+            $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
+
             $insert['id_tugas']         = $id_tugas;
             $insert['id_tugas_soal']    = $soal;
+            $insert['file']             = $namaFile;
 
             $insert['created_by']       = $this->permission_cookie[0];
             $insert['created_date']     = DATE('Y-m-d H:i:s');

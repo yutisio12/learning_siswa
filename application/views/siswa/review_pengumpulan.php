@@ -122,8 +122,18 @@
                                             <div class="col">
                                                 <div class="col">
                                                     <div class="col">
-                                                    <textarea class="form-control abcd_<?=  $key_soal ?>" name="jawaban[<?=  $key_soal ?>]" rows="5" readonly><?= $jawaban[$value_soal['id']] ?></textarea>
+                                                        <?php $answer = $jawaban[$value_soal['id']] ?>
+                                                    <textarea class="form-control abcd_<?=  $key_soal ?>" name="jawaban[<?=  $key_soal ?>]" rows="5" readonly><?= htmlentities($answer) ?></textarea>
                                                     <input type="hidden" name="id_soal[<?=  $key_soal ?>]" value="<?= $value_soal['id'] ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card col">
+                                                <div class="col">
+                                                    <div class="col">
+                                                        <div class="col text-center">
+                                                            <img src="<?= base_url('upload/').$file[$value_soal['id']] ?>" style="width: 200px; height: 200px;">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

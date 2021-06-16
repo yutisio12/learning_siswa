@@ -29,7 +29,8 @@
                             <div class="soal_">
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-1"><p><?= $nos ?> )</p></div>
+                                    <div class="col-md-1"><p><?= $nos ?> )<i class="fas fa-lg <?= $jawaban[$value_soal['id']]==$value_soal['jawaban_benar'] ? 'fa-check text-success' : 'fa-times text-danger' ?>"></i></p></div>
+
                                     <div class="col">
                                         <textarea class="form-control" disabled><?= $value_soal['soal'] ?></textarea>
                                     </div>
@@ -76,6 +77,20 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card col">
+                                                <div class="col">
+                                                    <div class="col">
+                                                        <div class="col text-center">
+                                                            <img src="<?= base_url('upload/').$file[$value_soal['id']] ?>" style="width: 200px; height: 200px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +190,7 @@
                            
                         <div class="modal-body">
                                 <label for="nilai">Nilai</label>
-                                <input type="text" class="form-control" id="nilai" name="nilai" placeholder="Masukan Nilai">
+                                <input type="number" class="form-control" id="nilai" name="nilai" placeholder="Masukan Nilai" min="0" max="100">
                         </div>
 
                         <input type="hidden" name="id_tugas" id="id_tugas"  value="<?= $value_soal['id_tugas'] ?>">

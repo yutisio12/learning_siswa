@@ -66,6 +66,19 @@
                                 </div>
                                 <?php } ?>
                                 <br>
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-4 text-right">
+                                        <label>Jawaban Benar :</label>
+                                        <select class="form-control" readonly>
+                                            <option value="a" <?= $value_soal['jawaban_benar']=='a' ? 'selected' : '' ?>>A</option>
+                                            <option value="b" <?= $value_soal['jawaban_benar']=='b' ? 'selected' : '' ?>>B</option>
+                                            <option value="c" <?= $value_soal['jawaban_benar']=='c' ? 'selected' : '' ?>>C</option>
+                                            <option value="d" <?= $value_soal['jawaban_benar']=='d' ? 'selected' : '' ?>>D</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-danger" onclick="hapus_soal('<?= $value_soal['id'] ?>')">
@@ -111,6 +124,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-8"></div>
+                                <div class="col-md-4 text-right">
+                                    <label>Jawaban Benar :</label>
+                                    <select class="form-control" name="jawaban_benar[0]">
+                                        <option value="a">A</option>
+                                        <option value="b">B</option>
+                                        <option value="c">C</option>
+                                        <option value="d">D</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <br>
                         </div>
@@ -142,6 +168,21 @@
                         html += '<div class="col">B <input type="text" name="opsi_b['+no_soal+']" class="form-control" disabled></div></div>'
                         html += '<div class="row"><div class="col">C <input type="text" name="opsi_c['+no_soal+']" class="form-control" disabled></div>'
                         html += '<div class="col">D <input type="text" name="opsi_d['+no_soal+']" class="form-control" disabled></div></div></div></div>'
+                        
+                        html += '<br>'
+                            html += '<div class="row">'
+                                html += '<div class="col-md-8"></div>'
+                                html += '<div class="col-md-4 text-right">'
+                                    html += '<label>Jawaban Benar :</label>'
+                                    html += '<select class="form-control" name="jawaban_benar['+no_soal+']">'
+                                        html += '<option value="a">A</option>'
+                                        html += '<option value="b">B</option>'
+                                        html += '<option value="c">C</option>'
+                                        html += '<option value="d">D</option>'
+                                    html += '</select>'
+                                html += '</div>'
+                            html += '</div>'
+
                         html += '<button class="btn btn-danger" onclick="remove_tugas('+no_soal+')"><i class="fas fa-trash"></i> Remove</button><br><br></div>'
                         $('#tugas').append(html)
                     }

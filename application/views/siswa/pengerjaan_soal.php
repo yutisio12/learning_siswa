@@ -21,7 +21,7 @@
                 <br>
                 <div class="card">
                     <div class="col">
-                        <form action="<?= base_url('siswa/pengumpulan_soal/').$id_tugas_main ?>" method="POST">
+                        <form action="<?= base_url('siswa/pengumpulan_soal/').$id_tugas_main ?>" method="POST" enctype="multipart/form-data">
                         <?php 
                             if(isset($soal)){ 
                             $nos = 1;
@@ -74,6 +74,11 @@
                                                     <div class="col">
                                                     <textarea class="form-control abcd_<?=  $key_soal ?>" name="jawaban[<?=  $key_soal ?>]" rows="5" id="ckeditor">..........</textarea>
                                                     <input type="hidden" name="id_soal[<?=  $key_soal ?>]" value="<?= $value_soal['id'] ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="col">
+                                                        <input type="file" name="foto[<?=  $key_soal ?>]" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>

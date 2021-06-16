@@ -183,9 +183,10 @@ class Guru extends CI_Controller {
         $data['id_tugas'] = $id_tugas;
         $tugas['id'] = $id_tugas;
         $where_tugas = $this->guru_model->list_tugas($tugas)[0];
-            // $this->test_var($where_tugas);
+            
         $where_soal['id_tugas'] = $where_tugas['id'];
         $data['soal'] = $this->guru_model->list_tugas_soal($where_soal);
+        // $this->test_var($data['soal']);
 
         $data['sidebar'] = 'guru/sidebar';
         $data['subview'] = 'guru/list_soal';
@@ -194,7 +195,7 @@ class Guru extends CI_Controller {
 
     public function add_soal_process($id_tugas){
         error_reporting(0);
-        
+        // $this->test_var($_POST);
         foreach ($_POST['soal'] as $key => $soal) {
             $insert['id_tugas']         = $id_tugas;
             $insert['soal']             = $soal;
@@ -203,6 +204,7 @@ class Guru extends CI_Controller {
             $insert['soal_opsi_c']      = $_POST['opsi_c'][$key];
             $insert['soal_opsi_d']      = $_POST['opsi_d'][$key];
             $insert['jenis_soal']       = $_POST['jenis'][$key];
+            $insert['jawaban_benar']    = $_POST['jawaban_benar'][$key];
             
             $this->guru_model->insert_soal($insert);
         }
@@ -260,6 +262,7 @@ class Guru extends CI_Controller {
         $data_jawaban = $this->siswa_model->list_pengumpulan($where);
         foreach ($data_jawaban as $key => $value) {
             $data['jawaban'][$value['id_tugas_soal']] = $value['jawaban'];
+            $data['file'][$value['id_tugas_soal']] = $value['file'];
         }
 
         $data['sidebar'] = 'guru/sidebar';
