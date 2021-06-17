@@ -235,6 +235,10 @@ class Home extends CI_Controller {
 			$this->siswa_model->editSiswa($where, $data);
 		}
 
+		function export_siswa(){
+			
+		}
+
 		//DATA GURU
 		function list_guru(){
 			$dataguru = $this->guru_model->list_guru();

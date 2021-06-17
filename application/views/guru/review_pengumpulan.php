@@ -197,6 +197,9 @@
                         <?php foreach ($siswa as $list): ?>
                         <input type="hidden" name="id_siswa" id="id_siswa"  value="<?= $list['id'] ?>">
                         <?php endforeach ?>
+                        <?php foreach ($kelas as $list): ?>
+                        <input type="hidden" name="id_kelas" id="id_kelas"  value="<?= $list['id'] ?>">
+                        <?php endforeach ?>
                         <?php foreach ($mapel as $list): ?>
                         <input type="hidden" name="id_mapel" id="id_mapel"  value="<?= $list['id'] ?>">
                         <?php endforeach ?>

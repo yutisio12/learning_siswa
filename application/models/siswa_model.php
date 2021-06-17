@@ -59,5 +59,9 @@ class siswa_model extends CI_Model{
         $db = $this->db->get('penilaian')->result_array();
         return $db;
     }
+
+    function export_siswa(){
+        
+    }
         
 }

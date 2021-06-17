@@ -137,10 +137,16 @@ class Guru extends CI_Controller {
             $data['name'][$value['id']] = $value['name'];
         }
 
+        $data['kelas'] = $this->guru_model->list_kelas();
+        foreach($data['kelas'] as $key => $value){
+            $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
+        }
+
         $data['mapel'] = $this->guru_model->list_mapel();
         foreach($data['mapel'] as $key => $value){
             $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
         }
+
 
         $data['tugas'] = $this->guru_model->list_tugas();
         foreach($data['tugas'] as $key => $value){
@@ -239,7 +245,8 @@ class Guru extends CI_Controller {
         $where_tugas = $this->guru_model->list_tugas($tugas)[0];
         $where_mapel['id'] = $where_tugas['id_mapel'];
         $yoo = $this->guru_model->list_mapel($where_mapel);
-        // $this->test_var($where_mapel);
+        $where_kelas['id'] = $where_tugas['id_kelas'];
+        // $this->test_var($where_kelas);
 
 
         $where_siswa['id'] = $id_siswa;
@@ -251,6 +258,11 @@ class Guru extends CI_Controller {
         $data['siswa'] = $this->guru_model->list_user($where_user);
         foreach($data['siswa'] as $key => $value){
             $data['name'][$value['id']] = $value['name'];
+        }
+
+        $data['kelas'] = $this->guru_model->list_kelas($where_kelas);
+        foreach($data['kelas'] as $key => $value){
+            $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
         }
 
         $data['mapel'] = $this->guru_model->list_mapel($where_mapel);
@@ -274,6 +286,7 @@ class Guru extends CI_Controller {
         
         $insert['id_tugas']      = $_POST['id_tugas'];
         $insert['id_siswa']      = $_POST['id_siswa'];
+        $insert['id_kelas']      = $_POST['id_kelas'];
         $insert['id_mapel']      = $_POST['id_mapel'];
         $insert['nilai']         = $_POST['nilai'];
         $insert['created_by']    = $this->permission_cookie[0];
