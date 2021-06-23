@@ -10,11 +10,14 @@
     <link href="<?= base_url('assets/bootstrap/') ?>css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/css/') ?>login.css" rel="stylesheet">
 
+    <link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet"> 
+    <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+    
   </head>
   <body>
     
-  <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
-    <div class="card card0 border-0">
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto" >
+    <div class="card card0 border-0" data-title="Hello" data-intro="This is a login form">
         <div class="row d-flex">
             <div class="col-lg-6">
                 <div class="card1 pb-5">
@@ -26,16 +29,16 @@
                 <div class="card2 card border-0 px-4 py-5">
                 <form action="<?= base_url('auth/checking') ?>" method="POST">
 
-                    <div class="row px-3"> <label class="mb-1">
+                    <div class="row px-3" data-title="Username form" data-intro="Ini adalah form untuk memasukan username anda."> <label class="mb-1">
                             <h6 class="mb-0 text-sm">Username</h6>
                         </label> <input required class="mb-4" type="text" name="username" placeholder="Enter a valid username"> </div>
-                    <div class="row px-3"> <label class="mb-1">
-                            <h6 class="mb-0 text-sm">Password</h6>
+                    <div class="row px-3" data-title="Password form" data-intro="Ini adalah form untuk memasukan password anda."> <label class="mb-1">
+                            <h6 class="mb-0 text-sm" >Password</h6>
                         </label> <input required type="password" name="password" placeholder="Enter password"> </div>
                     <div class="row px-3 mb-4">
                         <div class="custom-control custom-checkbox custom-control-inline"> </div>
                     </div>
-                    <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
+                    <div class="row mb-3 px-3" data-title="Button Login"> <button type="submit" class="btn btn-blue text-center" data-intro="Jika sudah memasukan username dan password dengan benar maka tekan tombol login untuk masuk ke halaman website.">Login</button> </div>
                     <div class="row mb-3 px-3">
                     <input type="button" class="btn btn-red text-center" onclick="play()" value="Help"><audio id="audio" src="<?= base_url('assets/audio/') ?>a.mpeg"></audio>
                     </div>
@@ -79,9 +82,8 @@
 
 <script>
       function play() {
-        var audio = document.getElementById("audio");
-        audio.play();
-      }
+        introJs().start();
+        }
     </script>
   </body>
 </html>

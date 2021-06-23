@@ -77,10 +77,11 @@
                 </nav>
 
 <link href="<?= base_url('assets/css/') ?>login.css" rel="stylesheet">
+<link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet"> 
+<script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
 
 <script>
  function play() {
-        var audio = document.getElementById("audio");
-        audio.play();
+    introJs().start();
       }
 </script>
