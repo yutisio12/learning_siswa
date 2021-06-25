@@ -26,6 +26,7 @@
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">Kelas</th>
                             <th scope="col">Mata Pelajaran</th>
+                            <th>Semester</th>
                             <th>Kode Tugas</th>
                             <th scope="col">Nilai</th>
                         </tr>
@@ -40,6 +41,7 @@
                             <td><?= $name[$value['id_siswa']] ?></td>
                             <td><?= $nama_kelas[$value['id_kelas']] ?></td>
                             <td><?= $nama_mapel[$value['id_mapel']] ?></td>
+                            <td><?= $value['semester'] ?></td>
                             <td><?= $tugas[$value['id_tugas']] ?></td>
                             <td><?= $value['nilai'] ?></td>
                         </tr>
@@ -89,6 +91,24 @@ $(document).ready(function() {
                 } );
             } );
             this.api().columns(3).every(function () {
+                         var column = this;
+                         $(column.header()).append("<br>")
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.header()))
+                             .on('change', function () {
+                                 var val = $.fn.dataTable.util.escapeRegex(
+                                     $(this).val()
+                                 );
+
+                                 column
+                                     .search(val ? '^' + val + '$' : '', true, false)
+                                     .draw();
+                             });
+                         column.data().unique().sort().each(function (d, j) {
+                             select.append('<option value="' + d + '">' + d + '</option>')
+                } );
+            } );
+            this.api().columns(4).every(function () {
                          var column = this;
                          $(column.header()).append("<br>")
                 var select = $('<select><option value=""></option></select>')

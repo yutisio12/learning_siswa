@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jun 2021 pada 15.45
--- Versi server: 10.4.13-MariaDB
--- Versi PHP: 7.4.8
+-- Generation Time: Jun 25, 2021 at 08:01 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `guru`
+-- Table structure for table `guru`
 --
 
 CREATE TABLE `guru` (
@@ -39,7 +39,7 @@ CREATE TABLE `guru` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `guru`
+-- Dumping data for table `guru`
 --
 
 INSERT INTO `guru` (`id`, `nama_guru`, `nip_guru`, `alamat_guru`, `telpon_guru`, `id_kelas`, `id_mapel`, `status`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `guru` (`id`, `nama_guru`, `nip_guru`, `alamat_guru`, `telpon_guru`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kelas`
+-- Table structure for table `kelas`
 --
 
 CREATE TABLE `kelas` (
@@ -59,19 +59,10 @@ CREATE TABLE `kelas` (
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `kelas`
---
-
-INSERT INTO `kelas` (`id`, `nama_kelas`, `wali_kelas`, `lokasi_kelas`, `status`) VALUES
-(11, '1', '', 'Sebelah kanan kantin', 1),
-(12, '2', '', 'Dekat Lapangan', 1),
-(13, '3', '', 'Sebelah kiri kantor guru', 1);
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mapel`
+-- Table structure for table `mapel`
 --
 
 CREATE TABLE `mapel` (
@@ -83,18 +74,10 @@ CREATE TABLE `mapel` (
   `status_hapus` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `mapel`
---
-
-INSERT INTO `mapel` (`id`, `nama_mapel`, `kelas_mapel`, `pengajar_mapel`, `status`, `status_hapus`) VALUES
-(11, 'Bahasa Indonesia', '11', '17', '1', 1),
-(12, 'Bahasa Inggris', '11', '', '1', 1);
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengumpulan`
+-- Table structure for table `pengumpulan`
 --
 
 CREATE TABLE `pengumpulan` (
@@ -108,25 +91,19 @@ CREATE TABLE `pengumpulan` (
   `status_jawaban` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `pengumpulan`
---
-
-INSERT INTO `pengumpulan` (`id`, `id_tugas`, `id_tugas_soal`, `jawaban`, `file`, `created_by`, `created_date`, `status_jawaban`) VALUES
-(12, 11, 16, 'a', '', '25', '2021-06-07 15:29:05', 0),
-(13, 12, 18, '<p>..........</p>\r\n', 'Jawaban020210616152623.jpg', '25', '2021-06-16 15:26:23', 0);
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penilaian`
+-- Table structure for table `penilaian`
 --
 
 CREATE TABLE `penilaian` (
   `id` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
+  `id_kelas` int(11) DEFAULT NULL,
   `id_mapel` int(11) NOT NULL,
   `id_tugas` int(11) NOT NULL,
+  `semester` int(11) DEFAULT NULL,
   `nilai` varchar(255) NOT NULL,
   `created_by` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -134,7 +111,7 @@ CREATE TABLE `penilaian` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `siswa`
+-- Table structure for table `siswa`
 --
 
 CREATE TABLE `siswa` (
@@ -148,16 +125,17 @@ CREATE TABLE `siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `siswa`
+-- Dumping data for table `siswa`
 --
 
 INSERT INTO `siswa` (`id`, `nama_siswa`, `nip_siswa`, `alamat_siswa`, `telpon_siswa`, `kelas_siswa`, `status`) VALUES
-(9, 'Maria Enjelina Situmorang', '3015789191', 'Batuaji', '0895603671151', 11, 1);
+(9, 'Maria Enjelina Situmorang', '3015789191', 'Batuaji', '0895603671151', 11, 1),
+(10, 'tes', '123', 'tes', '1234', 12, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tugas`
+-- Table structure for table `tugas`
 --
 
 CREATE TABLE `tugas` (
@@ -165,6 +143,7 @@ CREATE TABLE `tugas` (
   `running_number` varchar(250) NOT NULL,
   `id_mapel` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL,
+  `semester` int(11) DEFAULT NULL,
   `open_date` datetime NOT NULL,
   `close_date` datetime NOT NULL,
   `created_by` varchar(250) NOT NULL,
@@ -172,18 +151,10 @@ CREATE TABLE `tugas` (
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tugas`
---
-
-INSERT INTO `tugas` (`id`, `running_number`, `id_mapel`, `id_kelas`, `open_date`, `close_date`, `created_by`, `created_datetime`, `status`) VALUES
-(11, '000001', 11, 11, '2021-06-08 22:00:00', '2021-06-09 22:00:00', '24', '2021-06-07 15:27:18', 2),
-(12, '000002', 11, 11, '2021-06-16 10:00:00', '2021-06-16 12:00:00', '24', '2021-06-16 15:01:51', 0);
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tugas_soal`
+-- Table structure for table `tugas_soal`
 --
 
 CREATE TABLE `tugas_soal` (
@@ -199,19 +170,10 @@ CREATE TABLE `tugas_soal` (
   `status_soal` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tugas_soal`
---
-
-INSERT INTO `tugas_soal` (`id`, `id_tugas`, `soal`, `soal_opsi_a`, `soal_opsi_b`, `soal_opsi_c`, `soal_opsi_d`, `jawaban_benar`, `jenis_soal`, `status_soal`) VALUES
-(16, 11, 'andi pergi ... sekolah', 'ke', 'me', 'di', 'nya', 'a', 1, 0),
-(17, 11, 'akuuuu if kelas', 'a', 'b', 'c', 'd', 'b', 1, 0),
-(18, 12, 'Apa ini', NULL, NULL, NULL, NULL, 'a', 0, 0);
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -226,7 +188,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `password`, `role`, `nip`, `status`, `status_hapus`) VALUES
@@ -239,115 +201,115 @@ INSERT INTO `user` (`id`, `name`, `username`, `password`, `role`, `nip`, `status
 --
 
 --
--- Indeks untuk tabel `guru`
+-- Indexes for table `guru`
 --
 ALTER TABLE `guru`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nip_guru` (`nip_guru`);
 
 --
--- Indeks untuk tabel `kelas`
+-- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `mapel`
+-- Indexes for table `mapel`
 --
 ALTER TABLE `mapel`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pengumpulan`
+-- Indexes for table `pengumpulan`
 --
 ALTER TABLE `pengumpulan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `penilaian`
+-- Indexes for table `penilaian`
 --
 ALTER TABLE `penilaian`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `siswa`
+-- Indexes for table `siswa`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nip_siswa` (`nip_siswa`);
 
 --
--- Indeks untuk tabel `tugas`
+-- Indexes for table `tugas`
 --
 ALTER TABLE `tugas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tugas_soal`
+-- Indexes for table `tugas_soal`
 --
 ALTER TABLE `tugas_soal`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `guru`
+-- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT untuk tabel `kelas`
+-- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `mapel`
+-- AUTO_INCREMENT for table `mapel`
 --
 ALTER TABLE `mapel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT untuk tabel `pengumpulan`
+-- AUTO_INCREMENT for table `pengumpulan`
 --
 ALTER TABLE `pengumpulan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT untuk tabel `penilaian`
+-- AUTO_INCREMENT for table `penilaian`
 --
 ALTER TABLE `penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
--- AUTO_INCREMENT untuk tabel `siswa`
+-- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tugas`
+-- AUTO_INCREMENT for table `tugas`
 --
 ALTER TABLE `tugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `tugas_soal`
+-- AUTO_INCREMENT for table `tugas_soal`
 --
 ALTER TABLE `tugas_soal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;

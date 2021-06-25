@@ -49,6 +49,14 @@
                                         <option value="<?= $v_mapel['id'] ?>"><?= $v_mapel['nama_mapel'] ?></option>
                                     <?php } ?>
                                 </select>
+                            </div><div class="modal-body">
+                                <label for="mapel">semester</label>
+                                <br>
+                                <select class="select2 form-control" id="semester" name="semester" style="width: 100%;" required>
+                                    <option value="">---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
                             </div>
                             <div class="modal-body">
                                 <label for="mapel">Date Open</label>
@@ -91,6 +99,7 @@
                             <th scope="col">Kelas</th>
                             <th scope="col">Mata Pelajaran</th>
                             <th scope="col">Kode Tugas</th>
+                            <th scope="col">Semester</th>
                             <th scope="col">Open Date</th>
                             <th scope="col">Close Date</th>
                             <th scope="col">Status</th>
@@ -106,9 +115,8 @@
                             <td><?= $no ?></td>
                             <td><?= $nama_kelas[$value['id_kelas']] ?></td>
                             <td><?= $nama_mapel[$value['id_mapel']] ?></td>
-
                             <td><?= $value['running_number'] ?></td>
-
+                            <td><?= $value['semester']?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
                             <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
                             <td>
@@ -176,8 +184,26 @@ $(document).ready(function() {
                              });
                          column.data().unique().sort().each(function (d, j) {
                              select.append('<option value="' + d + '">' + d + '</option>')
-                } );
-            } );
+                });
+            });
+            this.api().columns(4).every(function () {
+                         var column = this;
+                         $(column.header()).append("<br>")
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.header()))
+                             .on('change', function () {
+                                 var val = $.fn.dataTable.util.escapeRegex(
+                                     $(this).val()
+                                 );
+
+                                 column
+                                     .search(val ? '^' + val + '$' : '', true, false)
+                                     .draw();
+                             });
+                         column.data().unique().sort().each(function (d, j) {
+                             select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
         }
             });
         });

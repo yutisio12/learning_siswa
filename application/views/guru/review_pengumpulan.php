@@ -203,6 +203,9 @@
                         <?php foreach ($mapel as $list): ?>
                         <input type="hidden" name="id_mapel" id="id_mapel"  value="<?= $list['id'] ?>">
                         <?php endforeach ?>
+                        <?php foreach ($semester as $list): ?>
+                        <input type="hidden" name="semester" id="semester"  value="<?= $list['semester'] ?>">
+                        <?php endforeach ?>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save </button>

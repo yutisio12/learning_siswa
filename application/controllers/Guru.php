@@ -153,6 +153,12 @@ class Guru extends CI_Controller {
             $data['tugas'][$value['id']] = $value['running_number'];
         }
 
+        $data['tugas'] = $this->guru_model->list_tugas();
+        foreach($data['tugas'] as $key => $value){
+            $data['tugas'][$value['id']] = $value['running_number'];
+        }
+        
+
         $data['sidebar'] = 'guru/sidebar';
 		$data['subview'] = 'guru/list_nilai';
 		$this->load->view('index', $data);
@@ -174,6 +180,7 @@ class Guru extends CI_Controller {
 
         $insert['id_kelas']         = $_POST['kelas'][0];
         $insert['id_mapel']         = $_POST['mapel'][0];
+        $insert['semester']         = $_POST['semester'][0];
         $insert['open_date']        = $_POST['date_open'].' '.$_POST['time_open'];
         $insert['close_date']       = $_POST['date_close'].' '.$_POST['time_close'];
         $insert['created_by']       = $this->permission_cookie[0];
@@ -246,7 +253,8 @@ class Guru extends CI_Controller {
         $where_mapel['id'] = $where_tugas['id_mapel'];
         $yoo = $this->guru_model->list_mapel($where_mapel);
         $where_kelas['id'] = $where_tugas['id_kelas'];
-        // $this->test_var($where_kelas);
+        $where_semester['semester'] = $where_tugas['semester'];
+        // $this->test_var($where_semester);
 
 
         $where_siswa['id'] = $id_siswa;
@@ -270,6 +278,11 @@ class Guru extends CI_Controller {
             $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
         }
 
+        $data['semester'] = $this->guru_model->list_tugas($where_semester);
+        foreach($data['semester'] as $key => $value){
+            $data['semester'][$value['semester']] = $value['semester'];
+        }
+
         $where['created_by'] = $id_akun_siswa['id'];
         $data_jawaban = $this->siswa_model->list_pengumpulan($where);
         foreach ($data_jawaban as $key => $value) {
@@ -288,6 +301,7 @@ class Guru extends CI_Controller {
         $insert['id_siswa']      = $_POST['id_siswa'];
         $insert['id_kelas']      = $_POST['id_kelas'];
         $insert['id_mapel']      = $_POST['id_mapel'];
+        $insert['semester']      = $_POST['semester'];
         $insert['nilai']         = $_POST['nilai'];
         $insert['created_by']    = $this->permission_cookie[0];
 
