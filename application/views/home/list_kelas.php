@@ -70,6 +70,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Kelas</th>
+                            <th>Kode Kelas</th>
                             <th scope="col">Wali Kelas</th>
                             <th scope="col">Lokasi</th>
                             <th scope="col">Action</th>
@@ -87,6 +88,7 @@
                             <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?= $list['nama_kelas'] ?></td>
+                            <td><?= $list['id'] ?></td>
                             <td><?= $name[$list['wali_kelas']] ?></td>
                             <td><?= $list['lokasi_kelas'] ?></td>
                             <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal<?= $list['id']; ?>">
