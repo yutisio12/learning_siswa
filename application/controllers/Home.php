@@ -320,4 +320,57 @@ class Home extends CI_Controller {
 
 		}
 
+		public function import_siswa(){
+
+			$datadb = $this->siswa_model->list_siswa();
+			foreach ($datadb as $key => $value) {
+				$data['nip_terdaftar'][$value['nip_siswa']] = 1;
+			}
+
+			$datakelas = $this->list_kelas->getKelas();
+			foreach ($datakelas as $key => $value) {
+				$data['kelas'][$value['id']] = $value['nama_kelas'];
+
+				$data['cek_kelas'][$value['id']] = 1;
+			}
+
+			$config['upload_path']   = 'upload/import/';
+			$config['file_name']     = 'excel_'.date('Y-m-d');
+			$config['allowed_types'] = 'xlsx';
+			$config['overwrite'] 	 = TRUE;
+
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			$this->upload->do_upload('file_siswa');
+
+			include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+			
+			$excelreader = new PHPExcel_Reader_Excel2007();
+			$loadexcel = $excelreader->load('upload/import/'.$this->upload->data('file_name')); // Load file yang telah diupload ke folder excel
+			$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
+
+			$data['sheet']	 = $sheet;
+
+			$data['sidebar'] = 'home/sidebar';
+			$data['subview'] = 'home/preview_import_siswa';
+			$this->load->view('index', $data);
+		}
+
+		public function process_import_siswa(){
+
+			foreach ($_POST['nip'] as $key => $value) {
+				$insert['nama_siswa'] 	= $_POST['nama'][$key];
+				$insert['nip_siswa'] 	= $value;
+				$insert['alamat_siswa'] = $_POST['alamat'][$key];
+				$insert['telpon_siswa'] = $_POST['telepon'][$key];
+				$insert['kelas_siswa'] 	= $_POST['kelas'][$key];
+				$insert['status'] 		= 1;
+
+				$this->siswa_model->insert_siswa($insert);
+			}
+			$this->session->set_flashdata('success', 'Data Berhasil Ditambahkan');
+			redirect('home/list_siswa');
+
+		}
+
 }

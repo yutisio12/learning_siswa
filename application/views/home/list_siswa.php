@@ -19,6 +19,38 @@
                         <i class="fas fa-plus"></i>
                          Tambah Siswa
                     </button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importModal">
+                        <i class="fas fa-plus"></i>
+                         Import Data Siswa
+                    </button>
+
+                    <!-- Import Modal -->
+                    <div class="modal fade" id="importModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Form Data Siswa</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url('home/import_siswa')?>" method="POST" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <label for="nama_siswa">File Siswa</label>
+                                <input type="file" class="form-control" name="file_siswa">
+                                <a href="<?= base_url('file/Template Import Siswa.xlsx') ?>">Template Import Siswa.xlsx</a>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- End Import Modal -->
+
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
