@@ -1,7 +1,4 @@
 <!-- Begin Page Content -->
-<style>
-
-</style>
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
@@ -29,16 +26,6 @@
                                 <td>
                                     <button class="btn btn-success">
                                         <?php  
-                                            // if($nilai['nilai']>=90){
-                                            //     $warna = 'btn-success';
-                                            //     $pesan = 'Luar biasa, pertahanin prestasi kamu ya!';
-                                            // } elseif($nilai['nilai']>=70){
-                                            //     $warna = 'btn-success';
-                                            //     $pesan = 'Hebat, terus tingkatkan prestasi kamu ya!';
-                                            // } else {
-                                            //     $warna = 'btn-danger';
-                                            //     $pesan = 'Lumayan, jangan patah semangat dan tetap rajin ya!';
-                                            // }
                                             
                                             if($nilai['nilai']<=70){
                                                 $warna = 'btn-danger';
@@ -107,19 +94,19 @@
                                         <div class="col-md-6">
                                             <div class="row">
                                                 <div class="col">
-                                                    <span class="btn <?= $jawaban[$value_soal['id']]==a ? 'btn-warning' : 'btn-secondary text-white' ?> opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'a')"><b>A)</b> <?= $value_soal['soal_opsi_a'] ?></span>
+                                                    <span class="btn <?= $jawaban[$value_soal['id']]=='a' ? 'btn-warning' : 'btn-secondary text-white' ?> opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'a')"><b>A)</b> <?= $value_soal['soal_opsi_a'] ?></span>
                                                 </div>
                                                 <div class="col">
-                                                    <span class="btn <?= $jawaban[$value_soal['id']]==b ? 'btn-warning' : 'btn-secondary text-white' ?> opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'b')"><b>B)</b> <?= $value_soal['soal_opsi_b'] ?></span>
+                                                    <span class="btn <?= $jawaban[$value_soal['id']]=='b' ? 'btn-warning' : 'btn-secondary text-white' ?> opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'b')"><b>B)</b> <?= $value_soal['soal_opsi_b'] ?></span>
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="row">
                                                 <div class="col">
-                                                    <span class="btn <?= $jawaban[$value_soal['id']]==c ? 'btn-warning' : 'btn-secondary text-white' ?> opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'c')"><b>C)</b> <?= $value_soal['soal_opsi_c'] ?></span>
+                                                    <span class="btn <?= $jawaban[$value_soal['id']]=='c' ? 'btn-warning' : 'btn-secondary text-white' ?> opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'c')"><b>C)</b> <?= $value_soal['soal_opsi_c'] ?></span>
                                                 </div>
                                                 <div class="col">
-                                                    <span class="btn <?= $jawaban[$value_soal['id']]==d ? 'btn-warning' : 'btn-secondary text-white' ?> opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'd')"><b>D)</b> <?= $value_soal['soal_opsi_d'] ?></span>
+                                                    <span class="btn <?= $jawaban[$value_soal['id']]=='d' ? 'btn-warning' : 'btn-secondary text-white' ?> opsi_<?= $key_soal ?>" style="color: black" onclick="jawaban('<?= $key_soal ?>', 'd')"><b>D)</b> <?= $value_soal['soal_opsi_d'] ?></span>
                                                 </div>
                                                 <input type="hidden" name="jawaban[<?=  $key_soal ?>]" class="abcd_<?=  $key_soal ?>">
                                                 <input type="hidden" name="id_soal[<?=  $key_soal ?>]" value="<?= $value_soal['id'] ?>">
