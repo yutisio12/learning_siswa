@@ -91,53 +91,55 @@
                     </div>
                 </div>
                 <br>
-                                
-                <table class="table table-hover table-bordered data-table-filter">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Kelas</th>
-                            <th scope="col">Mata Pelajaran</th>
-                            <th scope="col">Kode Tugas</th>
-                            <th scope="col">Semester</th>
-                            <th scope="col">Open Date</th>
-                            <th scope="col">Close Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $no = 1;
-                            foreach($tugas as $key => $value){
-                        ?>
-                        <tr>
-                            <td><?= $no ?></td>
-                            <td><?= $nama_kelas[$value['id_kelas']] ?></td>
-                            <td><?= $nama_mapel[$value['id_mapel']] ?></td>
-                            <td><?= $value['running_number'] ?></td>
-                            <td><?= $value['semester']?></td>
-                            <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
-                            <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
-                            <td>
-                                <select class="form-control" onchange="ubah_status(this, '<?= $value['id'] ?>')">
-                                    <option value="0" <?= $value['status']==0 ? 'selected' : '' ?>>Open</option>
-                                    <option value="1" <?= $value['status']==1 ? 'selected' : '' ?>>Close</option>
-                                    <option value="2" <?= $value['status']==2 ? 'selected' : '' ?>>Scored</option>
-                                </select>
-                            </td>
-                            <td>
-                                <a href="<?= base_url('guru/tulis_soal/').$value['id'] ?>" class="btn btn-danger"><i class="fas fa-pencil-alt"></i> Soal</a>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered data-table-filter">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Kelas</th>
+                                <th scope="col">Mata Pelajaran</th>
+                                <th scope="col">Kode Tugas</th>
+                                <th scope="col">Semester</th>
+                                <th scope="col">Open Date</th>
+                                <th scope="col">Close Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                                $no = 1;
+                                foreach($tugas as $key => $value){
+                            ?>
+                            <tr>
+                                <td><?= $no ?></td>
+                                <td><?= $nama_kelas[$value['id_kelas']] ?></td>
+                                <td><?= $nama_mapel[$value['id_mapel']] ?></td>
+                                <td><?= $value['running_number'] ?></td>
+                                <td><?= $value['semester']?></td>
+                                <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>
+                                <td><?= DATE('d F, Y H:i a', strtotime($value['close_date'])) ?></td>
+                                <td>
+                                    <select class="form-control" onchange="ubah_status(this, '<?= $value['id'] ?>')">
+                                        <option value="0" <?= $value['status']==0 ? 'selected' : '' ?>>Open</option>
+                                        <option value="1" <?= $value['status']==1 ? 'selected' : '' ?>>Close</option>
+                                        <option value="2" <?= $value['status']==2 ? 'selected' : '' ?>>Scored</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <a href="<?= base_url('guru/tulis_soal/').$value['id'] ?>" class="btn btn-danger"><i class="fas fa-pencil-alt"></i> Soal</a>
 
-                                <a href="<?php echo site_url('guru/hapus_tugas/'.$value['id']);?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                                    <a href="<?php echo site_url('guru/hapus_tugas/'.$value['id']);?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
 
-                            </td>
-                        </tr>
-                        <?php 
-                            $no++;}
-                        ?>
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>
+                            <?php 
+                                $no++;}
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- =================================================================== -->

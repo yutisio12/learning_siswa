@@ -109,31 +109,59 @@ class Siswa extends CI_Controller {
     }
 
     public function pengumpulan_soal($id_tugas){
-        // $this->test_var($_FILES);
+        error_reporting(0);
+        
+        $jumlah_soal = count($_POST['id_soal']);
+        $jumlah_benar= 0;
         foreach ($_POST['id_soal'] as $key => $soal) {
 
             // ambil data file
-            $namaFile = 'Jawaban'.$key.DATE('YmdHis').'.jpg';
-            $namaSementara = $_FILES['foto']['tmp_name'][$key];
+            if(isset($_FILES['foto']['tmp_name'][$key])){
+                $namaFile = 'Jawaban'.$key.DATE('YmdHis').'.jpg';
+                $namaSementara = $_FILES['foto']['tmp_name'][$key];
 
-            // tentukan lokasi file akan dipindahkan
-            $dirUpload = "upload/";
+                // tentukan lokasi file akan dipindahkan
+                $dirUpload = "upload/";
 
-            // pindahkan file
-            $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
+                // pindahkan file
+                $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
+            }
 
             $insert['id_tugas']         = $id_tugas;
             $insert['id_tugas_soal']    = $soal;
             $insert['file']             = $namaFile;
-
             $insert['created_by']       = $this->permission_cookie[0];
             $insert['created_date']     = DATE('Y-m-d H:i:s');
-
             $insert['jawaban']          = $_POST['jawaban'][$key];
             $insert['status_jawaban']   = 0;
-
+            
             $this->siswa_model->insert_pengumpulan($insert);
+
+            $where_cek['id'] = $soal;
+            $cek_benar = $this->siswa_model->list_soal($where_cek)[0];
+            if($cek_benar['jawaban_benar']==$_POST['jawaban'][$key]){
+                $jumlah_benar++;
+            }
+
+            $where_cek_main['id'] = $cek_benar['id_tugas'];
+            $main = $this->guru_model->list_tugas($where_cek_main)[0];  
         }
+
+        if($cek_benar['jenis_soal']==1){
+            $nilai = ($jumlah_benar/$jumlah_soal)*100;
+            // $this->test_var($main);
+            $insert_penilaian['id_siswa']   = $this->permission_cookie[0];
+            $insert_penilaian['id_tugas']       = $cek_benar['id_tugas'];
+            $insert_penilaian['id_kelas']       = $main['id_kelas'];
+            $insert_penilaian['id_mapel']       = $main['id_mapel'];
+            $insert_penilaian['semester']       = $main['semester'];
+            $insert_penilaian['nilai']          = $nilai;
+            $insert_penilaian['created_by']     = 99999; //id system
+            $insert_penilaian['created_date']   = DATE('Y-m-d H:i:s'); //id system
+            
+            $this->guru_model->insert_score($insert_penilaian);
+        }
+
         $this->session->set_flashdata('success', 'Soal berhasil dikumpulkan :)');
         redirect('siswa/tugas_tersedia');
     }

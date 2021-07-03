@@ -29,7 +29,11 @@
                             <div class="soal_">
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-1"><p><?= $nos ?> )<i class="fas fa-lg <?= $jawaban[$value_soal['id']]==$value_soal['jawaban_benar'] ? 'fa-check text-success' : 'fa-times text-danger' ?>"></i></p></div>
+                                    <div class="col-md-1"><p><?= $nos ?> )
+                                    <?php if($value_soal['jenis_soal']==1){ ?>
+                                        <i class="fas fa-lg <?= $jawaban[$value_soal['id']]==$value_soal['jawaban_benar'] ? 'fa-check text-success' : 'fa-times text-danger' ?>"></i></p>
+                                    <?php } ?>
+                                    </div>
 
                                     <div class="col">
                                         <textarea class="form-control" disabled><?= $value_soal['soal'] ?></textarea>

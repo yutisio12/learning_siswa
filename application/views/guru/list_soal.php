@@ -21,6 +21,29 @@
                     </button>
                 </div> 
                 <br>
+                <?php if(!isset($soal[0]['jenis_soal'])){ ?>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="radio" name="jenis_soal" value="0" class="text-right" required="" onclick="mass_type_soal(0)">&nbsp;Essay
+                        </div>
+                        <div class="col-md-3">
+                            <input type="radio" name="jenis_soal" value="1" required="" onclick="mass_type_soal(1)">&nbsp;Objektif
+                        </div>
+                        <script>
+                            function mass_type_soal(types){
+                                if(types==0){
+                                    $('.abc_only').addClass('d-none')
+                                    $('.jenis_soal_all').val(0)
+                                    $('.opsi_abc_only').attr('disabled', true)
+                                } else {                        
+                                    $('.abc_only').removeClass('d-none')
+                                    $('.jenis_soal_all').val(1)
+                                    $('.opsi_abc_only').attr('disabled', false)
+                                }
+                            }
+                        </script>
+                    </div>
+                <?php } ?>
                 <div class="card">
                     <div class="col">
                         <?php 
@@ -39,12 +62,12 @@
                                 <br>
                                 <?php if($value_soal['jenis_soal']==1){ ?>
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <input type="radio" <?= $value_soal['jenis_soal']==0 ? 'checked' : '' ?> class="text-right" disabled>&nbsp;Essay
                                     </div>
                                     <div class="col-md-3">
                                         <input type="radio" <?= $value_soal['jenis_soal']==1 ? 'checked' : '' ?> disabled>&nbsp;Objektif
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col">
@@ -66,7 +89,7 @@
                                 </div>
                                 <?php } ?>
                                 <br>
-                                <div class="row">
+                                <div class="row abc_only">
                                     <div class="col-md-8"></div>
                                     <div class="col-md-4 text-right">
                                         <label>Jawaban Benar :</label>
@@ -78,6 +101,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                
                                 <br>
                             </div>
                             <div class="text-right">
@@ -88,6 +112,16 @@
                             <hr>
                         <?php $nos++;}} ?>
                         <form action="<?= base_url('guru/add_soal_process/').$id_tugas ?>" method="POST">
+                        <?php if(isset($soal[0]['jenis_soal'])){ ?>
+                            <?php if($soal[0]['jenis_soal']==1){ ?>
+                                <input type="hidden" name="jenis_soal_all" class="jenis_soal_all" value="1">
+                            <?php } else { ?>
+                                <input type="hidden" name="jenis_soal_all" class="jenis_soal_all" value="0">
+                            <?php } ?>
+                        <?php } else { ?>
+                            <input type="hidden" name="jenis_soal_all" class="jenis_soal_all">
+                        <?php } ?>
+                            
                         <div id="tugas">
                         <br>
                         <div class="soal_1">
@@ -98,34 +132,29 @@
                                 </div>
                             </div>
                             <br>
+                            <?php if(COUNT($soal)==0 OR $soal[0]['jenis_soal']==1){ ?>
                             <div class="row">
-                                <div class="col-md-3">
-                                    <input type="radio" name="jenis[0]" value="0" class="text-right" required="" checked onclick="check_checked(0)">&nbsp;Essay
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="radio" name="jenis[0]" value="1" required="" onclick="check_checked(0)">&nbsp;Objektif
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12 abc_only">
                                     <div class="row">
                                         <div class="col">
-                                            A <input type="text" name="opsi_a[0]" class="form-control" disabled>
+                                            A <input type="text" name="opsi_a[0]" class="form-control opsi_abc_only">
                                         </div>
                                         <div class="col">
-                                            B <input type="text" name="opsi_b[0]" class="form-control" disabled>
+                                            B <input type="text" name="opsi_b[0]" class="form-control opsi_abc_only">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            C <input type="text" name="opsi_c[0]" class="form-control" disabled>
+                                            C <input type="text" name="opsi_c[0]" class="form-control opsi_abc_only">
                                         </div>
                                         <div class="col">
-                                            D <input type="text" name="opsi_d[0]" class="form-control" disabled>
+                                            D <input type="text" name="opsi_d[0]" class="form-control opsi_abc_only">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <br>
-                            <div class="row">
+                            <div class="row abc_only">
                                 <div class="col-md-8"></div>
                                 <div class="col-md-4 text-right">
                                     <label>Jawaban Benar :</label>
@@ -137,6 +166,8 @@
                                     </select>
                                 </div>
                             </div>
+                        <?php } ?>
+
                         </div>
                         <br>
                         </div>
@@ -151,7 +182,13 @@
                     var x = <?= $nos ?>+0
                     var no_soal = x
                     var no_div = 0
+                    <?php if(isset($soal[0]['jenis_soal'])){ ?>
+                        var jenis_all = "<?= $soal[0]['jenis_soal'] ?>"
+                    <?php } else { ?>
+                        var jenis_all = 999
+                    <?php } ?>
                     function tambah_soal(){
+                        console.log(jenis_all)
                         no_soal+=1
                         no_div+=1
                         html = '<hr><div class="soal_'+no_soal+'">'
@@ -159,29 +196,51 @@
                         html += '<div class="col-md-1"><p>'+no_soal+')</p></div>'
                         html += '<div class="col">'
                         html += '<textarea class="form-control" required="" name="soal['+no_soal+']"></textarea>'
-                        html += '</div></div><br><div class="row"><div class="col-md-3">'
+                        html += '</div></div><br>'
 
-                        html += '<input type="radio" name="jenis['+no_soal+']" value="0" class="text-right" required="" checked onclick="check_checked('+no_soal+', 0)">&nbsp;Essay'
-                        html += '</div><div class="col-md-3"><input type="radio" name="jenis['+no_soal+']" value="1" required="" onclick="check_checked('+no_soal+', 1)">&nbsp;Objektif</div>'
-
-                        html += '<div class="col-md-6"><div class="row"><div class="col">A <input type="text" name="opsi_a['+no_soal+']" class="form-control" disabled></div>'
-                        html += '<div class="col">B <input type="text" name="opsi_b['+no_soal+']" class="form-control" disabled></div></div>'
-                        html += '<div class="row"><div class="col">C <input type="text" name="opsi_c['+no_soal+']" class="form-control" disabled></div>'
-                        html += '<div class="col">D <input type="text" name="opsi_d['+no_soal+']" class="form-control" disabled></div></div></div></div>'
-                        
-                        html += '<br>'
-                            html += '<div class="row">'
-                                html += '<div class="col-md-8"></div>'
-                                html += '<div class="col-md-4 text-right">'
-                                    html += '<label>Jawaban Benar :</label>'
-                                    html += '<select class="form-control" name="jawaban_benar['+no_soal+']">'
-                                        html += '<option value="a">A</option>'
-                                        html += '<option value="b">B</option>'
-                                        html += '<option value="c">C</option>'
-                                        html += '<option value="d">D</option>'
-                                    html += '</select>'
+                        // html += '<div class="col-md-3"><input type="radio" name="jenis['+no_soal+']" value="0" class="text-right" required="" checked onclick="check_checked('+no_soal+', 0)">&nbsp;Essay'
+                        // html += '</div><div class="col-md-3"><input type="radio" name="jenis['+no_soal+']" value="1" required="" onclick="check_checked('+no_soal+', 1)">&nbsp;Objektif</div>'
+                        if($('input[type=radio][name=jenis_soal]:checked').val()==1 || jenis_all==1){
+                            console.log('abc')
+                            html += '<div class="row"><div class="col-md-12 abc_only"><div class="row"><div class="col">A <input type="text" name="opsi_a['+no_soal+']" class="form-control"></div>'
+                            html += '<div class="col">B <input type="text" name="opsi_b['+no_soal+']" class="form-control"></div></div>'
+                            html += '<div class="row"><div class="col">C <input type="text" name="opsi_c['+no_soal+']" class="form-control"></div>'
+                            html += '<div class="col">D <input type="text" name="opsi_d['+no_soal+']" class="form-control"></div></div></div></div>'
+                            
+                            html += '<br>'
+                                html += '<div class="row abc_only">'
+                                    html += '<div class="col-md-8"></div>'
+                                    html += '<div class="col-md-4 text-right">'
+                                        html += '<label>Jawaban Benar :</label>'
+                                        html += '<select class="form-control" name="jawaban_benar['+no_soal+']">'
+                                            html += '<option value="a">A</option>'
+                                            html += '<option value="b">B</option>'
+                                            html += '<option value="c">C</option>'
+                                            html += '<option value="d">D</option>'
+                                        html += '</select>'
+                                    html += '</div>'
                                 html += '</div>'
-                            html += '</div>'
+                        } else {
+                            console.log('essay')
+                            html += '<div class="row"><div class="col-md-12 abc_only d-none"><div class="row"><div class="col">A <input type="text" name="opsi_a['+no_soal+']" class="form-control opsi_abc_only" disabled></div>'
+                            html += '<div class="col">B <input type="text" name="opsi_b['+no_soal+']" class="form-control opsi_abc_only" disabled></div></div>'
+                            html += '<div class="row"><div class="col">C <input type="text" name="opsi_c['+no_soal+']" class="form-control opsi_abc_only" disabled></div>'
+                            html += '<div class="col">D <input type="text" name="opsi_d['+no_soal+']" class="form-control opsi_abc_only" disabled></div></div></div></div>'
+                            
+                            html += '<br>'
+                                html += '<div class="row abc_only d-none">'
+                                    html += '<div class="col-md-8"></div>'
+                                    html += '<div class="col-md-4 text-right">'
+                                        html += '<label>Jawaban Benar :</label>'
+                                        html += '<select class="form-control" name="jawaban_benar['+no_soal+']">'
+                                            html += '<option value="a">A</option>'
+                                            html += '<option value="b">B</option>'
+                                            html += '<option value="c">C</option>'
+                                            html += '<option value="d">D</option>'
+                                        html += '</select>'
+                                    html += '</div>'
+                                html += '</div>'
+                        }
 
                         html += '<button class="btn btn-danger" onclick="remove_tugas('+no_soal+')"><i class="fas fa-trash"></i> Remove</button><br><br></div>'
                         $('#tugas').append(html)

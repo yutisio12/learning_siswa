@@ -212,12 +212,17 @@ class Guru extends CI_Controller {
         foreach ($_POST['soal'] as $key => $soal) {
             $insert['id_tugas']         = $id_tugas;
             $insert['soal']             = $soal;
-            $insert['soal_opsi_a']      = $_POST['opsi_a'][$key];
-            $insert['soal_opsi_b']      = $_POST['opsi_b'][$key];
-            $insert['soal_opsi_c']      = $_POST['opsi_c'][$key];
-            $insert['soal_opsi_d']      = $_POST['opsi_d'][$key];
-            $insert['jenis_soal']       = $_POST['jenis'][$key];
-            $insert['jawaban_benar']    = $_POST['jawaban_benar'][$key];
+    
+            // $insert['jenis_soal']       = $_POST['jenis'][$key]; diganti karena mau pakai satu jenis untuk satu tugas
+            $insert['jenis_soal']       = $_POST['jenis_soal_all']; 
+
+            if($_POST['jenis_soal_all']==1){
+                $insert['soal_opsi_a']      = $_POST['opsi_a'][$key];
+                $insert['soal_opsi_b']      = $_POST['opsi_b'][$key];
+                $insert['soal_opsi_c']      = $_POST['opsi_c'][$key];
+                $insert['soal_opsi_d']      = $_POST['opsi_d'][$key];
+                $insert['jawaban_benar']    = $_POST['jawaban_benar'][$key];
+            }
             
             $this->guru_model->insert_soal($insert);
         }

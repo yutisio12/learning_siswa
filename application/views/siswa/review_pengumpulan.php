@@ -17,7 +17,7 @@
                 <div class="text-left">
                 </div> 
                 <br>
-                <?php if(isset($nilai)){ ?>
+                <?php if(isset($nilai['nilai'])){ ?>
                 <div class="card">
                     <div class="col">
                         <br>
@@ -29,15 +29,29 @@
                                 <td>
                                     <button class="btn btn-success">
                                         <?php  
-                                            if($nilai>=90){
-                                                $warna = 'btn-success';
-                                                $pesan = 'Luar biasa, pertahanin prestasi kamu ya!';
-                                            } elseif($nilai>=70){
-                                                $warna = 'btn-success';
-                                                $pesan = 'Hebat, terus tingkatkan prestasi kamu ya!';
-                                            } else {
+                                            // if($nilai['nilai']>=90){
+                                            //     $warna = 'btn-success';
+                                            //     $pesan = 'Luar biasa, pertahanin prestasi kamu ya!';
+                                            // } elseif($nilai['nilai']>=70){
+                                            //     $warna = 'btn-success';
+                                            //     $pesan = 'Hebat, terus tingkatkan prestasi kamu ya!';
+                                            // } else {
+                                            //     $warna = 'btn-danger';
+                                            //     $pesan = 'Lumayan, jangan patah semangat dan tetap rajin ya!';
+                                            // }
+                                            
+                                            if($nilai['nilai']<=70){
                                                 $warna = 'btn-danger';
                                                 $pesan = 'Lumayan, jangan patah semangat dan tetap rajin ya!';
+                                                
+                                            } elseif($nilai['nilai']<=80){
+                                                $warna = 'btn-success';
+                                                $pesan = 'Luar biasa, pertahanin prestasi kamu ya!';
+                                
+                                            } else {
+                                                $warna = 'btn-success';
+                                                $pesan = 'Hebat, terus tingkatkan prestasi kamu ya!';
+                                                
                                             }
                                         ?>
                                         <div class="row">
@@ -47,9 +61,9 @@
                                                 </h1>
                                             </div>
                                             <div class="col">
-                                                <?php if($nilai>=90){ ?>
+                                                <?php if($nilai['nilai']>=90){ ?>
                                                     <i class="fas fa-praying-hands fa-3x"></i>
-                                                <?php } elseif($nilai>=70){ ?>
+                                                <?php } elseif($nilai['nilai']>=70){ ?>
                                                     <i class="fas fa-thumbs-up fa-3x"></i>
                                                 <?php } else { ?>
                                                     <i class="fas fa-smile fa-3x"></i>
