@@ -27,6 +27,7 @@
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">Kelas</th>
                             <th scope="col">NIP Siswa</th>
+                            <th scope="col">Nilai</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                             <td><?= $list['nama_siswa'] ?></td>
                             <td><?= $nama_kelas[$list['kelas_siswa']] ?></td>
                             <td><?= $list['nip_siswa'] ?></td>
+                            <td><?= $nilai[0]['nilai'] ?></td>
                             <td>
                                 <a href="<?= base_url('guru/review_pengumpulan_tugas/').$list['id'].'/'.$id_tugas ?>" class="btn btn-danger"><i class="fas fa-eye"></i> Lihat Jawaban</a>
                             </td>

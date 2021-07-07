@@ -113,6 +113,10 @@ class Guru extends CI_Controller {
         $where['kelas_siswa']  = $idkelas;
         $datasiswa = $this->guru_model->siswa($where);
         $data['siswa'] = $datasiswa;
+
+        $where_nilai['id_tugas'] = $idtugas;
+        $data['nilai'] = $this->guru_model->list_nilai($where_nilai);
+        // $this->test_var($nilai);
         
         $data['kelas'] = $this->guru_model->GetKelas();
         foreach($data['kelas'] as $key => $value){
