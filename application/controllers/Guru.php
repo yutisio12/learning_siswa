@@ -116,13 +116,21 @@ class Guru extends CI_Controller {
 
         $where_nilai['id_tugas'] = $idtugas;
         $data['penilaian'] = $this->guru_model->list_nilai($where_nilai);
-        // $this->test_var($data['penilaian']);
+
         foreach($data['penilaian'] as $key => $value){
-            $data['nilai'][$value['id_siswa']][$value['id_tugas']] = $value['nilai'];
+            $data['nilai'][$value['id_siswa']] = $value['nilai'];
 
         }
-        // $this->test_var($data['nilai']);
 
+        $datadb = $this->guru_model->list_user();
+        foreach ($datadb as $key => $value) {
+            $data['nim_user'][$value['nip']] = $value['id'];
+        }
+
+        // $datadb = $this->guru_model->list_siswa();
+        // foreach ($datadb as $key => $value) {
+        //     $data['nim_user'][$value['id']] = $value['nip'];
+        // }
         
         $data['kelas'] = $this->guru_model->GetKelas();
         foreach($data['kelas'] as $key => $value){
@@ -311,7 +319,7 @@ class Guru extends CI_Controller {
     }
 
     public function add_score(){
-        
+        $this->test_var($_POST);
         $insert['id_tugas']      = $_POST['id_tugas'];
         $insert['id_siswa']      = $_POST['id_siswa'];
         $insert['id_kelas']      = $_POST['id_kelas'];
