@@ -41,7 +41,7 @@
                             <td><?= $list['nama_siswa'] ?></td>
                             <td><?= $nama_kelas[$list['kelas_siswa']] ?></td>
                             <td><?= $list['nip_siswa'] ?></td>
-                            <td><?= $nilai[0]['nilai'] ?></td>
+                            <td><?= $nilai['id_siswa']['id_tugas'] ?></td>
                             <td>
                                 <a href="<?= base_url('guru/review_pengumpulan_tugas/').$list['id'].'/'.$id_tugas ?>" class="btn btn-danger"><i class="fas fa-eye"></i> Lihat Jawaban</a>
                             </td>
