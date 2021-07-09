@@ -4,7 +4,7 @@
 </style>
 <script src="<?= base_url('assets/ckeditor/') ?>ckeditor.js"></script>
 
-<div class="container-fluid">
+<div class="container-fluid" data-title="Pengerjaan Tugas" data-intro="Ini adalah halaman pengerjaan tugas.">
     <div class="card">
         <div class="card-header">
             <h3 class="text-black">Pengerjaan Soal</h3>
@@ -29,7 +29,7 @@
                         ?>
                             <div class="soal_">
                                 <br>
-                                <div class="row">
+                                <div class="row" data-title="Form Soal" data-intro="Ini adalah form untuk membaca soal.">
                                     <div class="col-md-1"><p><?= $nos ?> )</p></div>
                                     <div class="col">
                                         <textarea class="form-control" disabled><?= $value_soal['soal'] ?></textarea>
@@ -38,7 +38,7 @@
                                 <br>
                                 <div class="col">
                                     <?php if($value_soal['jenis_soal']==1){ ?>
-                                    <div class="row">
+                                    <div class="row" data-title="Form Jawaban" data-intro="Ini adalah form untuk memilih jawaban yang menurut kamu benar.">
                                         <div class="col-md-2"> </div>
                                         <div class="col-md-6">
                                             <div class="row">
@@ -64,7 +64,7 @@
                                         <div class="col-md-2"> </div>
                                     </div>
                                     <?php } else {?>
-                                    <div class="row">
+                                    <div class="row" data-title="Form Jawaban" data-intro="Ini adalah tempat untuk kamu menulis jawaban.">
                                         <div class="col">
                                             <div class="col">
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jawabannya :
@@ -77,7 +77,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="col">
+                                                    <div class="col" data-title="Upload Foto" data-intro="Ini adalah tempat kamu jika ingin memasukan gambar kedalam jawaban kamu. Caranya dengan menekan tulisan Choose File lalu pilih gambar yang ingin kamu masukan.">
                                                         <input type="file" name="foto[<?=  $key_soal ?>]" class="form-control">
                                                     </div>
                                                 </div>
