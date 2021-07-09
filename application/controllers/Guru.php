@@ -319,7 +319,7 @@ class Guru extends CI_Controller {
     }
 
     public function add_score(){
-        $this->test_var($_POST);
+        // $this->test_var($_POST);
         $insert['id_tugas']      = $_POST['id_tugas'];
         $insert['id_siswa']      = $_POST['id_siswa'];
         $insert['id_kelas']      = $_POST['id_kelas'];

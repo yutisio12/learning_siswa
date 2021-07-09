@@ -133,7 +133,9 @@
                                                 <div class="col">
                                                     <div class="col">
                                                         <div class="col text-center">
+                                                            <?php if(strlen($file[$value_soal['id']])>0 AND isset($file[$value_soal['id']]) AND $file[$value_soal['id']]!=NULL){ ?>
                                                             <img src="<?= base_url('upload/').$file[$value_soal['id']] ?>" style="width: 200px; height: 200px;">
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>

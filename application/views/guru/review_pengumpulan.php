@@ -91,7 +91,9 @@
                                                 <div class="col">
                                                     <div class="col">
                                                         <div class="col text-center">
+                                                            <?php if(strlen($file[$value_soal['id']])>0 AND isset($file[$value_soal['id']]) AND $file[$value_soal['id']]!=NULL){ ?>
                                                             <img src="<?= base_url('upload/').$file[$value_soal['id']] ?>" style="width: 200px; height: 200px;">
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -197,7 +199,7 @@
                                 <input type="number" class="form-control" id="nilai" name="nilai" placeholder="Masukan Nilai" min="0" max="100">
                         </div>
 
-                        <input type="hidden" name="id_tugas" id="id_tugas"  value="<?= $value_soal['id_tugas'] ?>">
+                        <input type="hidden" name="id_tugas" id="id_tugas"  value="<?= $id_tugas_main ?>">
                         <?php foreach ($siswa as $list): ?>
                         <input type="hidden" name="id_siswa" id="id_siswa"  value="<?= $list['id'] ?>">
                         <?php endforeach ?>

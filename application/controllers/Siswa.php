@@ -110,32 +110,30 @@ class Siswa extends CI_Controller {
 
     public function pengumpulan_soal($id_tugas){
         error_reporting(0);
-        
+
         $jumlah_soal = count($_POST['id_soal']);
         $jumlah_benar= 0;
         foreach ($_POST['id_soal'] as $key => $soal) {
 
-            // ambil data file
-            if(isset($_FILES['foto']['tmp_name'][$key])){
+            // $this->test_var($_FILES['foto']['size']);
+            if($_FILES['foto']['size'][$key]>0){
                 $namaFile = 'Jawaban'.$key.DATE('YmdHis').'.jpg';
                 $namaSementara = $_FILES['foto']['tmp_name'][$key];
-
-                // tentukan lokasi file akan dipindahkan
                 $dirUpload = "upload/";
-
-                // pindahkan file
                 $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
+
+                $insert['file']             = $namaFile;
             }
 
             $insert['id_tugas']         = $id_tugas;
             $insert['id_tugas_soal']    = $soal;
-            $insert['file']             = $namaFile;
             $insert['created_by']       = $this->permission_cookie[0];
             $insert['created_date']     = DATE('Y-m-d H:i:s');
             $insert['jawaban']          = $_POST['jawaban'][$key];
             $insert['status_jawaban']   = 0;
             
             $this->siswa_model->insert_pengumpulan($insert);
+            unset($insert);
 
             $where_cek['id'] = $soal;
             $cek_benar = $this->siswa_model->list_soal($where_cek)[0];
@@ -149,7 +147,7 @@ class Siswa extends CI_Controller {
 
         if($cek_benar['jenis_soal']==1){
             $nilai = ($jumlah_benar/$jumlah_soal)*100;
-            // $this->test_var($main);
+            
             $insert_penilaian['id_siswa']   = $this->permission_cookie[0];
             $insert_penilaian['id_tugas']       = $cek_benar['id_tugas'];
             $insert_penilaian['id_kelas']       = $main['id_kelas'];
