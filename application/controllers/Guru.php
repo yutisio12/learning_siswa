@@ -28,13 +28,41 @@ class Guru extends CI_Controller {
 
 	public function index()
 	{
-        $datatugas = $this->guru_model->total_tugas()[0];
-        $data['total_tugas'] = $datatugas;
+
+        $where['nip_guru'] = $this->permission_cookie[4];
+        $id_guru = $this->guru_model->list_guru($where)[0];
+        unset($where);
+        // $this->test_var($id_guru);
+
+        $where['nip_guru'] = $this->permission_cookie[4];
+        $guru = $this->guru_model->list_guru($where);
+        $data['dashboard'] = $guru;
+        unset($where);
+        // $this->test_var($guru);
+
+        $where['id IN ('.str_replace(';',',',$id_guru['id_kelas']).')'] = NULL;
+        $data['list_kelas'] = $this->guru_model->list_kelas($where);
+        unset($where);
+        foreach($data['list_kelas'] as $key => $value){
+            $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
+        }
+        // $this->test_var($data['list_kelas']);
 
 		$data['sidebar'] = 'guru/sidebar';
 		$data['subview'] = 'guru/dashboard';
 		$this->load->view('index', $data);
 	}
+
+    public function siswa($idkelas){
+
+        $where['kelas_siswa']  = $idkelas;
+        $datasiswa = $this->guru_model->siswa($where);
+        $data['siswa'] = $datasiswa;
+        
+		$data['sidebar'] = 'guru/sidebar';
+		$data['subview'] = 'guru/siswa';
+		$this->load->view('index', $data);
+    }
 
     public function list_tugas(){
 
@@ -142,39 +170,95 @@ class Guru extends CI_Controller {
         $this->load->view('index', $data);
     }
 
+    public function nilai_siswa($idkelas){
+        
+        $where['kelas_siswa']  = $idkelas;
+        $datasiswa = $this->guru_model->siswa($where);
+        $data['siswa'] = $datasiswa;
+        unset($where);
+        // $this->test_var($datasiswa);
+
+        $datadb = $this->guru_model->list_user();
+        foreach ($datadb as $key => $value) {
+            $data['nim_user'][$value['nip']] = $value['id'];
+        }
+
+        $where['id_kelas'] = $idkelas;
+        $data['datatugas'] = $this->guru_model->list_tugas($where);
+        unset($where);
+        // $this->test_var($datatugas);
+
+        $where['id_kelas'] = $idkelas;
+        $datanilai = $this->guru_model->list_nilai($where);
+        // $this->test_var($datanilai);
+        foreach($datanilai as $value){
+            $data['nilai_siswa_per_tugas'][$value['id_tugas']][$value['id_siswa']] = $value;
+        }
+        unset($where);
+        // $this->test_var($data['nilai_siswa_per_tugas']);
+
+        $where['a.id_kelas'] = $idkelas;
+        $rata_nilai = $this->guru_model->nilai_rata($where);
+        // $this->test_var($rata_nilai);
+        
+		$data['sidebar'] = 'guru/sidebar';
+		$data['subview'] = 'guru/nilai_siswa';
+		$this->load->view('index', $data);
+    }
+
     public function list_nilai(){
 
-        $where['created_by'] = $this->permission_cookie[0];
-        $datanilai = $this->guru_model->list_nilai($where);
-        $data['penilaian'] = $datanilai;
+        $where['nip_guru'] = $this->permission_cookie[4];
+        $id_guru = $this->guru_model->list_guru($where)[0];
         unset($where);
-        // $this->test_var($datanilai);
+        // $this->test_var($id_guru);
 
-        $data['siswa'] = $this->guru_model->list_user();
-        foreach($data['siswa'] as $key => $value){
-            $data['name'][$value['id']] = $value['name'];
-        }
+        $where['nip_guru'] = $this->permission_cookie[4];
+        $guru = $this->guru_model->list_guru($where);
+        $data['dashboard'] = $guru;
+        unset($where);
+        // $this->test_var($guru);
 
-        $data['kelas'] = $this->guru_model->list_kelas();
-        foreach($data['kelas'] as $key => $value){
+        $where['id IN ('.str_replace(';',',',$id_guru['id_kelas']).')'] = NULL;
+        $data['list_kelas'] = $this->guru_model->list_kelas($where);
+        unset($where);
+        foreach($data['list_kelas'] as $key => $value){
             $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
         }
-
-        $data['mapel'] = $this->guru_model->list_mapel();
-        foreach($data['mapel'] as $key => $value){
-            $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
-        }
+        // $this->test_var($data['list_kelas']);
 
 
-        $data['tugas'] = $this->guru_model->list_tugas();
-        foreach($data['tugas'] as $key => $value){
-            $data['tugas'][$value['id']] = $value['running_number'];
-        }
+        // $where['created_by'] = $this->permission_cookie[0];
+        // $datanilai = $this->guru_model->list_nilai($where);
+        // $data['penilaian'] = $datanilai;
+        // unset($where);
+        // // $this->test_var($datanilai);
 
-        $data['tugas'] = $this->guru_model->list_tugas();
-        foreach($data['tugas'] as $key => $value){
-            $data['tugas'][$value['id']] = $value['running_number'];
-        }
+        // $data['siswa'] = $this->guru_model->list_user();
+        // foreach($data['siswa'] as $key => $value){
+        //     $data['name'][$value['id']] = $value['name'];
+        // }
+
+        // $data['kelas'] = $this->guru_model->list_kelas();
+        // foreach($data['kelas'] as $key => $value){
+        //     $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
+        // }
+
+        // $data['mapel'] = $this->guru_model->list_mapel();
+        // foreach($data['mapel'] as $key => $value){
+        //     $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
+        // }
+
+
+        // $data['tugas'] = $this->guru_model->list_tugas();
+        // foreach($data['tugas'] as $key => $value){
+        //     $data['tugas'][$value['id']] = $value['running_number'];
+        // }
+
+        // $data['tugas'] = $this->guru_model->list_tugas();
+        // foreach($data['tugas'] as $key => $value){
+        //     $data['tugas'][$value['id']] = $value['running_number'];
+        // }
         
 
         $data['sidebar'] = 'guru/sidebar';
@@ -196,6 +280,7 @@ class Guru extends CI_Controller {
             $insert['running_number'] = str_pad($str,6,0,STR_PAD_LEFT);
         }
 
+        $insert['nama_tugas']         = $_POST['nama_tugas'];
         $insert['id_kelas']         = $_POST['kelas'][0];
         $insert['id_mapel']         = $_POST['mapel'][0];
         $insert['semester']         = $_POST['semester'][0];

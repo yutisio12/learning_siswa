@@ -30,6 +30,10 @@
                             </button>
                         </div>
                         <form action="<?= base_url('guru/add_tugas_process')?>" method="POST">
+                        <div class="modal-body">
+                                <label for="nama_tugas">Nama Tugas</label>
+                                <input type="text" class="form-control" id="nama_tugas" name="nama_tugas" placeholder="Masukan Nama Tugas">
+                            </div>
                             <div class="modal-body">
                                 <label for="kelas">Kelas</label>
                                 <br>
@@ -99,6 +103,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Kelas</th>
                                 <th scope="col">Mata Pelajaran</th>
+                                <th scope="col">Nama Tugas</th>
                                 <th scope="col">Kode Tugas</th>
                                 <th scope="col">Semester</th>
                                 <th scope="col">Open Date</th>
@@ -116,6 +121,7 @@
                                 <td><?= $no ?></td>
                                 <td><?= $nama_kelas[$value['id_kelas']] ?></td>
                                 <td><?= $nama_mapel[$value['id_mapel']] ?></td>
+                                <td><?= $value['nama_tugas'] ?></td>
                                 <td><?= $value['running_number'] ?></td>
                                 <td><?= $value['semester']?></td>
                                 <td><?= DATE('d F, Y H:i a', strtotime($value['open_date'])) ?></td>

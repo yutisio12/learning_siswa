@@ -1,132 +1,42 @@
 <!-- Begin Page Content -->
-<style>
-
-</style>
 <div class="container-fluid">
     <div class="card">
-        <div class="card-header">
-            <h3 class="text-black">Data Nilai</h3>
+        <div class="card-header bg-white">
+            <h3 class="text-black text-center">Dashboard</h3>
         </div>
     </div>
     <br>
-    <div class="">
+    <div class="row" width="100%">
         <!-- =================================================================== -->
-        <div class="card">
-            <div class="container">
-                <br>
-                <div class="text-left">
+        <?php
+        foreach($dashboard as $list):
+        ?>
+        <?php $kelas = explode(';', $list['id_kelas']);  
+        foreach ($kelas as $value_kelas):
+        ?>
 
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <a href="<?= base_url('guru/nilai_siswa/').$value_kelas ?>">
+                               <?= $nama_kelas[trim($value_kelas)]?>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-square fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
                 </div>
-                <br>
-                                
-                <table class="table table-hover table-bordered data-table-filter">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nama Siswa</th>
-                            <th scope="col">Kelas</th>
-                            <th scope="col">Mata Pelajaran</th>
-                            <th>Semester</th>
-                            <th>Kode Tugas</th>
-                            <th scope="col">Nilai</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            $no = 1;
-                            foreach($penilaian as $key => $value){
-                        ?>
-                        <tr>
-                            <td><?= $no ?></td>
-                            <td><?= $name[$value['id_siswa']] ?></td>
-                            <td><?= $nama_kelas[$value['id_kelas']] ?></td>
-                            <td><?= $nama_mapel[$value['id_mapel']] ?></td>
-                            <td><?= $value['semester'] ?></td>
-                            <td><?= $tugas[$value['id_tugas']] ?></td>
-                            <td><?= $value['nilai'] ?></td>
-                        </tr>
-                        <?php 
-                            $no++;}
-                        ?>
-                    </tbody>
-                </table>
             </div>
         </div>
+        <?php endforeach ?>
+        <?php endforeach ?>
         <!-- =================================================================== -->
     </div>
 </div>
 <!-- /.container-fluid -->
 </div>
-
-<script>
-$(document).ready(function() {
-    $('.data-table-filter').DataTable({
-        dom: 'Bfrtlp',
-        buttons: [ {
-            extend: 'excelHtml5',
-            autoFilter: true,
-            sheetName: 'Exported data',
-            title: 'List Nilai',
-            exportOptions: {
-                    columns: [ 0, 1, 2, 3, 5 ]
-                }
-        } ],
-                initComplete: function () {
-                     this.api().columns(2).every(function () {
-                         var column = this;
-                         $(column.header()).append("<br>")
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo($(column.header()))
-                             .on('change', function () {
-                                 var val = $.fn.dataTable.util.escapeRegex(
-                                     $(this).val()
-                                 );
-
-                                 column
-                                     .search(val ? '^' + val + '$' : '', true, false)
-                                     .draw();
-                             });
-                         column.data().unique().sort().each(function (d, j) {
-                             select.append('<option value="' + d + '">' + d + '</option>')
-                } );
-            } );
-            this.api().columns(3).every(function () {
-                         var column = this;
-                         $(column.header()).append("<br>")
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo($(column.header()))
-                             .on('change', function () {
-                                 var val = $.fn.dataTable.util.escapeRegex(
-                                     $(this).val()
-                                 );
-
-                                 column
-                                     .search(val ? '^' + val + '$' : '', true, false)
-                                     .draw();
-                             });
-                         column.data().unique().sort().each(function (d, j) {
-                             select.append('<option value="' + d + '">' + d + '</option>')
-                } );
-            } );
-            this.api().columns(4).every(function () {
-                         var column = this;
-                         $(column.header()).append("<br>")
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo($(column.header()))
-                             .on('change', function () {
-                                 var val = $.fn.dataTable.util.escapeRegex(
-                                     $(this).val()
-                                 );
-
-                                 column
-                                     .search(val ? '^' + val + '$' : '', true, false)
-                                     .draw();
-                             });
-                         column.data().unique().sort().each(function (d, j) {
-                             select.append('<option value="' + d + '">' + d + '</option>')
-                } );
-            } );
-        }
-            });
-        });
-</script>

@@ -151,4 +151,26 @@ class guru_model extends CI_Model{
         $db = $this->db->get('penilaian')->result_array();
         return $db;
     }
+
+    function nilai_rata($where = NULL){
+        
+        $this->db->select('
+            c.nama_kelas,
+            b.nama_tugas as nama_tugas,
+            b.running_number as kode_tugas,
+            sum(a.nilai) as total_nilai, 
+            count(a.id) as total, 
+            a.id_tugas,
+            sum(a.nilai)/count(a.id) as rata_rata
+        ');
+
+        $this->db->join('tugas b', 'b.id=a.id_tugas', 'LEFT');
+        $this->db->join('kelas c', 'c.id=a.id_kelas', 'LEFT');
+        if(isset($where)){
+            $this->db->where($where);
+        }
+        $this->db->group_by('id_siswa');
+        $query = $this->db->from('penilaian a')->get()->result_array();
+        return $query; 
+    }
 }
