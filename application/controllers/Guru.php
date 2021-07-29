@@ -170,6 +170,75 @@ class Guru extends CI_Controller {
         $this->load->view('index', $data);
     }
 
+    public function nilai_siswa_mapel($idkelas){
+        
+        
+        $where['nip_guru'] = $this->permission_cookie[4];
+        $id_guru = $this->guru_model->list_guru($where)[0];
+        unset($where);
+        // $this->test_var($id_guru);
+
+        $where['nip_guru'] = $this->permission_cookie[4];
+        $guru = $this->guru_model->list_guru($where);
+        $data['dashboard'] = $guru;
+        unset($where);
+        // $this->test_var($guru);
+
+        $where['pengajar_mapel'] = $id_guru['id'];
+        $where['kelas_mapel'] = $idkelas;
+        $data['list_mapel'] = $this->guru_model->list_mapel($where);
+        // $this->test_var($data['list_mapel']);
+        unset($where);
+
+
+        $data['sidebar'] = 'guru/sidebar';
+        $data['subview'] = 'guru/list_nilai_mapel';
+        $this->load->view('index', $data);
+    }
+
+    public function nilai_siswa_v2($mapel, $idkelas){
+        
+        $where['id']  = $mapel;
+        $data['mapel'] = $this->guru_model->list_mapel($where)[0];
+        unset($where);
+        // $this->test_var($data['mapel']);
+
+        $where['kelas_siswa']  = $idkelas;
+        $datasiswa = $this->guru_model->siswa($where);
+        $data['siswa'] = $datasiswa;
+        unset($where);
+        
+
+        $datadb = $this->guru_model->list_user();
+        foreach ($datadb as $key => $value) {
+            $data['nim_user'][$value['nip']] = $value['id'];
+        }
+
+        $where['id_mapel']        = $mapel;
+        $where['id_kelas']  = $idkelas;
+        $data['datatugas']  = $this->guru_model->list_tugas($where);
+        unset($where);
+        // $this->test_var($data['datatugas']);
+
+        $where['id_mapel']        = $mapel;
+        $where['id_kelas'] = $idkelas;
+        $datanilai = $this->guru_model->list_nilai($where);
+        // $this->test_var($datanilai);
+        foreach($datanilai as $value){
+            $data['nilai_siswa_per_tugas'][$value['id_tugas']][$value['id_siswa']] = $value;
+        }
+        unset($where);
+        // $this->test_var($data['nilai_siswa_per_tugas']);
+
+        $where['a.id_kelas'] = $idkelas;
+        $rata_nilai = $this->guru_model->nilai_rata($where);
+        // $this->test_var($rata_nilai);
+        
+        $data['sidebar'] = 'guru/sidebar';
+        $data['subview'] = 'guru/nilai_siswa';
+        $this->load->view('index', $data);
+    }
+
     public function nilai_siswa($idkelas){
         
         $where['kelas_siswa']  = $idkelas;

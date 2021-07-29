@@ -9,10 +9,7 @@
     <div class="row" width="100%">
         <!-- =================================================================== -->
         <?php
-        foreach($dashboard as $list):
-        ?>
-        <?php $kelas = explode(';', $list['id_kelas']);  
-        foreach ($kelas as $value_kelas):
+        foreach($list_mapel as $list):
         ?>
 
         <div class="col-xl-3 col-md-4 mb-4">
@@ -21,8 +18,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 text-center">
-                                <a href="<?= base_url('guru/nilai_siswa_mapel/').$value_kelas ?>">
-                               <?= $nama_kelas[trim($value_kelas)]?>
+                                <a href="<?= base_url('guru/nilai_siswa_v2/').$list['id'].'/'.$list['kelas_mapel'] ?>">
+                               <?= $list['nama_mapel'] ?>
                                 </a>
                             </div>
                         </div>
@@ -33,7 +30,6 @@
                 </div>
             </div>
         </div>
-        <?php endforeach ?>
         <?php endforeach ?>
         <!-- =================================================================== -->
     </div>
