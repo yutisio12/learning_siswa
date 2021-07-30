@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h3 class="text-black">Data Guru</h3>
+            <h3 class="text-black">Data Nilai - <?= $mapel['nama_mapel'] ?></h3>
         </div>
     </div>
     <br>
@@ -18,7 +18,7 @@
                 <br>
                 
 
-                    <table class="table table-hover table-bordered data-table">
+                    <table class="table table-hover table-bordered data-table-nilai" width="100%">
                     <thead class="bg-primary text-white">
 
                         <tr>
@@ -44,10 +44,16 @@
                         <td><?= $list['nama_siswa'] ?></td>
                         
                         <?php foreach($datatugas as $key => $value_tugas) { ?>
-                            <td><?= $nilai_siswa_per_tugas[$value_tugas['id']][$nim_user[$list['nip_siswa']]]['nilai'] ?></td>
+
+                            <?php $arr_nilai[$nim_user[$list['nip_siswa']]][] = $nilai_siswa_per_tugas[$value_tugas['id']][$nim_user[$list['nip_siswa']]]['nilai']; ?>
+
+                            <td class="text-center"><?= (int)$nilai_siswa_per_tugas[$value_tugas['id']][$nim_user[$list['nip_siswa']]]['nilai'] ?></td>
                         <?php } ?>
 
-                        <td></td>
+                        <td class="text-center">
+                            <b><?= (int)array_sum($arr_nilai[$nim_user[$list['nip_siswa']]])/COUNT($arr_nilai[$nim_user[$list['nip_siswa']]]) ?></b>
+                                
+                        </td>
                         </tr>
                         <?php endforeach ?>
                     </tbody>
@@ -59,4 +65,11 @@
 </div>
 <!-- /.container-fluid -->
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    var table = $('.data-table-nilai').DataTable( 
+
+    );
+} );
+</script>
 
