@@ -172,6 +172,7 @@ class Guru extends CI_Controller {
 
     public function nilai_siswa_mapel($idkelas){
         
+        // $this->test_var($idkelas);
         
         $where['nip_guru'] = $this->permission_cookie[4];
         $id_guru = $this->guru_model->list_guru($where)[0];
@@ -294,41 +295,6 @@ class Guru extends CI_Controller {
         foreach($data['list_kelas'] as $key => $value){
             $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
         }
-        // $this->test_var($data['list_kelas']);
-
-
-        // $where['created_by'] = $this->permission_cookie[0];
-        // $datanilai = $this->guru_model->list_nilai($where);
-        // $data['penilaian'] = $datanilai;
-        // unset($where);
-        // // $this->test_var($datanilai);
-
-        // $data['siswa'] = $this->guru_model->list_user();
-        // foreach($data['siswa'] as $key => $value){
-        //     $data['name'][$value['id']] = $value['name'];
-        // }
-
-        // $data['kelas'] = $this->guru_model->list_kelas();
-        // foreach($data['kelas'] as $key => $value){
-        //     $data['nama_kelas'][$value['id']] = $value['nama_kelas'];
-        // }
-
-        // $data['mapel'] = $this->guru_model->list_mapel();
-        // foreach($data['mapel'] as $key => $value){
-        //     $data['nama_mapel'][$value['id']] = $value['nama_mapel'];
-        // }
-
-
-        // $data['tugas'] = $this->guru_model->list_tugas();
-        // foreach($data['tugas'] as $key => $value){
-        //     $data['tugas'][$value['id']] = $value['running_number'];
-        // }
-
-        // $data['tugas'] = $this->guru_model->list_tugas();
-        // foreach($data['tugas'] as $key => $value){
-        //     $data['tugas'][$value['id']] = $value['running_number'];
-        // }
-        
 
         $data['sidebar'] = 'guru/sidebar';
 		$data['subview'] = 'guru/list_nilai';

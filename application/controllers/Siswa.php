@@ -28,7 +28,9 @@ class Siswa extends CI_Controller {
 
 	public function index()
 	{
-        $datatugas = $this->guru_model->total_tugas()[0];
+
+        // $this->test_var($this->kelas_cookie);
+        $datatugas = $this->guru_model->total_tugas_siswa($this->kelas_cookie)[0];
         $data['total_tugas'] = $datatugas;
 
 		$data['sidebar'] = 'siswa/sidebar';

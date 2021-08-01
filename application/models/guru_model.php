@@ -50,6 +50,18 @@ class guru_model extends CI_Model{
         return $db;
     }
 
+    function total_tugas_siswa($idkelas){
+        $db = $this->db->query("
+        SELECT 
+            SUM(IF(status=0, 1, 0)) AS total_open,
+            SUM(IF(status=1, 1, 0)) AS total_close,
+            SUM(IF(status=2, 1, 0)) AS total_scored
+        FROM tugas
+            WHERE id_kelas = $idkelas
+        ")->result_array();
+        return $db;
+    }
+
     function total_tugas(){
         $db = $this->db->query("SELECT 
             SUM(IF(status=0, 1, 0)) AS total_open,
