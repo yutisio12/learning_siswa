@@ -171,9 +171,12 @@
 
                 </script>
                 <br>
+                <?php if(isset($nilai['nilai'])){ ?>
+                <?php if($nilai['nilai']=='') { ?>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalScore">
                     <i class="fas fa-plus"></i>Add Score
                 </button>
+                <?php }} ?>
                 <br><br>
             </div>
         </div>

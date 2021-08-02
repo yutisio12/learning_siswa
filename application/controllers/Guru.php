@@ -405,6 +405,14 @@ class Guru extends CI_Controller {
         // $this->test_var($nip['nip_siswa']);
         $where_user['nip'] = $nip['nip_siswa'];
         $id_akun_siswa = $this->siswa_model->list_user($where_user)[0];
+
+        
+        $nilai['id_siswa'] =  $id_akun_siswa['id'];
+        // $this->test_var($nilai['id_siswa']);
+        $nilai['id_tugas'] = $id_tugas;
+        $data['nilai'] = $this->siswa_model->list_penilaian($nilai)[0];
+        // $this->test_var($data['nilai']);
+
         
         $data['siswa'] = $this->guru_model->list_user($where_user);
         foreach($data['siswa'] as $key => $value){
