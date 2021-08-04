@@ -32,18 +32,18 @@
                         <form action="<?= base_url('home/tambah_guru')?>" method="POST">
                             <div class="modal-body">
                                 <label for="nama_guru">Nama Guru</label>
-                                <input type="text" class="form-control" name="nama_guru" id="nama_guru" placeholder="Masukan Nama Guru">
+                                <input type="text" class="form-control" name="nama_guru" id="nama_guru" placeholder="Masukan Nama Guru" required>
                             </div>
 
                             <div class="modal-body">
                                 <label for="nip_guru">NIP Guru</label>
-                                <input type="text" class="form-control" name="nip_guru" id="nip_guru" placeholder="Masukan NIP Guru">
+                                <input type="text" class="form-control" name="nip_guru" id="nip_guru" placeholder="Masukan NIP Guru" required>
                             </div>
 
                             <div class="modal-body">
                                 <label for="kelas">Kelas</label>
                                 <br>
-                                <select class="multiSelect2 form-control" id="kelas" name="kelas[]" style="width: 100%;" >
+                                <select class="multiSelect2 form-control" id="kelas" name="kelas[]" style="width: 100%;" required>
                                     <!-- <option value="">---</option> -->
                                     <?php foreach($list_kelas as $v_kelas){ ?>
                                         <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
@@ -54,7 +54,7 @@
                             <div class="modal-body">
                                 <label for="mapel">mapel</label>
                                 <br>
-                                <select class="multiSelect2 form-control" id="mapel" name="mapel[]" style="width: 100%;" >
+                                <select class="multiSelect2 form-control" id="mapel" name="mapel[]" style="width: 100%;" required>
                                     <!-- <option value="">---</option> -->
                                     <?php foreach($list_mapel as $v_mapel){ ?>
                                         <option value="<?= $v_mapel['id'] ?>"><?= $v_mapel['nama_mapel'] ?></option>
@@ -64,12 +64,12 @@
 
                             <div class="modal-body">
                                 <label for="alamat_guru">Alamat Guru</label>
-                                <input type="text" class="form-control" id="alamat_guru" name="alamat_guru" placeholder="Masukan Alamat Guru">
+                                <input type="text" class="form-control" id="alamat_guru" name="alamat_guru" placeholder="Masukan Alamat Guru" required>
                             </div>
 
                             <div class="modal-body">
                                 <label for="telpon_guru">No Telphone Guru</label>
-                                <input type="text" class="form-control" id="telpon_guru" name="telpon_guru" placeholder="Masukan No Telphone Guru">
+                                <input type="text" class="form-control" id="telpon_guru" name="telpon_guru" placeholder="Masukan No Telphone Guru" required>
                             </div>
 
                             <input type="hidden" name="status" id="status">

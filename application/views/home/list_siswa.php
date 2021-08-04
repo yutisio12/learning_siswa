@@ -64,7 +64,7 @@
                         <form action="<?= base_url('home/tambah_siswa')?>" method="POST">
                             <div class="modal-body">
                                 <label for="nama_siswa">Nama Siswa</label>
-                                <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" placeholder="Masukan Nama Siswa">
+                                <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" placeholder="Masukan Nama Siswa" required>
                             </div>
 
                             <div class="modal-body">
@@ -75,7 +75,7 @@
                             <div class="modal-body">
                                 <label for="kelas_siswa">Kelas</label>
                                 <br>
-                                <select class="select2 form-control" name="kelas_siswa" style="width: 100%;">
+                                <select class="select2 form-control" name="kelas_siswa" style="width: 100%;" required>
                                 <option value="<?= $list['kelas_siswa'] ?>"><?= $nama_kelas[$list['kelas_siswa']] ?></option>
                                     <?php foreach($kelas as $v_kelas){ ?>
                                         <option value="<?= $v_kelas['id'] ?>"><?= $v_kelas['nama_kelas'] ?></option>
@@ -85,12 +85,12 @@
 
                             <div class="modal-body">
                                 <label for="alamat_siswa">Alamat Siswa</label>
-                                <input type="text" class="form-control" id="alamat_siswa" name="alamat_siswa" placeholder="Masukan Kelas">
+                                <input type="text" class="form-control" id="alamat_siswa" name="alamat_siswa" placeholder="Masukan Alamat Siswa" required>
                             </div>
 
                             <div class="modal-body">
                                 <label for="telpon_siswa">No Telphone Siswa</label>
-                                <input type="text" class="form-control" id="telpon_siswa" name="telpon_siswa" placeholder="Masukan Kelas">
+                                <input type="text" class="form-control" id="telpon_siswa" name="telpon_siswa" placeholder="Masukan No Telphone Siswa" required>
                             </div>
                             <input type="hidden" name="status" id="status">
 
@@ -177,12 +177,12 @@ foreach ($siswa as $list):
       
         <div class="modal-body">
                                 <label for="nama_siswa">Nama Siswa</label>
-                                <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" value="<?= $list['nama_siswa'] ?>" placeholder="Masukan Nama Siswa">
+                                <input type="text" class="form-control" name="nama_siswa" id="nama_siswa" value="<?= $list['nama_siswa'] ?>" placeholder="Masukan Nama Siswa" required>
                             </div>
 
                             <div class="modal-body">
                                 <label for="nip_siswa">NIP Siswa</label>
-                                <input type="text" class="form-control" name="nip_siswa" id="nip_siswa" value="<?= $list['nip_siswa'] ?>"placeholder="Masukan NIP Siswa">
+                                <input type="text" class="form-control" name="nip_siswa" id="nip_siswa" value="<?= $list['nip_siswa'] ?>"placeholder="Masukan NIP Siswa" required>
                             </div>
 
                             <div class="modal-body">
@@ -198,12 +198,12 @@ foreach ($siswa as $list):
 
                             <div class="modal-body">
                                 <label for="alamat_siswa">Alamat Siswa</label>
-                                <input type="text" class="form-control" id="alamat_siswa" name="alamat_siswa" value="<?= $list['alamat_siswa'] ?>" placeholder="Masukan Alamat Siswa">
+                                <input type="text" class="form-control" id="alamat_siswa" name="alamat_siswa" value="<?= $list['alamat_siswa'] ?>" placeholder="Masukan Alamat Siswa" required>
                             </div>
 
                             <div class="modal-body">
                                 <label for="telpon_siswa">No Telphone Siswa</label>
-                                <input type="text" class="form-control" id="telpon_siswa" name="telpon_siswa" value="<?= $list['telpon_siswa'] ?>" placeholder="Masukan No Telphone Siswa">
+                                <input type="text" class="form-control" id="telpon_siswa" name="telpon_siswa" value="<?= $list['telpon_siswa'] ?>" placeholder="Masukan No Telphone Siswa" required>
                             </div>
 
                             <input type="hidden" name="id" id="id" value="<?= $list['id']; ?>">

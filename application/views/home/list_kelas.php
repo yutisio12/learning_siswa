@@ -32,13 +32,13 @@
                         <form action="<?= base_url('home/tambah')?>" method="POST">
                             <div class="modal-body">
                                 <label for="nama_kelas">Nama Kelas</label>
-                                <input type="text" class="form-control" name="nama_kelas" id="nama_kelas" placeholder="Masukan Nama Kelas">
+                                <input type="text" class="form-control" name="nama_kelas" id="nama_kelas" placeholder="Masukan Nama Kelas" required>
                             </div>
 
                             <div class="modal-body">
                                 <label for="wali_kelas">Wali Kelas</label>
                                 <br>
-                                <select class="select2 form-control" id="wali_kelas" name="wali_kelas" style="width: 100%;">
+                                <select class="select2 form-control" id="wali_kelas" name="wali_kelas" style="width: 100%;" required>
                                     <option value="">Pilih Wali Kelas</option>
                                     <?php foreach($wali_kelas as $v_wali){ ?>
                                         <option value="<?= $v_wali['id'] ?>"><?= $v_wali['nama_guru'] ?></option>
@@ -48,7 +48,7 @@
 
                             <div class="modal-body">
                                 <label for="lokasi_kelas">Lokasi</label>
-                                <input type="text" class="form-control" id="lokasi_kelas" name="lokasi_kelas" placeholder="Masukan Lokasi Kelas">
+                                <input type="text" class="form-control" id="lokasi_kelas" name="lokasi_kelas" placeholder="Masukan Lokasi Kelas" required>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -171,12 +171,17 @@
 
                 </script>
                 <br>
-                <?php if(isset($nilai['nilai'])){ ?>
-                <?php if($nilai['nilai']=='') { ?>
+                <?php if($nilai['nilai'] > 0) { ?>
+
+                <?php } else { ?>
+                <?php foreach ($soal as $key_soal => $value_soal) { ?>
+                <?php if($value_soal['jenis_soal']==0){ ?>
+
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalScore">
-                    <i class="fas fa-plus"></i>Add Score
+                <i class="fas fa-plus"></i>Add Score
                 </button>
-                <?php }} ?>
+
+                <?php }}}?>
                 <br><br>
             </div>
         </div>
