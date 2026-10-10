@@ -26,7 +26,7 @@ class Auth extends CI_Controller {
     }
 
     public function checking(){
-        $where["username LIKE '".$_POST['username']."'"] = NULL;
+        $where["username LIKE '%".$_POST['username']."%'"] = NULL;
         $datadb = $this->auth_model->find_user($where)[0];
         // $this->test_var($datadb);
         $c_pass = $this->encryption->decrypt($datadb['password']);
