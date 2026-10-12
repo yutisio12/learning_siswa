@@ -98,7 +98,7 @@ class Guru extends CI_Controller {
     function hapus_tugas($id){
         $this->guru_model->hapus_tugas($id);
 
-        $this->session->set_flashdata('success', 'Tugas Berhasil Di Hapus');
+        $this->session->set_flashdata('success', 'Tugas Berhasil Di lHapus');
         redirect('guru/list_tugas');
     }
 
