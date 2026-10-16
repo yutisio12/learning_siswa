@@ -68,7 +68,7 @@
             icon: 'success',
             title: "<?= $this->session->flashdata('success') ?>",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1000
         })
     <?php } elseif(strlen($this->session->flashdata('warning'))>1) { ?>
         Swal.fire({
