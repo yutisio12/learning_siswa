@@ -75,7 +75,7 @@
             icon: 'warning',
             title: "<?= $this->session->flashdata('warning') ?>",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1000
         })
     <?php } ?>
     </script>
